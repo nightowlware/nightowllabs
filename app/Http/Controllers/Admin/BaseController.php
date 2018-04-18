@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use Illuminate\Support\Facades\DB;
+
 
 class BaseController extends Controller
 {
@@ -20,6 +23,12 @@ class BaseController extends Controller
      */
     public function users()
     {
-        return view('admin.manage_users');
+//        $users = DB::table('users')->simplePaginate(15);
+        $search = request()->search;
+        $users = User::where('name', 'like', '%'.$search.'%')
+            ->orderBy('name')
+            ->paginate(20);
+
+        return view('admin.manage_users', compact('users'));
     }
 }
