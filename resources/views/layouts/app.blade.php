@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="images/owl_standalone.png" style="height: 20%; width: 20%"/>
+                    <img src="/images/owl_standalone.png" style="height: 20%; width: 20%"/>
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,10 +48,28 @@
 
                             @is_super_user
                             <li class="nav-link dropdown">
-                                <b> Administrator </b>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <b> Administrator </b> <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Manage Users') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
                             </li>
                             @endis_super_user
 
+                            {{--User Menu--}}
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -69,15 +87,37 @@
                                     </form>
                                 </div>
                             </li>
+
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
 
+
         <main class="py-4">
             @yield('content')
         </main>
+
+
+        @if ($normalMsg = session('message'))
+            <div id="messageToast" class="floating-message alert alert-success" role="alert">
+                {{--@php--}}
+                {{--session(['message' => "Test Message!"]);--}}
+                {{--@endphp--}}
+                <b> {{ $normalMsg }} </b>
+            </div>
+        @endif
+
+        @if ($errorMsg = session('errorMessage'))
+            <div id="errorMessageToast" class="floating-message alert alert-danger" role="alert">
+                {{--@php--}}
+                {{--session(['message' => "Test Message!"]);--}}
+                {{--@endphp--}}
+                <b> {{ $errorMsg }} </b>
+            </div>
+        @endif
     </div>
+
 </body>
 </html>

@@ -26,7 +26,5 @@ Route::get('/', function () {
 // Admin routes
 ///////////////
 Route::prefix('admin')->middleware('admin')->group(function () {
-    Route::get('users', function () {
-        return ('Manage all the users!');
-    });
+    Route::get('users', 'BaseController@users');
 });
