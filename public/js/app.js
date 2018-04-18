@@ -13902,6 +13902,15 @@ var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
   el: '#app'
 });
 
+///////////
+// Misc
+///////////
+var _arr = ['#errorMessageToast', '#messageToast'];
+for (var _i = 0; _i < _arr.length; _i++) {
+  var toast = _arr[_i];
+  $(toast).delay(500).fadeIn(250).delay(2000).fadeOut(2000);
+}
+
 /***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {

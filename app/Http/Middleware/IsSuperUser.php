@@ -22,6 +22,7 @@ class IsSuperUser
             return $next($request);
         }
 
+        session()->flash('errorMessage', "Sorry, you're not an admin!");
         return redirect('/');
     }
 }

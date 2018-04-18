@@ -19,3 +19,11 @@ Vue.component('dashboard', require('./components/Dashboard.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+
+///////////
+// Misc
+///////////
+for (let toast of ['#errorMessageToast', '#messageToast']) {
+    $(toast).delay(500).fadeIn(250).delay(2000).fadeOut(2000);
+}

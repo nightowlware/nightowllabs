@@ -21,13 +21,23 @@
     {{--</div>--}}
 
     @if (session('message'))
-        <div class="floating-message alert alert-success" role="alert">
+        <div id="messageToast" class="floating-message alert alert-success" role="alert">
             {{--@php--}}
             {{--session(['message' => "Test Message!"]);--}}
             {{--@endphp--}}
             <b> {{ session('message') }} </b>
         </div>
     @endif
+
+    @if ($errorMsg = session('errorMessage'))
+        <div id="errorMessageToast" class="floating-message alert alert-danger" role="alert">
+            {{--@php--}}
+            {{--session(['message' => "Test Message!"]);--}}
+            {{--@endphp--}}
+            <b> {{ $errorMsg }} </b>
+        </div>
+    @endif
+
     <dashboard></dashboard>
 
 </div>
