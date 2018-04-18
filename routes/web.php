@@ -17,5 +17,16 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', function () {
+//    return view('layouts.app');
     return redirect('/home');
 })->middleware('auth');
+
+
+///////////////
+// Admin routes
+///////////////
+Route::prefix('admin')->middleware('admin')->group(function () {
+    Route::get('users', function () {
+        return ('Manage all the users!');
+    });
+});
