@@ -13867,7 +13867,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(44);
+module.exports = __webpack_require__(43);
 
 
 /***/ }),
@@ -46894,16 +46894,15 @@ module.exports = Vue;
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {var scope = this;
-var apply = Function.prototype.apply;
+/* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
 
 // DOM APIs, for completeness
 
 exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
+  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
 };
 exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
+  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
 };
 exports.clearTimeout =
 exports.clearInterval = function(timeout) {
@@ -46918,7 +46917,7 @@ function Timeout(id, clearFn) {
 }
 Timeout.prototype.unref = Timeout.prototype.ref = function() {};
 Timeout.prototype.close = function() {
-  this._clearFn.call(scope, this._id);
+  this._clearFn.call(window, this._id);
 };
 
 // Does not start the time, just sets up the members needed.
@@ -47343,7 +47342,7 @@ var render = function() {
       _c("div", { staticClass: "jumbotron row justify-content-center" }, [
         _c("img", {
           staticStyle: { width: "30%", height: "30%" },
-          attrs: { src: __webpack_require__(43) }
+          attrs: { src: __webpack_require__(48) }
         })
       ])
     ])
@@ -47363,13 +47362,17 @@ if (false) {
 /* 43 */
 /***/ (function(module, exports) {
 
-module.exports = "/images/flask.png?58bbf5b5b60fff50a708d77019a213a6";
+// removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 44 */
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+module.exports = "/images/flask.png?58bbf5b5b60fff50a708d77019a213a6";
 
 /***/ })
 /******/ ]);
