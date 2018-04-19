@@ -19,7 +19,7 @@ class IsSuperUser
     public function handle($request, Closure $next)
     {
         if (Auth::user() && Auth::user()->is_super_user == 1) {
-            session()->flash('errorMessage', "Be careful, you have Admin powers!");
+             // session()->flash('errorMessage', "Be careful, you have Admin powers!");
             return $next($request);
         }
 

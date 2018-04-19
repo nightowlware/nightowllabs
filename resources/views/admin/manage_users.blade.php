@@ -6,13 +6,13 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h3>Log Search</h3>
-                        {{ Form::open(['url' => '/log-search', 'method' => 'get']) }}
+                        <h3>User Search</h3>
+                        {{ Form::open(['method' => 'get']) }}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ Form::label('reference_number', 'Reference Number') }}
-                                    {{ Form::text('reference_number', old('reference_number'), ['class' => 'form-control']) }}
+                                    {{ Form::label('searchName', 'Name') }}
+                                    {{ Form::text('searchName', old('searchName'), ['class' => 'form-control']) }}
                                 </div>
                             </div>
                         </div>
@@ -41,16 +41,17 @@
                                 <tr>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->is_super_user ? "Yes" : "No" }}</td>
-                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->created_at }}</td>
 {{--                                    <td><a href="/view-log/{{ $log->id }}">View</a></td>--}}
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
+
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
-                                {{ $users->links() }}
+                                {{ $users->appends('searchName')->links() }}
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class AdminUserController extends AdminBaseController
 {
@@ -13,10 +14,10 @@ class AdminUserController extends AdminBaseController
     public function index()
     {
 //        $users = DB::table('users')->simplePaginate(15);
-        $search = request()->search;
-        $users = User::where('name', 'like', '%'.$search.'%')
-            ->orderBy('name')
-            ->paginate(10);
+        $searchName = request()->searchName;
+        $users = User::where('name', 'like', '%'.$searchName.'%')
+            ->orderBy('created_at')
+            ->paginate(5);
 
         return view('admin.manage_users', compact('users'));
     }

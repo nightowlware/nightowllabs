@@ -26,5 +26,5 @@ Route::get('/', function () {
 // Admin routes
 ///////////////
 Route::prefix('admin')->middleware('admin')->group(function () {
-    Route::get('users', 'AdminasdfController@index');
+    Route::get('users', 'AdminUserController@index');
 });
