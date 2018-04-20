@@ -45,10 +45,15 @@
 
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->is_super_user ? "Yes" : "No" }}</td>
-                                    <td>{{ $user->created_at }}</td>
-                                    <td>
+                                    @php
+                                        $klass = $user->is_super_user ? 'table-dark' : '';
+                                        $klass = $klass . ' align-middle';
+                                    @endphp
+
+                                    <td class="{{ $klass }}">{{ $user->name }}</td>
+                                    <td class="{{ $klass }}">{{ $user->is_super_user ? "Yes" : "No" }}</td>
+                                    <td class="{{ $klass }}">{{ $user->created_at }}</td>
+                                    <td class="{{ $klass }}" colspan="100%">
                                         {{ Form::open(
                                             [
                                              'onsubmit' => "return ConfirmDelete('$user->name')",
