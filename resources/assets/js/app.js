@@ -27,3 +27,13 @@ const app = new Vue({
 for (let toast of ['#errorMessageToast', '#messageToast']) {
     $(toast).delay(500).fadeIn(250).delay(2000).fadeOut(2000);
 }
+
+/**
+ * @param msg
+ * @returns {boolean}
+ * @constructor
+ */
+window.ConfirmDelete = function(msg) {
+    return confirm("Are you sure you want to delete " + msg + " ?");
+}
+

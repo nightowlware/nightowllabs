@@ -116,11 +116,3 @@
 
 </body>
 </html>
-
-
-
-<script>
-    function ConfirmDelete(msg) {
-        return confirm("Are you sure you want to delete " + msg);
-    }
-</script>
