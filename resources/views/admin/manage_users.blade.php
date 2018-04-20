@@ -46,7 +46,7 @@
                             @foreach ($users as $user)
                                 <tr>
                                     @php
-                                        $klass = $user->is_super_user ? 'table-dark' : '';
+                                        $klass = $user->is_super_user ? 'table-primary' : '';
                                         $klass = $klass . ' align-middle';
                                     @endphp
 
