@@ -48,15 +48,19 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->is_super_user ? "Yes" : "No" }}</td>
                                     <td>{{ $user->created_at }}</td>
-{{--                                    <td><a href="/view-log/{{ $log->id }}">View</a></td>--}}
                                     <td>
                                         {{ Form::open(
-                                            ['action' => ['AdminUserController@destroy', 'id' => "$user->id"],
-                                             'method' => 'DELETE'])
+                                            [
+                                             'onsubmit' => "return ConfirmDelete('$user->name')",
+                                             'action' => ['AdminUserController@destroy', 'id' => "$user->id"],
+                                             'method' => 'DELETE'
+                                            ])
                                         }}
 
                                         {!! Form::submit('Delete',
-                                            ['type' => 'submit', 'class' => 'btn btn-primary pull-right', 'onsubmit' => 'return ConfirmDelete()']) !!}
+                                            ['type' => 'submit',
+                                             'class' => 'btn btn-primary pull-right' ]) !!}
+
                                         {{ Form::close() }}
                                     </td>
                                 </tr>

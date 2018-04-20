@@ -120,7 +120,7 @@
 
 
 <script>
-    function ConfirmDelete() {
-        return confirm("Are you sure???");
+    function ConfirmDelete(msg) {
+        return confirm("Are you sure you want to delete " + msg);
     }
 </script>

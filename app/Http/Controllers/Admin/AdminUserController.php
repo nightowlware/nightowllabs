@@ -88,7 +88,11 @@ class AdminUserController extends AdminBaseController
      */
     public function destroy($id)
     {
-        dd("Attempting to delete $id");
-        //
+        $u = User::findOrFail($id);
+        $u->delete();
+
+        session()->flash('errorMessage', "User '$u->name' has been deleted");
+
+        return redirect()->back();
     }
 }
