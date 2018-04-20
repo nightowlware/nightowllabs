@@ -19,6 +19,9 @@ class AdminUserController extends AdminBaseController
             ->orderBy('created_at')
             ->paginate(5);
 
+        $users->appends(request()->all());
+
+//        request()->flash();
         return view('admin.manage_users', compact('users'));
     }
 
@@ -85,6 +88,7 @@ class AdminUserController extends AdminBaseController
      */
     public function destroy($id)
     {
+        dd("Attempting to delete $id");
         //
     }
 }

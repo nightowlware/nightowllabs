@@ -116,3 +116,11 @@
 
 </body>
 </html>
+
+
+
+<script>
+    function ConfirmDelete() {
+        return confirm("Are you sure???");
+    }
+</script>

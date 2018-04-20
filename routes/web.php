@@ -27,4 +27,6 @@ Route::get('/', function () {
 ///////////////
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('users', 'AdminUserController@index');
+    Route::resource('user', 'AdminUserController');
 });
+
