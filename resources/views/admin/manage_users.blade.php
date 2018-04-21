@@ -29,7 +29,9 @@
                         </div>
                         {{ Form::close() }}
 
-                        <hr>
+                        {{--Vertical Spacer--}}
+                        <div class="control-group">&nbsp</div>
+                        <div class="control-group">&nbsp</div>
 
                         <table class="table">
                             <thead>
@@ -73,7 +75,6 @@
                             </tbody>
                         </table>
 
-                        <hr>
                         <div class="row">
                             <div class="col-md-12">
                                 {{ $users->links() }}

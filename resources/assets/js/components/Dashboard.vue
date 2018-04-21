@@ -1,8 +1,21 @@
 <template>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="jumbotron row justify-content-center">
-                <img :src="require('../../images/flask.png')" style="width: 30%; height: 30%" />
+            <div class="jumbotron">
+                <div style="display: flex">
+                    <div>
+                        "Whether you think you can or cannot, you're a cunt."   --Shafik
+                        <br><br>
+                        "You'd be amazed how much research you can get done when you have no life whatsoever."  --Ernes Cline
+                        <br><br>
+                        "Researchers surf the wave of human imagination." --Steven Magee
+                        <br><br>
+                        "Highly organized research is guaranteed to produce nothing new." --Frank Herbert
+                    </div>
+                    <div class="fill">
+                        <img :src="require('../../images/flask.png')"/>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -15,3 +28,18 @@
         }
     }
 </script>
+
+<style>
+    .fill {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden
+    }
+
+    .fill img {
+        object-fit: cover;
+        width: 50%;
+        /*height: auto;*/
+    }
+</style>
