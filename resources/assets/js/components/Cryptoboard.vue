@@ -6,11 +6,11 @@
                     <div>
                         Connected? {{ isConnected }}
                         <br>
-                        Bitcoin: {{ prices.bitcoin }}
+                        Bitcoin: {{ cryptos.bitcoin.price }}
                         <br>
-                        Litecoin: {{ prices.litecoin }}
+                        Litecoin: {{ cryptos.litecoin.price }}
                         <br>
-                        Ethereum: {{ prices.ethereum }}
+                        Ethereum: {{ cryptos.ethereum.price }}
                     </div>
                     <!--<div class="fill">-->
                         <!--<img :src="require('../../images/flask.png')"/>-->
@@ -24,6 +24,7 @@
 <script>
     export default {
         mounted() {
+            this.webSocket = this.createWebSocket();
         },
 
         methods: {
@@ -39,7 +40,7 @@
                 w.onopen = () => {
                     let params = {
                         type: "subscribe",
-                        channels: [{"name": "ticker", "product_ids": ["BTC-USD", "ETH-USD", "LTC-USD"]}]
+                        channels: [{"name": "ticker", "product_ids": this.getAllSymbols() }]
                     };
                     w.send(JSON.stringify(params));
                     this.isConnected = true;
@@ -51,13 +52,23 @@
             parseTicker: function(data) {
                 data = JSON.parse(data);
                 if (data.product_id === "ETH-USD") {
-                    this.prices.ethereum = data.price;
+                    this.cryptos.ethereum.price = data.price;
                 } else if (data.product_id === "LTC-USD") {
-                    this.prices.litecoin = data.price;
+                    this.cryptos.litecoin.price = data.price;
                 } else if (data.product_id === "BTC-USD") {
-                    this.prices.bitcoin = data.price;
+                    this.cryptos.bitcoin.price = data.price;
                 }
             },
+
+            getAllSymbols: function() {
+                let arr = [];
+                for (let c of Object.keys(this.cryptos)) {
+                    if (this.cryptos[c].symbol) {
+                        arr.push(this.cryptos[c].symbol);
+                    }
+                }
+                return arr;
+            }
         },
 
         computed: {
@@ -67,12 +78,12 @@
             return {
                 // Note: for some hitherto unknown reason, the websocket object
                 // is not reactive (in the Vuejs sense).
-                webSocket: this.createWebSocket(),
+                webSocket: null,
                 isConnected: false,
-                prices: {
-                    bitcoin: 0,
-                    litecoin: 0,
-                    ethereum: 0
+                cryptos: {
+                    bitcoin: { symbol: "BTC-USD", price: 0 },
+                    litecoin: { symbol: "LTC-USD", price: 0 },
+                    ethereum: { symbol: "ETH-USD", price: 0 },
                 }
             };
         },

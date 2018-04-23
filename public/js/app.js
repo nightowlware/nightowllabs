@@ -47935,7 +47935,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {},
+    mounted: function mounted() {
+        this.webSocket = this.createWebSocket();
+    },
 
 
     methods: {
@@ -47955,7 +47957,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             w.onopen = function () {
                 var params = {
                     type: "subscribe",
-                    channels: [{ "name": "ticker", "product_ids": ["BTC-USD", "ETH-USD", "LTC-USD"] }]
+                    channels: [{ "name": "ticker", "product_ids": _this.getAllSymbols() }]
                 };
                 w.send(JSON.stringify(params));
                 _this.isConnected = true;
@@ -47967,12 +47969,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         parseTicker: function parseTicker(data) {
             data = JSON.parse(data);
             if (data.product_id === "ETH-USD") {
-                this.prices.ethereum = data.price;
+                this.cryptos.ethereum.price = data.price;
             } else if (data.product_id === "LTC-USD") {
-                this.prices.litecoin = data.price;
+                this.cryptos.litecoin.price = data.price;
             } else if (data.product_id === "BTC-USD") {
-                this.prices.bitcoin = data.price;
+                this.cryptos.bitcoin.price = data.price;
             }
+        },
+
+        getAllSymbols: function getAllSymbols() {
+            var arr = [];
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = Object.keys(this.cryptos)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var c = _step.value;
+
+                    if (this.cryptos[c].symbol) {
+                        arr.push(this.cryptos[c].symbol);
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return arr;
         }
     },
 
@@ -47982,12 +48016,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             // Note: for some hitherto unknown reason, the websocket object
             // is not reactive (in the Vuejs sense).
-            webSocket: this.createWebSocket(),
+            webSocket: null,
             isConnected: false,
-            prices: {
-                bitcoin: 0,
-                litecoin: 0,
-                ethereum: 0
+            cryptos: {
+                bitcoin: { symbol: "BTC-USD", price: 0 },
+                litecoin: { symbol: "LTC-USD", price: 0 },
+                ethereum: { symbol: "ETH-USD", price: 0 }
             }
         };
     },
@@ -48017,19 +48051,19 @@ var render = function() {
             _c("br"),
             _vm._v(
               "\n                    Bitcoin: " +
-                _vm._s(_vm.prices.bitcoin) +
+                _vm._s(_vm.cryptos.bitcoin.price) +
                 "\n                    "
             ),
             _c("br"),
             _vm._v(
               "\n                    Litecoin: " +
-                _vm._s(_vm.prices.litecoin) +
+                _vm._s(_vm.cryptos.litecoin.price) +
                 "\n                    "
             ),
             _c("br"),
             _vm._v(
               "\n                    Ethereum: " +
-                _vm._s(_vm.prices.ethereum) +
+                _vm._s(_vm.cryptos.ethereum.price) +
                 "\n                "
             )
           ])
