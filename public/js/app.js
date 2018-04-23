@@ -47968,17 +47968,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         parseTicker: function parseTicker(data) {
             data = JSON.parse(data);
-            if (data.product_id === "ETH-USD") {
-                this.cryptos.ethereum.price = data.price;
-            } else if (data.product_id === "LTC-USD") {
-                this.cryptos.litecoin.price = data.price;
-            } else if (data.product_id === "BTC-USD") {
-                this.cryptos.bitcoin.price = data.price;
-            }
-        },
 
-        getAllSymbols: function getAllSymbols() {
-            var arr = [];
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
             var _iteratorError = undefined;
@@ -47987,8 +47977,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 for (var _iterator = Object.keys(this.cryptos)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var c = _step.value;
 
-                    if (this.cryptos[c].symbol) {
-                        arr.push(this.cryptos[c].symbol);
+                    if (data.product_id === this.cryptos[c].symbol) {
+                        this.cryptos[c].price = data.price;
                     }
                 }
             } catch (err) {
@@ -48002,6 +47992,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 } finally {
                     if (_didIteratorError) {
                         throw _iteratorError;
+                    }
+                }
+            }
+        },
+
+        getAllSymbols: function getAllSymbols() {
+            var arr = [];
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = Object.keys(this.cryptos)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var c = _step2.value;
+
+                    if (this.cryptos[c].symbol) {
+                        arr.push(this.cryptos[c].symbol);
+                    }
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
                     }
                 }
             }

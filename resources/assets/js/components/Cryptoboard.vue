@@ -51,12 +51,11 @@
 
             parseTicker: function(data) {
                 data = JSON.parse(data);
-                if (data.product_id === "ETH-USD") {
-                    this.cryptos.ethereum.price = data.price;
-                } else if (data.product_id === "LTC-USD") {
-                    this.cryptos.litecoin.price = data.price;
-                } else if (data.product_id === "BTC-USD") {
-                    this.cryptos.bitcoin.price = data.price;
+
+                for (let c of Object.keys(this.cryptos)) {
+                    if (data.product_id === this.cryptos[c].symbol) {
+                        this.cryptos[c].price = data.price;
+                    }
                 }
             },
 
