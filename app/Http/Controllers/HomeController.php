@@ -25,4 +25,14 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * Show the crypto dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function crypto()
+    {
+        return view('crypto');
+    }
 }

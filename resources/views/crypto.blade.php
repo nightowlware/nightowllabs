@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container">
-    <dashboard></dashboard>
+    <cryptoboard></cryptoboard>
 </div>
 @endsection

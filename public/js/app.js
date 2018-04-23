@@ -13897,6 +13897,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  */
 
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('dashboard', __webpack_require__(39));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('cryptoboard', __webpack_require__(54));
 
 var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
   el: '#app'
@@ -47811,6 +47812,241 @@ module.exports = function listToStyles (parentId, list) {
   return styles
 }
 
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(55)
+}
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = __webpack_require__(57)
+/* template */
+var __vue_template__ = __webpack_require__(58)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Cryptoboard.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-02f85044", Component.options)
+  } else {
+    hotAPI.reload("data-v-02f85044", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(56);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(52)("e9fb94b4", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-02f85044\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Cryptoboard.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-02f85044\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Cryptoboard.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(46)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fill {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    overflow: hidden\n}\n.fill img {\n    -o-object-fit: cover;\n       object-fit: cover;\n    width: 50%;\n    /*height: auto;*/\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {},
+
+
+    methods: {
+        createWebSocket: function createWebSocket() {
+            var _this = this;
+
+            var w = new WebSocket("wss://ws-feed.gdax.com");
+
+            w.onclose = function () {
+                _this.isConnected = false;
+            };
+
+            w.onmessage = function (msg) {
+                _this.parseTicker(msg.data);
+            };
+
+            w.onopen = function () {
+                var params = {
+                    type: "subscribe",
+                    channels: [{ "name": "ticker", "product_ids": ["BTC-USD", "ETH-USD", "LTC-USD"] }]
+                };
+                w.send(JSON.stringify(params));
+                _this.isConnected = true;
+            };
+
+            return w;
+        },
+
+        parseTicker: function parseTicker(data) {
+            data = JSON.parse(data);
+            if (data.product_id === "ETH-USD") {
+                this.prices.ethereum = data.price;
+            } else if (data.product_id === "LTC-USD") {
+                this.prices.litecoin = data.price;
+            } else if (data.product_id === "BTC-USD") {
+                this.prices.bitcoin = data.price;
+            }
+        }
+    },
+
+    computed: {},
+
+    data: function data() {
+        return {
+            // Note: for some hitherto unknown reason, the websocket object
+            // is not reactive (in the Vuejs sense).
+            webSocket: this.createWebSocket(),
+            isConnected: false,
+            prices: {
+                bitcoin: 0,
+                litecoin: 0,
+                ethereum: 0
+            }
+        };
+    },
+
+
+    watch: {}
+});
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "jumbotron" }, [
+        _c("div", { staticStyle: { display: "flex" } }, [
+          _c("div", [
+            _vm._v(
+              "\n                    Connected? " +
+                _vm._s(_vm.isConnected) +
+                "\n                    "
+            ),
+            _c("br"),
+            _vm._v(
+              "\n                    Bitcoin: " +
+                _vm._s(_vm.prices.bitcoin) +
+                "\n                    "
+            ),
+            _c("br"),
+            _vm._v(
+              "\n                    Litecoin: " +
+                _vm._s(_vm.prices.litecoin) +
+                "\n                    "
+            ),
+            _c("br"),
+            _vm._v(
+              "\n                    Ethereum: " +
+                _vm._s(_vm.prices.ethereum) +
+                "\n                "
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-02f85044", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

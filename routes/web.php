@@ -15,6 +15,7 @@
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/crypto', 'HomeController@crypto')->name('crypto');
 
 Route::get('/', function () {
 //    return view('layouts.app');

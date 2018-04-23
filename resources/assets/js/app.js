@@ -15,6 +15,7 @@ import Vue from 'vue';
  */
 
 Vue.component('dashboard', require('./components/Dashboard.vue'));
+Vue.component('cryptoboard', require('./components/Cryptoboard.vue'));
 
 const app = new Vue({
     el: '#app'
