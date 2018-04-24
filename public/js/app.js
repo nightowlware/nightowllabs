@@ -47911,7 +47911,7 @@ exports = module.exports = __webpack_require__(46)(false);
 
 
 // module
-exports.push([module.i, "\n.fill {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    overflow: hidden\n}\n.fill img {\n    -o-object-fit: cover;\n       object-fit: cover;\n    width: 50%;\n    /*height: auto;*/\n}\n.green {\n    color: green;\n}\n.red {\n    color: red;\n}\n.hugefont {\n    font-size: 8rem;\n}\n", ""]);
+exports.push([module.i, "\n.fill {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    overflow: hidden\n}\n.fill img {\n    -o-object-fit: cover;\n       object-fit: cover;\n    width: 50%;\n    /*height: auto;*/\n}\n.green {\n    color: green;\n}\n.red {\n    color: red;\n}\n.hugefont {\n    margin-left: auto;\n    margin-right: auto;\n    font-size: 4rem;\n}\n", ""]);
 
 // exports
 
@@ -47922,8 +47922,6 @@ exports.push([module.i, "\n.fill {\n    display: -webkit-box;\n    display: -ms-
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
 //
 //
 //
@@ -48078,42 +48076,48 @@ var render = function() {
   return _c("div", { staticClass: "row justify-content-center" }, [
     _c("div", { staticClass: "col-md-8" }, [
       _c("div", { staticClass: "jumbotron" }, [
-        _c("div", { staticStyle: { display: "flex" } }, [
-          _c("div", [
-            _c("h1", [
-              _vm._v(
-                "Bitcoin: " +
-                  _vm._s(_vm._f("toCurrency")(_vm.cryptos.bitcoin.price))
-              )
+        _c(
+          "div",
+          {
+            staticStyle: { display: "flex", "justify-content": "space-between" }
+          },
+          [
+            _c("div", [
+              _c("h1", [
+                _vm._v(
+                  "Bitcoin: " +
+                    _vm._s(_vm._f("toCurrency")(_vm.cryptos.bitcoin.price))
+                )
+              ]),
+              _vm._v(" "),
+              _c("h1", [
+                _vm._v(
+                  "Litecoin: " +
+                    _vm._s(_vm._f("toCurrency")(_vm.cryptos.litecoin.price))
+                )
+              ]),
+              _vm._v(" "),
+              _c("h1", [
+                _vm._v(
+                  "Ethereum: " +
+                    _vm._s(_vm._f("toCurrency")(_vm.cryptos.ethereum.price))
+                )
+              ])
             ]),
             _vm._v(" "),
-            _c("h1", [
-              _vm._v(
-                "Litecoin: " +
-                  _vm._s(_vm._f("toCurrency")(_vm.cryptos.litecoin.price))
-              )
-            ]),
-            _vm._v(" "),
-            _c("h1", [
-              _vm._v(
-                "Ethereum: " +
-                  _vm._s(_vm._f("toCurrency")(_vm.cryptos.ethereum.price))
-              )
+            _c("div", { staticClass: "flex-center" }, [
+              _c("h1", [
+                _c("i", {
+                  staticClass: "hugefont far",
+                  class: [
+                    _vm.isConnected ? "fa-check-circle" : "fa-times-circle",
+                    _vm.isConnected ? "green" : "red"
+                  ]
+                })
+              ])
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("h1", [
-              _c("i", {
-                staticClass: "hugefont far",
-                class: [
-                  _vm.isConnected ? "fa-check-circle" : "fa-times-circle",
-                  _vm.isConnected ? "green" : "red"
-                ]
-              })
-            ])
-          ])
-        ])
+          ]
+        )
       ])
     ])
   ])

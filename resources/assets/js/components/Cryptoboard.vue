@@ -2,20 +2,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="jumbotron">
-                <div style="display: flex">
+                <div style="display: flex; justify-content: space-between">
                     <div>
                         <h1>Bitcoin: {{ cryptos.bitcoin.price | toCurrency}}</h1>
                         <h1>Litecoin: {{ cryptos.litecoin.price | toCurrency}}</h1>
                         <h1>Ethereum: {{ cryptos.ethereum.price | toCurrency}}</h1>
                     </div>
-                    <div>
+                    <div class="flex-center">
                         <h1>
                             <i class="hugefont far"
                                :class="[isConnected ? 'fa-check-circle' : 'fa-times-circle', isConnected ? 'green' : 'red']">
                             </i>
                         </h1>
-
-                        <!--<font-awesome-icon :icon="true ? checkedIcon : uncheckedIcon" :size="size" />-->
                     </div>
                     <!--<div class="fill">-->
                         <!--<img :src="require('../../images/flask.png')"/>-->
@@ -120,6 +118,8 @@
     }
 
     .hugefont {
-        font-size: 8rem;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 4rem;
     }
 </style>
