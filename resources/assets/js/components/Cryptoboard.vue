@@ -4,13 +4,18 @@
             <div class="jumbotron">
                 <div style="display: flex">
                     <div>
-                        Connected? {{ isConnected }}
-                        <br>
-                        Bitcoin: {{ cryptos.bitcoin.price }}
-                        <br>
-                        Litecoin: {{ cryptos.litecoin.price }}
-                        <br>
-                        Ethereum: {{ cryptos.ethereum.price }}
+                        <h1>Bitcoin: {{ cryptos.bitcoin.price | toCurrency}}</h1>
+                        <h1>Litecoin: {{ cryptos.litecoin.price | toCurrency}}</h1>
+                        <h1>Ethereum: {{ cryptos.ethereum.price | toCurrency}}</h1>
+                    </div>
+                    <div>
+                        <h1>
+                            <i class="hugefont far"
+                               :class="[isConnected ? 'fa-check-circle' : 'fa-times-circle', isConnected ? 'green' : 'red']">
+                            </i>
+                        </h1>
+
+                        <!--<font-awesome-icon :icon="true ? checkedIcon : uncheckedIcon" :size="size" />-->
                     </div>
                     <!--<div class="fill">-->
                         <!--<img :src="require('../../images/flask.png')"/>-->
@@ -104,5 +109,17 @@
         object-fit: cover;
         width: 50%;
         /*height: auto;*/
+    }
+
+    .green {
+        color: green;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .hugefont {
+        font-size: 8rem;
     }
 </style>

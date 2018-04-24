@@ -17,6 +17,19 @@ import Vue from 'vue';
 Vue.component('dashboard', require('./components/Dashboard.vue'));
 Vue.component('cryptoboard', require('./components/Cryptoboard.vue'));
 
+Vue.filter('toCurrency', function (value) {
+    if (typeof value !== "number") {
+        value = parseFloat(value);
+    }
+    let formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+    });
+    return formatter.format(value);
+});
+
+
 const app = new Vue({
     el: '#app'
 });

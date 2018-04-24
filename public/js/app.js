@@ -13899,8 +13899,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('dashboard', __webpack_require__(39));
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('cryptoboard', __webpack_require__(54));
 
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.filter('toCurrency', function (value) {
+    if (typeof value !== "number") {
+        value = parseFloat(value);
+    }
+    var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+    });
+    return formatter.format(value);
+});
+
 var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
-  el: '#app'
+    el: '#app'
 });
 
 ///////////
@@ -13908,8 +13920,8 @@ var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
 ///////////
 var _arr = ['#errorMessageToast', '#messageToast'];
 for (var _i = 0; _i < _arr.length; _i++) {
-  var toast = _arr[_i];
-  $(toast).delay(500).fadeIn(250).delay(2000).fadeOut(2000);
+    var toast = _arr[_i];
+    $(toast).delay(500).fadeIn(250).delay(2000).fadeOut(2000);
 }
 
 /**
@@ -13918,7 +13930,7 @@ for (var _i = 0; _i < _arr.length; _i++) {
  * @constructor
  */
 window.ConfirmDelete = function (msg) {
-  return confirm("Are you sure you want to delete " + msg + " ?");
+    return confirm("Are you sure you want to delete " + msg + " ?");
 };
 
 /***/ }),
@@ -47899,7 +47911,7 @@ exports = module.exports = __webpack_require__(46)(false);
 
 
 // module
-exports.push([module.i, "\n.fill {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    overflow: hidden\n}\n.fill img {\n    -o-object-fit: cover;\n       object-fit: cover;\n    width: 50%;\n    /*height: auto;*/\n}\n", ""]);
+exports.push([module.i, "\n.fill {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    overflow: hidden\n}\n.fill img {\n    -o-object-fit: cover;\n       object-fit: cover;\n    width: 50%;\n    /*height: auto;*/\n}\n.green {\n    color: green;\n}\n.red {\n    color: red;\n}\n.hugefont {\n    font-size: 8rem;\n}\n", ""]);
 
 // exports
 
@@ -47910,6 +47922,11 @@ exports.push([module.i, "\n.fill {\n    display: -webkit-box;\n    display: -ms-
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -48063,29 +48080,38 @@ var render = function() {
       _c("div", { staticClass: "jumbotron" }, [
         _c("div", { staticStyle: { display: "flex" } }, [
           _c("div", [
-            _vm._v(
-              "\n                    Connected? " +
-                _vm._s(_vm.isConnected) +
-                "\n                    "
-            ),
-            _c("br"),
-            _vm._v(
-              "\n                    Bitcoin: " +
-                _vm._s(_vm.cryptos.bitcoin.price) +
-                "\n                    "
-            ),
-            _c("br"),
-            _vm._v(
-              "\n                    Litecoin: " +
-                _vm._s(_vm.cryptos.litecoin.price) +
-                "\n                    "
-            ),
-            _c("br"),
-            _vm._v(
-              "\n                    Ethereum: " +
-                _vm._s(_vm.cryptos.ethereum.price) +
-                "\n                "
-            )
+            _c("h1", [
+              _vm._v(
+                "Bitcoin: " +
+                  _vm._s(_vm._f("toCurrency")(_vm.cryptos.bitcoin.price))
+              )
+            ]),
+            _vm._v(" "),
+            _c("h1", [
+              _vm._v(
+                "Litecoin: " +
+                  _vm._s(_vm._f("toCurrency")(_vm.cryptos.litecoin.price))
+              )
+            ]),
+            _vm._v(" "),
+            _c("h1", [
+              _vm._v(
+                "Ethereum: " +
+                  _vm._s(_vm._f("toCurrency")(_vm.cryptos.ethereum.price))
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("h1", [
+              _c("i", {
+                staticClass: "hugefont far",
+                class: [
+                  _vm.isConnected ? "fa-check-circle" : "fa-times-circle",
+                  _vm.isConnected ? "green" : "red"
+                ]
+              })
+            ])
           ])
         ])
       ])
