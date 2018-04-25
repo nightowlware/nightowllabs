@@ -9,7 +9,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
-        "laravelcollective/html": "^5.0"
+        "laravelcollective/html": "^5.0",
+        "phpoffice/phpexcel": "1.8.1"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "~5.3|~6.0",
@@ -26,7 +27,8 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": ["util/util.php"]
     },
     "autoload-dev": {
         "psr-4": {
