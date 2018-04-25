@@ -20,5 +20,6 @@
     "vue": "^2.5.7"
   },
   "dependencies": {
+    "zipcode-to-timezone": "0.0.9"
   }
 }
