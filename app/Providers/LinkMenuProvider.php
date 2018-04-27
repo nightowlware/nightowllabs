@@ -37,7 +37,6 @@ class LinkMenuProvider extends ServiceProvider
         $ret = [
             'Home' => route('home'),
             'Crypto Prices' => route('crypto'),
-            'Logout' => route('logout')
         ];
 
         return $ret;
@@ -45,8 +44,7 @@ class LinkMenuProvider extends ServiceProvider
 
     public function getAdminMenu() : array {
         $ret = [
-            'Admin1' => 'something',
-            'Admin2' => 'something'
+            'Manage Users' => route('admin.users'),
         ];
 
         return $ret;

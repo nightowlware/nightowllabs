@@ -56,11 +56,14 @@
                                     <b> Administrator </b> <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('admin.users') }}">
-                                        {{ __('Manage Users') }}
-                                    </a>
-                                </div>
+                                @foreach (app('adminmenu') as $text => $href)
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ $href }}">
+                                            {{ $text }}
+                                        </a>
+                                    </div>
+                                @endforeach
+
                             </li>
                             @endis_super_user
 
@@ -70,7 +73,16 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
+                                {{--Render the user-menu--}}
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @foreach (app('usermenu') as $text => $href)
+                                        <a class="dropdown-item" href="{{ $href }}">
+                                            {{ $text }}
+                                        </a>
+                                    @endforeach
+
+                                    {{--The logout link is a special-case that does a POST instead of a GET,--}}
+                                    {{--That way the route is protected from cross-site scripting attacks.--}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
