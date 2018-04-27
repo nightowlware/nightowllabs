@@ -57,7 +57,7 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('/admin/users') }}">
+                                    <a class="dropdown-item" href="{{ route('admin.users') }}">
                                         {{ __('Manage Users') }}
                                     </a>
                                 </div>

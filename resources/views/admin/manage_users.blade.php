@@ -22,7 +22,7 @@
                                 {{ Form::submit('Search', ['class' => 'btn btn-primary pull-right']) }}
                             </div>
                             <div class="col-md-1">
-                                <a href="{{ url('/admin/users') }}" class="btn btn-primary pull-right">
+                                <a href="{{ route('admin.users') }}" class="btn btn-primary pull-right">
                                     Clear
                                 </a>
                             </div>
