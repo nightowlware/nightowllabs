@@ -4,9 +4,10 @@
             <div class="jumbotron">
                 <div style="display: flex; justify-content: space-between">
                     <div>
-                        <h1>Bitcoin: {{ cryptos.bitcoin.price | toCurrency}}</h1>
-                        <h1>Litecoin: {{ cryptos.litecoin.price | toCurrency}}</h1>
-                        <h1>Ethereum: {{ cryptos.ethereum.price | toCurrency}}</h1>
+                        <h1 v-for="(val, key) in sort(cryptos)"> {{key}} : {{ val.price | toCurrency }}</h1>
+                        <!--<h1>Bitcoin: {{ cryptos.bitcoin.price | toCurrency}}</h1>-->
+                        <!--<h1>Litecoin: {{ cryptos.litecoin.price | toCurrency}}</h1>-->
+                        <!--<h1>Ethereum: {{ cryptos.ethereum.price | toCurrency}}</h1>-->
                     </div>
                     <div class="flex-center">
                         <h1>
@@ -31,19 +32,24 @@
         },
 
         methods: {
-            createWebSocket: function() {
+            createWebSocket() {
                 let w = new WebSocket("wss://ws-feed.gdax.com");
 
                 w.onclose = () => { this.isConnected = false; };
 
                 w.onmessage = (msg) => {
-                    this.parseTicker(msg.data);
+                    let data = JSON.parse(msg.data);
+                    if (data.type === "heartbeat") {
+                        return;
+                    }
+                    this.parseTicker(data);
                 };
 
                 w.onopen = () => {
                     let params = {
                         type: "subscribe",
-                        channels: [{"name": "ticker", "product_ids": this.getAllSymbols() }]
+                        channels: [{"name": "ticker", "product_ids": this.getAllSymbols() },
+                                   {"name": "heartbeat", "product_ids": this.getAllSymbols()}]
                     };
                     w.send(JSON.stringify(params));
                     this.isConnected = true;
@@ -52,9 +58,7 @@
                 return w;
             },
 
-            parseTicker: function(data) {
-                data = JSON.parse(data);
-
+            parseTicker(data) {
                 for (let c of Object.keys(this.cryptos)) {
                     if (data.product_id === this.cryptos[c].symbol) {
                         this.cryptos[c].price = data.price;
@@ -62,7 +66,7 @@
                 }
             },
 
-            getAllSymbols: function() {
+            getAllSymbols() {
                 let arr = [];
                 for (let c of Object.keys(this.cryptos)) {
                     if (this.cryptos[c].symbol) {
@@ -70,6 +74,13 @@
                     }
                 }
                 return arr;
+            },
+
+            sort(cryptos) {
+                return Object.keys(cryptos).sort().reduce((a, v) => {
+                    a[v] = cryptos[v];
+                    return a;
+                }, {});
             }
         },
 
@@ -83,9 +94,9 @@
                 webSocket: null,
                 isConnected: false,
                 cryptos: {
-                    bitcoin: { symbol: "BTC-USD", price: 0 },
-                    litecoin: { symbol: "LTC-USD", price: 0 },
-                    ethereum: { symbol: "ETH-USD", price: 0 },
+                    Bitcoin: { symbol: "BTC-USD", price: 0 },
+                    Litecoin: { symbol: "LTC-USD", price: 0 },
+                    Ethereum: { symbol: "ETH-USD", price: 0 },
                 }
             };
         },
