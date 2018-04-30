@@ -29,7 +29,26 @@ Vue.filter('toCurrency', function (value) {
     return formatter.format(value);
 });
 
+///////////////
+// For Passport
+///////////////
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue')
+);
 
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue')
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue')
+);
+
+
+// Main Vue instance
 const app = new Vue({
     el: '#app'
 });
