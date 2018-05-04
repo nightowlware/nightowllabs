@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\UserLogin;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -21,11 +21,14 @@ class UserLoginListener
     /**
      * Handle the event.
      *
-     * @param  UserLogin  $event
+     * @param $event
      * @return void
      */
-    public function handle(UserLogin $event)
+    public function handle($event)
     {
-        //
+        // If the user has successfully logged in:
+        if ($event instanceof Login) {
+
+        }
     }
 }
