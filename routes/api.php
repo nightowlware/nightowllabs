@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
+// Note: this doesn't work if you just enter the endpoint in the URL address bar - you
+// actually have to use axios/postman/etc to set up the necessary headers (CSRF token, JWT token, etc).
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
