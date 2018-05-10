@@ -48,6 +48,7 @@ class HomeController extends Controller
      */
     public function profile()
     {
-        return view('profile');
+//        dd(request()->user()->incrementing);
+        return view('profile')->with('user', request()->user());
     }
 }
