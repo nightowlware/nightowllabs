@@ -47833,20 +47833,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-primary pull-right",
-            attrs: { href: "crypto" }
-          },
-          [
-            _vm._v(
-              "\n                    Realtime Crypto price ticker\n                "
-            )
-          ]
-        )
-      ])
+      _c("div", { staticClass: "col-md-6" })
     ])
   }
 ]

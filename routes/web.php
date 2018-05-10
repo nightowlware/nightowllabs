@@ -14,8 +14,16 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/crypto', 'HomeController@crypto')->name('crypto');
+
+// Helper for defining simple "home" routes
+function defineHomeRoute($name) {
+    Route::get("/$name", "HomeController@$name")->name($name);
+}
+
+defineHomeRoute('home');
+defineHomeRoute('crypto');
+defineHomeRoute('profile');
+
 
 Route::get('/', function () {
 //    return view('layouts.app');

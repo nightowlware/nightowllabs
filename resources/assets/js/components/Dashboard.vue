@@ -20,9 +20,9 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <a href="crypto" class="btn btn-primary pull-right">
-                        Realtime Crypto price ticker
-                    </a>
+                    <!--<a href="crypto" class="btn btn-primary pull-right">-->
+                        <!--Realtime Crypto price ticker-->
+                    <!--</a>-->
                 </div>
             </div>
 

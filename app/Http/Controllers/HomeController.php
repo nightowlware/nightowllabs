@@ -26,6 +26,12 @@ class HomeController extends Controller
         return view('home');
     }
 
+    // Alias to function above
+    public function home()
+    {
+        return $this->index();
+    }
+
     /**
      * Show the crypto dashboard.
      *
@@ -34,5 +40,14 @@ class HomeController extends Controller
     public function crypto()
     {
         return view('crypto');
+    }
+
+    /**
+     * Show the user's profile
+     * @return \Illuminate\Http\Response
+     */
+    public function profile()
+    {
+        return view('profile');
     }
 }
