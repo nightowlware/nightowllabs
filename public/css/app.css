@@ -32,6 +32,18 @@
           justify-content: center;
 }
 
+.flexy {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.auto-width {
+  width: auto;
+}
+
 table {
   width: 100%;
 }

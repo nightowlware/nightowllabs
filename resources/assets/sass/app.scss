@@ -36,6 +36,15 @@
   justify-content: center;
 }
 
+.flexy {
+  justify-content: space-around;
+  display: flex;
+}
+
+.auto-width {
+  width: auto;
+}
+
 table {
   width: 100%;
 }

@@ -9,17 +9,13 @@
 
                     <div class="card-body">
                         {{ Form::model($user) }}
-                        <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-                        <div class="col-md-6">
-                            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                            @if ($errors->has('email'))
-                                <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                            @endif
+                        <div class="flexy">
+                            {{ Form::label('email-label', 'Email address', ['class' => "auto-width", 'style' => 'inline-block']) }}
+                            {{ Form::email('email', NULL, ['class' => 'form-control auto-width']) }}
+{{--                            {{ Form::email('email', NULL, ['class' => '']) }}--}}
                         </div>
+
                         {{ Form::close() }}
 
                         {{--<form method="POST" action="{{ route('login') }}">--}}
