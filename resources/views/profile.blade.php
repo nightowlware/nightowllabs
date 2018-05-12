@@ -10,16 +10,13 @@
                     <div class="card-body">
                         {{ Form::model($user) }}
 
-                        <div class="flexy">
-                            {{ Form::label('email-label', 'Email address', ['class' => "auto-width", 'style' => 'inline-block']) }}
-                            {{ Form::email('email', NULL, ['class' => 'form-control auto-width']) }}
-{{--                            {{ Form::email('email', NULL, ['class' => '']) }}--}}
-                        </div>
+                        @include('include.form-row', ['field' => 'name', 'labelText' => 'Name'])
+                        @include('include.form-row', ['field' => 'email', 'labelText' => 'Email Address', 'ro' => true])
 
                         {{ Form::close() }}
 
+
                         {{--<form method="POST" action="{{ route('login') }}">--}}
-                            {{--@csrf--}}
 
                             {{--<div class="form-group row">--}}
                                 {{--<label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>--}}
