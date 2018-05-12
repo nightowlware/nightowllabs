@@ -51,7 +51,7 @@ class HomeController extends Controller
     {
         $user = request()->user();
 
-        if (!is_null(\Input::all())) {
+        if (!empty(\Input::all())) {
             // Be careful! Don't set any sensitive fields here!
             $user->name = \Input::get('name');
             $user->save();
