@@ -12,6 +12,12 @@
 
                         @include('include.form-row', ['field' => 'name', 'labelText' => 'Name'])
                         @include('include.form-row', ['field' => 'email', 'labelText' => 'Email Address', 'ro' => true])
+                        @include('include.form-row', ['field' => 'is_super_user', 'labelText' => 'Super User?', 'ro' => true])
+
+                        <div>
+                            {{ Form::submit('Update Profile', ['class' => 'btn btn-primary auto-margin blocky']) }}
+                        </div>
+
 
                         {{ Form::close() }}
 

@@ -36,6 +36,10 @@
   justify-content: center;
 }
 
+.blocky {
+  display: block;
+}
+
 .flexy {
   justify-content: space-between;
   display: flex;
@@ -43,6 +47,10 @@
 
 .auto-width {
   width: auto;
+}
+
+.auto-margin {
+  margin: auto;
 }
 
 table {

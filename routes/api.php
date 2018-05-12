@@ -17,6 +17,14 @@ use Illuminate\Http\Request;
 
 // Note: this doesn't work if you just enter the endpoint in the URL address bar - you
 // actually have to use axios/postman/etc to set up the necessary headers (CSRF token, JWT token, etc).
-Route::get('/user', function (Request $request) {
-    return $request->user();
+Route::name('api.')->group(function() {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::post('/user', function (Request $request) {
+//        return $request->user();
+        dd("DIE");
+//        return redirect('profile');
+    })->name('user');
 });

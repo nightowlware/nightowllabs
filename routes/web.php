@@ -18,6 +18,7 @@ Auth::routes();
 // Helper for defining simple "home" routes
 function defineHomeRoute($name) {
     Route::get("/$name", "HomeController@$name")->name($name);
+    Route::post("/$name", "HomeController@{$name}")->name($name);
 }
 
 defineHomeRoute('home');

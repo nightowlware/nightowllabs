@@ -32,6 +32,10 @@
           justify-content: center;
 }
 
+.blocky {
+  display: block;
+}
+
 .flexy {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -43,6 +47,10 @@
 
 .auto-width {
   width: auto;
+}
+
+.auto-margin {
+  margin: auto;
 }
 
 table {

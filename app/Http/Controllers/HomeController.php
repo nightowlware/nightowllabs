@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -48,7 +49,14 @@ class HomeController extends Controller
      */
     public function profile()
     {
-//        dd(request()->user()->incrementing);
+        $user = request()->user();
+
+        if (!is_null(\Input::all())) {
+            // Be careful! Don't set any sensitive fields here!
+            $user->name = \Input::get('name');
+            $user->save();
+        }
+
         return view('profile')->with('user', request()->user());
     }
 }
