@@ -11,6 +11,10 @@
                         "Researchers surf the wave of human imagination." --Steven Magee
                         <br><br>
                         "Highly organized research is guaranteed to produce nothing new." --Frank Herbert
+
+                        <!--Obtain custom quote from cgi Java program!-->
+                        <span v-html="customQuote !== '' ? paddedCustomQuote : ''"></span>
+
                     </div>
                     <div class="fill">
                         <img :src="require('../../images/flask.png')"/>
@@ -33,7 +37,25 @@
 <script>
     export default {
         mounted() {
-            // console.log('Component mounted.')
+            // Retrieve quote from external java program
+            axios.request('/api/quote').then((response) => {
+                this.customQuote = response.data;
+            }).catch((error) => {
+                console.error(error);
+            });
+
+        },
+
+        data() {
+            return {
+                customQuote: ""
+            }
+        },
+
+        computed: {
+            paddedCustomQuote() {
+                return "<br><br>" + this.customQuote;
+            }
         }
     }
 </script>

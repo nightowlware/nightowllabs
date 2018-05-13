@@ -47771,10 +47771,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        // console.log('Component mounted.')
+        var _this = this;
+
+        // Retrieve quote from external java program
+        axios.request('/api/quote').then(function (response) {
+            _this.customQuote = response.data;
+        }).catch(function (error) {
+            console.error(error);
+        });
+    },
+    data: function data() {
+        return {
+            customQuote: ""
+        };
+    },
+
+
+    computed: {
+        paddedCustomQuote: function paddedCustomQuote() {
+            return "<br><br>" + this.customQuote;
+        }
     }
 });
 
@@ -47790,7 +47813,34 @@ var render = function() {
     _c("div", { staticClass: "col-md-8" }, [
       _c("div", { staticClass: "jumbotron" }, [
         _c("div", { staticStyle: { display: "flex" } }, [
-          _vm._m(0),
+          _c("div", [
+            _vm._v(
+              '\n                    "Whether you think you can or cannot, you\'re a cunt."   --Shafik\n                    '
+            ),
+            _c("br"),
+            _c("br"),
+            _vm._v(
+              '\n                    "You\'d be amazed how much research you can get done when you have no life whatsoever."  --Ernes Cline\n                    '
+            ),
+            _c("br"),
+            _c("br"),
+            _vm._v(
+              '\n                    "Researchers surf the wave of human imagination." --Steven Magee\n                    '
+            ),
+            _c("br"),
+            _c("br"),
+            _vm._v(
+              '\n                    "Highly organized research is guaranteed to produce nothing new." --Frank Herbert\n\n                    '
+            ),
+            _vm._v(" "),
+            _c("span", {
+              domProps: {
+                innerHTML: _vm._s(
+                  _vm.customQuote !== "" ? _vm.paddedCustomQuote : ""
+                )
+              }
+            })
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "fill" }, [
             _c("img", { attrs: { src: __webpack_require__(48) } })
@@ -47798,36 +47848,11 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(1)
+      _vm._m(0)
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _vm._v(
-        '\n                    "Whether you think you can or cannot, you\'re a cunt."   --Shafik\n                    '
-      ),
-      _c("br"),
-      _c("br"),
-      _vm._v(
-        '\n                    "You\'d be amazed how much research you can get done when you have no life whatsoever."  --Ernes Cline\n                    '
-      ),
-      _c("br"),
-      _c("br"),
-      _vm._v(
-        '\n                    "Researchers surf the wave of human imagination." --Steven Magee\n                    '
-      ),
-      _c("br"),
-      _c("br"),
-      _vm._v(
-        '\n                    "Highly organized research is guaranteed to produce nothing new." --Frank Herbert\n                '
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

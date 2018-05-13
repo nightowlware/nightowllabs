@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Symfony\Component\Process\Process;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +25,15 @@ Route::name('api.')->group(function() {
     });
 
     Route::post('/user', function (Request $request) {
-//        return $request->user();
         dd("DIE");
 //        return redirect('profile');
     })->name('user');
+
+
+    Route::get('/quote', function (Request $request) {
+        $process = new Process('cd cgi && java RandomQuoteGenerator');
+        $process->run();
+
+        return $process->getOutput();
+    })->name('quote');
 });
