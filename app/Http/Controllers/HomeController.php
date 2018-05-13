@@ -47,13 +47,13 @@ class HomeController extends Controller
      * Show the user's profile
      * @return \Illuminate\Http\Response
      */
-    public function profile()
+    public function profile(Request $request)
     {
-        $user = request()->user();
+        $user = $request->user();
 
-        if (!empty(\Input::all())) {
+        if (!empty($request->all())) {
             // Be careful! Don't set any sensitive fields here!
-            $user->name = \Input::get('name');
+            $user->name = $request->input('name');
             $user->save();
         }
 
