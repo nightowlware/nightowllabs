@@ -4,16 +4,11 @@
             <div class="jumbotron">
                 <div style="display: flex">
                     <div>
-                        "Whether you think you can or cannot, you're a cunt."   --Shafik
-                        <br><br>
-                        "You'd be amazed how much research you can get done when you have no life whatsoever."  --Ernes Cline
-                        <br><br>
-                        "Researchers surf the wave of human imagination." --Steven Magee
-                        <br><br>
-                        "Highly organized research is guaranteed to produce nothing new." --Frank Herbert
+                        <!--Here is my static quote-->
+                        <!--<br><br>-->
 
                         <!--Obtain custom quote from cgi Java program!-->
-                        <span v-html="customQuote !== '' ? paddedCustomQuote : ''"></span>
+                        <span v-html="quoteWall"></span>
 
                     </div>
                     <div class="fill">
@@ -37,25 +32,34 @@
 <script>
     export default {
         mounted() {
-            // Retrieve quote from external java program
-            axios.request('/api/quote').then((response) => {
-                this.customQuote = response.data;
-            }).catch((error) => {
-                console.error(error);
-            });
+            // Retrieve quotes from external java program
+            this.fetchQuotes(3);
+        },
 
+        methods: {
+            fetchQuotes(num) {
+                let promiseArray = Array(num).fill('/api/quote').map(url => axios.request(url));
+
+                axios.all(promiseArray).then((responses) => {
+                    let quotes = Array.from(new Set(responses.map(e => e.data)));
+                    this.quoteWall = quotes.join('<br><br>');
+                }).catch((error) => {
+                    console.error(error);
+                });
+            },
+
+            paddedQuote(q) {
+                return "<br><br>" + q;
+            }
         },
 
         data() {
             return {
-                customQuote: ""
+                quoteWall: ""
             }
         },
 
         computed: {
-            paddedCustomQuote() {
-                return "<br><br>" + this.customQuote;
-            }
         }
     }
 </script>
