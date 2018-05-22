@@ -41,7 +41,7 @@
                 let promiseArray = Array(num).fill('/api/quote').map(url => axios.request(url));
 
                 axios.all(promiseArray).then((responses) => {
-                    let quotes = Array.from(new Set(responses.map(e => e.data)));
+                    let quotes = Array.from(new Set(responses.map(e => (e.data.quote + "&nbsp&nbsp--" + e.data.author))));
                     this.quoteWall = quotes.join('<br><br>');
                 }).catch((error) => {
                     console.error(error);

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Quote;
 use Symfony\Component\Process\Process;
 
 
@@ -31,9 +32,10 @@ Route::name('api.')->group(function() {
 
 
     Route::get('/quote', function (Request $request) {
-        $process = new Process('cd cgi && java RandomQuoteGenerator');
-        $process->run();
-
-        return $process->getOutput();
+//        $process = new Process('cd cgi && java RandomQuoteGenerator');
+//        $process->run();
+//        return $process->getOutput();
+        $row = Quote::inRandomOrder()->first();
+        return $row;
     })->name('quote');
 });
