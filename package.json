@@ -19,7 +19,5 @@
     "lodash": "^4.17.4",
     "vue": "^2.5.7"
   },
-  "dependencies": {
-    "zipcode-to-timezone": "0.0.9"
-  }
+  "dependencies": {}
 }
