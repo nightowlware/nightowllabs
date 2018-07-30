@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\EchoPost;
 use App\User;
 
 class HomeController extends Controller
@@ -31,6 +32,26 @@ class HomeController extends Controller
     public function home()
     {
         return $this->index();
+    }
+
+    public function echo() {
+        $user = request()->user();
+        return view('echo')->with('echoPosts', $user->echos);
+    }
+
+    public function echoPost(Request $request) {
+        try {
+            $user = $request->user();
+
+            $echo = new EchoPost();
+            $echo->html = json_encode($request->all(), JSON_PRETTY_PRINT);
+
+            $user->echos()->save($echo);
+
+            return response()->json(['Success' => 'The Echo POST was successfully processed.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['Failure' => "There was a problem with processing your Echo POST"], 500);
+        }
     }
 
     /**
