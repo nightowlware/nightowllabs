@@ -16,7 +16,7 @@ git pull
 
 composer install
 npm install
-php artisan migrate
+php artisan migrate --force
 
 
 echo "--------"
