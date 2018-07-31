@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <p>
-        <strong>Warning: this is a technical tool.</strong>
+        <strong>Advanced: POST Echo Tester</strong>
         <br>
-        This page shows the last several http POSTs that were sent to this address.
+        This page shows the last several http POSTs that were sent to this endpoint.
     </p>
     <hr>
 

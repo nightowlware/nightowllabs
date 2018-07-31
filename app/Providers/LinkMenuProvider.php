@@ -37,6 +37,7 @@ class LinkMenuProvider extends ServiceProvider
         $ret = [
             'Home' => route('home'),
             'Crypto Prices' => route('crypto'),
+            'POST Echo Tester' => route('echo'),
             'Profile' => route('profile'),
         ];
 
