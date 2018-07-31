@@ -35,21 +35,28 @@ class HomeController extends Controller
     }
 
     public function echo() {
-        $user = request()->user();
-        return view('echo')->with('echoPosts', $user->echos);
+        // see echoPost()
+        $echoPosts = EchoPost::where('user_id', 0)->get();
+        return view('echo')->with('echoPosts', $echoPosts);
     }
 
     public function echoPost(Request $request) {
         try {
-            $user = $request->user();
-
             $echo = new EchoPost();
-            $echo->html = json_encode($request->all(), JSON_PRETTY_PRINT);
 
-            $user->echos()->save($echo);
+            $echo->html = "<strong>HEADERS</strong><br>";
+            $echo->html .= json_encode($request->headers->all(), JSON_PRETTY_PRINT);
+            $echo->html .= "<br><br>";
+            $echo->html .= "<strong>BODY</strong><br>";
+            $echo->html .= json_encode($request->all(), JSON_PRETTY_PRINT);
+
+            // save all posts under ficiticious "0" user
+            $echo->user_id = 0;
+            $echo->save();
 
             return response()->json(['Success' => 'The Echo POST was successfully processed.'], 200);
         } catch (\Exception $e) {
+            throw $e;
             return response()->json(['Failure' => "There was a problem with processing your Echo POST"], 500);
         }
     }
