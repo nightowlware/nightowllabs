@@ -19,7 +19,8 @@ class CreateEchoPostsTable extends Migration
 //            $table->foreign('user_id')
 //                ->references('id')->on('users')
 //                ->onDelete('cascade');
-            $table->text('html');
+            $table->text('headers');
+            $table->text('body');
             $table->timestamps();
         });
     }

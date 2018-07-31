@@ -36,7 +36,7 @@ class HomeController extends Controller
 
     public function echo() {
         // see echoPost()
-        $echoPosts = EchoPost::where('user_id', 0)->get();
+        $echoPosts = EchoPost::orderBy('created_at', 'desc')->take(25)->get();
         return view('echo')->with('echoPosts', $echoPosts);
     }
 
@@ -44,11 +44,8 @@ class HomeController extends Controller
         try {
             $echo = new EchoPost();
 
-            $echo->html = "<strong>HEADERS</strong><br>";
-            $echo->html .= json_encode($request->headers->all(), JSON_PRETTY_PRINT);
-            $echo->html .= "<br><br>";
-            $echo->html .= "<strong>BODY</strong><br>";
-            $echo->html .= json_encode($request->all(), JSON_PRETTY_PRINT);
+            $echo->headers = json_encode($request->headers->all(), JSON_PRETTY_PRINT);
+            $echo->body = json_encode($request->all(), JSON_PRETTY_PRINT);
 
             // save all posts under ficiticious "0" user
             $echo->user_id = 0;
