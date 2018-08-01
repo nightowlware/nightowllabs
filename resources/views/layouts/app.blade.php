@@ -92,6 +92,10 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+
+                                    {{--TODO: Bad place for a donation button?--}}
+                                    @include('include.donate')
+
                                 </div>
                             </li>
 
