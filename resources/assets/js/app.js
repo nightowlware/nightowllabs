@@ -68,5 +68,5 @@ for (let toast of ['#errorMessageToast', '#messageToast']) {
  */
 window.ConfirmDelete = function(msg) {
     return confirm("Are you sure you want to delete " + msg + " ?");
-}
+};
 

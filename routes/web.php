@@ -24,6 +24,7 @@ function defineHomeRoute($name) {
 defineHomeRoute('home');
 defineHomeRoute('crypto');
 defineHomeRoute('echo');
+defineHomeRoute('fileshare');
 defineHomeRoute('profile');
 
 

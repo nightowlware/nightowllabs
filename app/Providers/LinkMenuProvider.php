@@ -38,6 +38,7 @@ class LinkMenuProvider extends ServiceProvider
             'Home' => route('home'),
             'Crypto Prices' => route('crypto'),
             'POST Echo Tester' => route('echo'),
+            'Easy File Share' => route('fileshare'),
             'Profile' => route('profile'),
         ];
 

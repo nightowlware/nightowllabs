@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\EchoPost;
 use App\User;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+
 
 class HomeController extends Controller
 {
@@ -53,7 +57,7 @@ class HomeController extends Controller
 
             return response()->json(['Success' => 'The Echo POST was successfully processed.'], 200);
         } catch (\Exception $e) {
-            throw $e;
+            Log::error($e->getMessage());
             return response()->json(['Failure' => "There was a problem with processing your Echo POST"], 500);
         }
     }
@@ -83,5 +87,26 @@ class HomeController extends Controller
         }
 
         return view('profile')->with('user', request()->user());
+    }
+
+    public function fileshare(Request $request) {
+        return view('fileshare');
+    }
+
+    public function filesharePost(Request $request) {
+        $time = Carbon::now();
+
+        // fetch the file from the form
+        $file = $request->file('file');
+
+        $folder = $time->format('Y-m-d') . '-' . str_random(50);
+        $status = Storage::disk('spaces')->putFile($folder, request()->file, 'public');
+
+
+        if ($status) {
+            return response()->json($status, 200);
+        } else {
+            return response()->json('Error: could not upload file.', 400);
+        }
     }
 }

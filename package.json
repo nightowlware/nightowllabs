@@ -20,5 +20,7 @@
     "lodash": "^4.17.4",
     "vue": "^2.5.7"
   },
-  "dependencies": {}
+  "dependencies": {
+    "dropzone": "^5.5.1"
+  }
 }
