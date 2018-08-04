@@ -100,11 +100,13 @@ class HomeController extends Controller
         $file = $request->file('file');
 
         $folder = $time->format('Y-m-d') . '-' . str_random(50);
-        $status = Storage::disk('spaces')->putFile($folder, request()->file, 'public');
+        $filename = $file->getClientOriginalName();
 
+        $filePath = Storage::putFileAs($folder, request()->file, $filename, 'public');
 
-        if ($status) {
-            return response()->json($status, 200);
+        if ($filePath) {
+            $url = Storage::url($filePath);
+            return response()->json($url, 200);
         } else {
             return response()->json('Error: could not upload file.', 400);
         }
