@@ -15,7 +15,7 @@ fi
 git pull
 
 composer install
-npm install
+npm ci
 php artisan migrate --force
 
 
