@@ -24,7 +24,7 @@
             paramName: 'file',
             maxFilesize: 2048, // MB
             maxFiles: 5,
-            clickable: false,
+            clickable: true,
             dictDefaultMessage: "Simply drag&drop files in here, wait for them to upload, then click 'Copy Link' to share. The files are not guaranteed to be hosted for more than a day or so.",
             init: function() {
                 this.on("success", function(file, response) {
