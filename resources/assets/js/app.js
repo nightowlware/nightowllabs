@@ -7,6 +7,7 @@
 
 import './bootstrap.js';
 import Vue from 'vue';
+
 import Clipboard from 'clipboard';
 window.Clipboard = Clipboard;
 

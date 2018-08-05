@@ -17,53 +17,55 @@
 
 <script src="{{ asset('js/dropzone.min.js') }}"></script>
 <script>
-    Dropzone.options.fileshareDropzone = {
-        paramName: 'file',
-        maxFilesize: 2048, // MB
-        maxFiles: 5,
-        clickable: false,
-        dictDefaultMessage: "Simply drag&drop a file in here, wait for it to upload, then click 'Copy Link' to share. The file is not guaranteed to be hosted for more than a few hours.",
-        init: function() {
-            this.on("success", function(file, response) {
-                let a = document.createElement('span');
-                a.className = "thumb-url btn btn-primary";
-                a.setAttribute('data-clipboard-text', response);
-                a.innerHTML = "Copy Link";
-                a.style.width = "100%";
-                file.previewTemplate.appendChild(a);
-            });
+    document.addEventListener("DOMContentLoaded", function(event) {
+        Dropzone.options.fileshareDropzone = {
+            paramName: 'file',
+            maxFilesize: 2048, // MB
+            maxFiles: 5,
+            clickable: false,
+            dictDefaultMessage: "Simply drag&drop a file in here, wait for it to upload, then click 'Copy Link' to share. The file is not guaranteed to be hosted for more than a few hours.",
+            init: function() {
+                this.on("success", function(file, response) {
+                    let a = document.createElement('span');
+                    a.className = "thumb-url btn btn-primary";
+                    a.setAttribute('data-clipboard-text', response);
+                    a.innerHTML = "Copy Link";
+                    a.style.width = "100%";
+                    file.previewTemplate.appendChild(a);
+                });
+            }
+        };
+
+        $('.thumb-url').tooltip({
+            trigger: 'click',
+            placement: 'bottom'
+        });
+
+        function setTooltip(btn, message) {
+            $(btn).tooltip('hide')
+                .attr('data-original-title', message)
+                .tooltip('show');
         }
-    };
 
-    $('.thumb-url').tooltip({
-        trigger: 'click',
-        placement: 'bottom'
-    });
+        function hideTooltip(btn) {
+            setTimeout(function() {
+                $(btn).tooltip('hide');
+            }, 500);
+        }
 
-    function setTooltip(btn, message) {
-        $(btn).tooltip('hide')
-            .attr('data-original-title', message)
-            .tooltip('show');
-    }
+        let clipboard = new Clipboard('.thumb-url');
 
-    function hideTooltip(btn) {
-        setTimeout(function() {
-            $(btn).tooltip('hide');
-        }, 500);
-    }
+        clipboard.on('success', function(e) {
+            e.clearSelection();
+            setTooltip(e.trigger, 'Copied!');
+            hideTooltip(e.trigger);
+        });
 
-    let clipboard = new Clipboard('.thumb-url');
-
-    clipboard.on('success', function(e) {
-        e.clearSelection();
-        setTooltip(e.trigger, 'Copied!');
-        hideTooltip(e.trigger);
-    });
-
-    clipboard.on('error', function(e) {
-        e.clearSelection();
-        setTooltip(e.trigger, 'Failed to copy');
-        hideTooltip(e.trigger);
+        clipboard.on('error', function(e) {
+            e.clearSelection();
+            setTooltip(e.trigger, 'Failed to copy');
+            hideTooltip(e.trigger);
+        });
     });
 </script>
 
