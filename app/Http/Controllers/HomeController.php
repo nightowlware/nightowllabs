@@ -96,7 +96,7 @@ class HomeController extends Controller
     public function filesharePost(Request $request) {
         $time = Carbon::now();
 
-        // fetch the file from the form
+        // Fetch the file from the form. This must match "paramName" in the javascript
         $file = $request->file('file');
 
         $folder = $time->format('Y-m-d') . '-' . str_random(50);

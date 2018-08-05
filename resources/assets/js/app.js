@@ -7,6 +7,8 @@
 
 import './bootstrap.js';
 import Vue from 'vue';
+import Clipboard from 'clipboard';
+window.Clipboard = Clipboard;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
