@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <p>
-        <strong>File Share - Drag and Drop Files</strong>
+        <strong>EZ File Share - Drag and Drop Files</strong>
         <br>
     </p>
     <hr>
@@ -25,7 +25,7 @@
             maxFilesize: 2048, // MB
             maxFiles: 5,
             clickable: false,
-            dictDefaultMessage: "Simply drag&drop a file in here, wait for it to upload, then click 'Copy Link' to share. The file is not guaranteed to be hosted for more than a few hours.",
+            dictDefaultMessage: "Simply drag&drop files in here, wait for them to upload, then click 'Copy Link' to share. The files are not guaranteed to be hosted for more than a day or so.",
             init: function() {
                 this.on("success", function(file, response) {
                     let a = document.createElement('span');

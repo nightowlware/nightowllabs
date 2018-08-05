@@ -99,7 +99,7 @@ class HomeController extends Controller
         // Fetch the file from the form. This must match "paramName" in the javascript
         $file = $request->file('file');
 
-        $folder = $time->format('Y-m-d') . '-' . str_random(50);
+        $folder = $time->format('Y-m-d') . '/' . str_random(50);
         $filename = $file->getClientOriginalName();
 
         $filePath = Storage::putFileAs($folder, request()->file, $filename, 'public');
