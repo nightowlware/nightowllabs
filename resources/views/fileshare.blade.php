@@ -17,8 +17,10 @@
 
 <script src="{{ asset('js/dropzone.min.js') }}"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-        Dropzone.options.fileshareDropzone = {
+    Dropzone.autoDiscover = false;
+
+    window.onload = function () {
+        const opts = {
             paramName: 'file',
             maxFilesize: 2048, // MB
             maxFiles: 5,
@@ -31,10 +33,15 @@
                     a.setAttribute('data-clipboard-text', response);
                     a.innerHTML = "Copy Link";
                     a.style.width = "100%";
-                    file.previewTemplate.appendChild(a);
+
+                    file.previewElement.appendChild(a);
+                    file.previewElement.firstElementChild.style.width = '250px';
                 });
             }
         };
+
+        const uploader = document.querySelector('#fileshare-dropzone');
+        const newDropzone = new Dropzone(uploader, opts);
 
         $('.thumb-url').tooltip({
             trigger: 'click',
@@ -66,16 +73,9 @@
             setTooltip(e.trigger, 'Failed to copy');
             hideTooltip(e.trigger);
         });
-    });
+    };
 </script>
 
 <link rel="stylesheet" href="{{ asset('css/dropzone.min.css') }}">
 
-
-<style>
-    .dropzone .dz-preview .dz-image {
-        height: 100px;
-        width: 200px;
-    }
-</style>
 @endsection
