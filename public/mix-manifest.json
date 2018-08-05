@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/dropzone.min.js": "/js/dropzone.min.js",
-    "/css/dropzone.min.css": "/css/dropzone.min.css"
+    "/css/dropzone.min.css": "/css/dropzone.min.css",
+    "/js/phaser.min.js": "/js/phaser.min.js"
 }

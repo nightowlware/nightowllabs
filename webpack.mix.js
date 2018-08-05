@@ -15,5 +15,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
 
 mix.copy('resources/assets/images', 'public/images');
+
 mix.copy('node_modules/dropzone/dist/min/dropzone.min.js', 'public/js');
 mix.copy('node_modules/dropzone/dist/min/dropzone.min.css', 'public/css');
+
+mix.copy('node_modules/phaser/dist/phaser.min.js', 'public/js');
