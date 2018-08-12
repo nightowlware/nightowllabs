@@ -13,8 +13,10 @@
     </form>
 
 </div>
+@endsection
 
 
+@section('js')
 <script src="{{ asset('js/dropzone.min.js') }}"></script>
 <script>
     Dropzone.autoDiscover = false;
@@ -77,5 +79,5 @@
 </script>
 
 <link rel="stylesheet" href="{{ asset('css/dropzone.min.css') }}">
-
 @endsection
+

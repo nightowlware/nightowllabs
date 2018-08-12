@@ -9,14 +9,18 @@
 // Bootstrap
 //@import '~bootstrap/scss/bootstrap';
 
-//@import '../../../themes/bootstrap4-neon-glow.min.css';
-//@import '../../../themes/bootstrap4-bubblegum.min.css';
-//@import '../../../themes/bootstrap4-daydream.min.css';
-//@import '../../../themes/bootstrap4-charming.min.css';
-//@import '../../../themes/bootstrap4-wizardry.min.css';
-@import '../../../theme-machine/dist/hello-world/css/bootstrap4-hello-world.min.css';
-//@import '../../../themes/bootstrap4-business-tycoon.min.css';
-//@import '../../../themes/bootstrap4-vibrant-sea.min.css';
+@import '../../../themes/cyborg_b4.css';
+@import '../../../themes/cyborg2_b4.css';
+
+//@import '../../../theme-machine/dist/hello-world/css/bootstrap4-hello-world.min.css';
+//@import '../../../theme-machine/dist/harbor/css/bootstrap4-harbor.min.css';
+//@import '../../../theme-machine/dist/growth/css/bootstrap4-growth.min.css';
+//@import '../../../theme-machine/dist/charming/css/bootstrap4-charming.min.css';
+//@import '../../../theme-machine/dist/executive-suite/css/bootstrap4-executive-suite.min.css';
+//@import '../../../theme-machine/dist/retro/css/bootstrap4-retro.min.css';
+//@import '../../../theme-machine/dist/bubblegum/css/bootstrap4-bubblegum.min.css';
+//@import '../../../theme-machine/dist/neon-glow/css/bootstrap4-neon-glow.min.css';
+
 
 .navbar-laravel {
   background-color: #fff;
@@ -55,4 +59,13 @@
 
 table {
   width: 100%;
+}
+
+body {
+  //background: $body-bg;
+  padding-top: 40px;
+}
+
+.navbar {
+  //border: $body-bg solid 10px;
 }
