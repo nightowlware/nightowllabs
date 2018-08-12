@@ -10,7 +10,6 @@
 //@import '~bootstrap/scss/bootstrap';
 
 @import '../../../themes/cyborg_b4.css';
-@import '../../../themes/cyborg2_b4.css';
 
 //@import '../../../theme-machine/dist/hello-world/css/bootstrap4-hello-world.min.css';
 //@import '../../../theme-machine/dist/harbor/css/bootstrap4-harbor.min.css';
@@ -63,9 +62,9 @@ table {
 
 body {
   //background: $body-bg;
-  padding-top: 40px;
+  padding-top: 25px;
 }
 
 .navbar {
-  //border: $body-bg solid 10px;
+  border: black solid 10px;
 }
