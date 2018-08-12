@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
+use App\Mail\TestMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,9 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('testMail', function() {
+    echo("Sending email ...\n");
+    Mail::to(env('SUPER_USERS'))->send(new TestMail());
+    echo("Done.\n");
+})->describe('Send a test-email to the configured Super Users.');
