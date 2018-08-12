@@ -4,7 +4,7 @@
             <div class="jumbotron">
                 <div style="display: flex; justify-content: space-between">
                     <div>
-                        <h1 v-for="(val, key) in sort(cryptos)"> {{key}} : {{ val.price | toCurrency }}</h1>
+                        <h3 v-for="(val, key) in sort(cryptos)"> {{key}} : {{ val.price | toCurrency }}</h3>
                         <!--<h1>Bitcoin: {{ cryptos.bitcoin.price | toCurrency}}</h1>-->
                         <!--<h1>Litecoin: {{ cryptos.litecoin.price | toCurrency}}</h1>-->
                         <!--<h1>Ethereum: {{ cryptos.ethereum.price | toCurrency}}</h1>-->
