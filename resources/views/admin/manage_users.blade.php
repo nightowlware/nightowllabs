@@ -18,13 +18,11 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-1">
-                                {{ Form::submit('Search', ['class' => 'btn btn-primary pull-right']) }}
-                            </div>
-                            <div class="col-md-1">
-                                <a href="{{ route('admin.users') }}" class="btn btn-primary pull-right">
+                            <div class="col-md-6">
+                                <a href="{{ route('admin.users') }}" class="ml-3 btn btn-primary pull-right">
                                     Clear
                                 </a>
+                                {{ Form::submit('Search', ['class' => 'btn btn-primary pull-right']) }}
                             </div>
                         </div>
                         {{ Form::close() }}
