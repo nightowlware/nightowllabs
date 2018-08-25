@@ -16,16 +16,16 @@ Auth::routes();
 
 
 // Helper for defining simple "home" routes
-function defineHomeRoute($name) {
+$defineGetPost = function($name) {
     Route::get("/$name", "HomeController@$name")->name($name);
     Route::post("/$name", "HomeController@{$name}Post")->name("{$name}Post");
-}
+};
 
-defineHomeRoute('home');
-defineHomeRoute('crypto');
-defineHomeRoute('echo');
-defineHomeRoute('fileshare');
-defineHomeRoute('profile');
+$defineGetPost('home');
+$defineGetPost('crypto');
+$defineGetPost('echo');
+$defineGetPost('fileshare');
+$defineGetPost('profile');
 
 
 Route::get('/', function () {
@@ -37,8 +37,11 @@ Route::get('/', function () {
 ///////////////
 // Admin routes
 ///////////////
-Route::prefix('admin')->middleware('admin')->group(function () {
-    Route::get('users', 'AdminUserController@index')->name('admin.users');
-    Route::resource('user', 'AdminUserController');
-});
+//Route::prefix('admin')->middleware('admin')->group(function () {
+//    Route::get('users', 'AdminUserController@index')->name('admin.users');
+//    Route::resource('user', 'AdminUserController');
+//});
 
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

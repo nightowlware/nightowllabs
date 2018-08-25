@@ -1,7 +1,10 @@
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -13,7 +16,8 @@
         "laravelcollective/html": "^5.0",
         "league/flysystem-aws-s3-v3": "^1.0",
         "league/flysystem-cached-adapter": "^1.0",
-        "phpoffice/phpexcel": "1.8.1"
+        "phpoffice/phpexcel": "1.8.1",
+        "tcg/voyager": "^1.1"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "~5.3|~6.0",
@@ -31,7 +35,9 @@
         "psr-4": {
             "App\\": "app/"
         },
-        "files": ["util/util.php"]
+        "files": [
+            "util/util.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -40,8 +46,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {
@@ -62,5 +67,11 @@
         "optimize-autoloader": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "hooks": {
+            "type": "composer",
+            "url": "https://larapack.io"
+        }
+    }
 }

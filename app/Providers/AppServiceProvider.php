@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::if('is_super_user', function () {
-            return Auth::user()->is_super_user;
+            return Auth::user()->role_id === 1;
         });
 
         \Schema::defaultStringLength(191);

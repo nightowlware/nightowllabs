@@ -47,7 +47,7 @@ class LinkMenuProvider extends ServiceProvider
 
     public function getAdminMenu() : array {
         $ret = [
-            'Manage Users' => route('admin.users'),
+//            'Manage Users' => route('admin.users'),
         ];
 
         return $ret;

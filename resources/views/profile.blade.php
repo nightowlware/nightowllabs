@@ -12,7 +12,7 @@
 
                         @include('include.form-row', ['field' => 'name', 'labelText' => 'Name'])
                         @include('include.form-row', ['field' => 'email', 'labelText' => 'Email Address', 'ro' => true])
-                        @include('include.form-row', ['field' => 'is_super_user', 'labelText' => 'Super User?', 'ro' => true])
+                        @include('include.form-row', ['field' => 'role_id', 'labelText' => 'Role ID', 'ro' => true])
 
                         <div>
                             {{ Form::submit('Update Profile', ['class' => 'btn btn-primary auto-margin blocky']) }}
