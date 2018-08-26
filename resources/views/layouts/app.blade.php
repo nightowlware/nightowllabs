@@ -57,27 +57,6 @@
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
 
-                            {{--Admin Menu--}}
-                            {{--@is_super_user--}}
-                            {{--<li class="nav-link dropdown">--}}
-                            {{--</li>--}}
-
-                            {{--<li class="nav-item dropdown">--}}
-                                {{--<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-                                    {{--<b> Administrator </b> <span class="caret"></span>--}}
-                                {{--</a>--}}
-
-                                {{--@foreach (app('adminmenu') as $text => $href)--}}
-                                    {{--<div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
-                                        {{--<a class="dropdown-item" href="{{ $href }}">--}}
-                                            {{--{{ $text }}--}}
-                                        {{--</a>--}}
-                                    {{--</div>--}}
-                                {{--@endforeach--}}
-
-                            {{--</li>--}}
-                            {{--@endis_super_user--}}
-
                             {{--User Menu--}}
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -117,11 +96,16 @@
 
 
         <div class="flexy-start">
-            @include('include.sidebar')
-
-            <main class="py-4 col-10">
-                @yield('content')
-            </main>
+            @auth
+                @include('include.sidebar')
+                <main class="py-4 col-10">
+                    @yield('content')
+                </main>
+            @else
+                <main class="py-4 col-12">
+                    @yield('content')
+                </main>
+            @endauth
         </div>
 
 
