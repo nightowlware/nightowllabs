@@ -98,7 +98,7 @@
         <div class="flexy-start">
             @auth
                 @include('include.sidebar')
-                <main class="py-4 col-10">
+                <main class="py-4 col-9 col-sm-10">
                     @yield('content')
                 </main>
             @else

@@ -1,6 +1,6 @@
 @inject('usermenu', 'usermenu')
 
-<div class="card sidebar col-sm-2 col-md-2 col-lg-2 pull-left">
+<div class="card sidebar col-3 col-sm-2 col-md-2 col-lg-2 pull-left">
     <div style="padding-bottom: 50px;">
         @foreach ($usermenu as $name => $details)
             @if (Request::url() == str_replace('https', 'http', $details['url']))
