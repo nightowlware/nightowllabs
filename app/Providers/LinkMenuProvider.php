@@ -35,11 +35,10 @@ class LinkMenuProvider extends ServiceProvider
 
     public function getUserMenu() : array {
         $ret = [
-            'Home' => route('home'),
-            'Crypto Prices' => route('crypto'),
-            'POST Echo Tester' => route('echo'),
-            'EZ File Share' => route('fileshare'),
-            'Profile' => route('profile'),
+            'Home' => ['url' => route('home'), 'icon' => 'fa-home'],
+            'Crypto Prices' => ['url' => route('crypto'), 'icon' => 'fa-bitcoin'],
+            'POST Echo' => ['url' => route('echo'), 'icon' => 'fa-exchange'],
+            'EZ File Share' => ['url' => route('fileshare'), 'icon' => 'fa-share-square'],
         ];
 
         return $ret;

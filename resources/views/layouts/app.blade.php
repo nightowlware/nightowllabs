@@ -33,8 +33,8 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-custom navbar-laravel">
+            <div style="max-width: none;" class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="/images/owl_standalone.png" style="height: 20%; width: 20%"/>
                     {{ config('app.name', 'Laravel') }}
@@ -84,13 +84,12 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                {{--Render the user-menu--}}
+                                {{--Render the navbar-menu--}}
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    @foreach (app('usermenu') as $text => $href)
-                                        <a class="dropdown-item" href="{{ $href }}">
-                                            {{ $text }}
-                                        </a>
-                                    @endforeach
+
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        {{ __('Profile') }}
+                                    </a>
 
                                     {{--The logout link is a special-case that does a POST instead of a GET,--}}
                                     {{--That way the route is protected from cross-site scripting attacks.--}}
@@ -117,9 +116,13 @@
         </nav>
 
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <div class="flexy-start">
+            @include('include.sidebar')
+
+            <main class="py-4 col-10">
+                @yield('content')
+            </main>
+        </div>
 
 
         @if ($normalMsg = session('message'))

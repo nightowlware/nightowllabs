@@ -15,7 +15,7 @@
 Auth::routes();
 
 
-// Helper for defining simple "home" routes
+// Helper for defining simple routes
 $defineGetPost = function($name) {
     Route::get("/$name", "HomeController@$name")->name($name);
     Route::post("/$name", "HomeController@{$name}Post")->name("{$name}Post");
@@ -29,7 +29,6 @@ $defineGetPost('profile');
 
 
 Route::get('/', function () {
-//    return view('layouts.app');
     return redirect('/home');
 })->middleware('auth');
 
