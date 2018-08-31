@@ -32,4 +32,8 @@ class User extends \TCG\Voyager\Models\User
     public function echos() {
         return $this->hasMany('App\EchoPost');
     }
+
+    public function checklists() {
+        return $this->hasMany('App\Checklist');
+    }
 }

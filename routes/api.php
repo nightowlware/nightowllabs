@@ -26,7 +26,7 @@ Route::name('api.')->group(function() {
     });
 
     Route::post('/user', function (Request $request) {
-        dd("DIE");
+        dd("Not supported yet: E3818");
 //        return redirect('profile');
     })->name('user');
 
@@ -38,4 +38,8 @@ Route::name('api.')->group(function() {
         $row = Quote::inRandomOrder()->first();
         return $row;
     })->name('quote');
+
+
+    Route::resource('checklists', 'API\ChecklistController');
+
 });

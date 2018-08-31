@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EchoPost extends Model {
+class Checklist extends Model
+{
     public function user() {
         return $this->belongsTo('User');
     }
