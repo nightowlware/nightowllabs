@@ -15,7 +15,7 @@ class ChecklistController extends Controller
      */
     public function index()
     {
-        return Checklist::all();
+        return Checklist::where('user_id', \Auth::id())->get();
     }
 
     /**
@@ -26,7 +26,13 @@ class ChecklistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cl = new Checklist($request->all());
+
+        // associate the new checklist to the current user
+        $user = \Auth::user();
+        $cl->user()->associate($user);
+
+        $cl->save();
     }
 
     /**
@@ -37,7 +43,7 @@ class ChecklistController extends Controller
      */
     public function show($id)
     {
-        //
+        return Checklist::find($id);
     }
 
     /**
@@ -49,7 +55,12 @@ class ChecklistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cl = $this->show($id);
+
+        if ($cl) {
+            $cl->fill($request->all());
+            $cl->save();
+        }
     }
 
     /**
