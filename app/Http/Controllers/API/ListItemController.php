@@ -11,11 +11,11 @@ class ListItemController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return
      */
     public function index()
     {
-        //
+        return ListItem::all();
     }
 
     /**
@@ -57,6 +57,7 @@ class ListItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Checklist::destroy($id);
+        return response()->json("Checklist Destroyed.", 200);
     }
 }

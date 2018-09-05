@@ -20,7 +20,8 @@ class ListItem extends Model
         static::addGlobalScope('checklist', function (Builder $builder) {
             $builder
                 ->join('checklists', 'list_items.checklist_id', '=', 'checklists.id')
-                ->where('user_id', '=', \Auth::id());
+                ->where('user_id', '=', \Auth::id())
+                ->select('text', 'checklist_id', 'list_items.id as listitem_id');
         });
     }
 }

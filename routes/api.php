@@ -41,5 +41,6 @@ Route::name('api.')->group(function() {
 
 
     Route::resource('checklists', 'API\ChecklistController');
+    Route::resource('listitems', 'API\ListItemController');
 
 });
