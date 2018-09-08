@@ -39,6 +39,7 @@ class LinkMenuProvider extends ServiceProvider
             'Crypto Prices' => ['url' => route('crypto'), 'icon' => 'fa-bitcoin'],
             'POST Echo' => ['url' => route('echo'), 'icon' => 'fa-exchange'],
             'EZ File Share' => ['url' => route('fileshare'), 'icon' => 'fa-share-square'],
+            'Checklists' => ['url' => route('checklists'), 'icon' => 'fa-list'],
         ];
 
         return $ret;

@@ -111,4 +111,8 @@ class HomeController extends Controller
             return response()->json('Error: could not upload file.', 400);
         }
     }
+
+    public function checklists(Request $request) {
+        return "Under construction!";
+    }
 }

@@ -25,6 +25,7 @@ $defineGetPost('home');
 $defineGetPost('crypto');
 $defineGetPost('echo');
 $defineGetPost('fileshare');
+$defineGetPost('checklists');
 $defineGetPost('profile');
 
 

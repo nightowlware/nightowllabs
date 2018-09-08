@@ -7,8 +7,19 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ListItem extends Model
 {
+    public $timestamps = false;
+
+    protected $fillable = [
+        'text',
+        'checklist_id'
+    ];
+
     public function checklist() {
         return $this->belongsTo('App\Checklist');
+    }
+
+    public function setText(string $text) {
+        $this->text = substr($text, 0, 4000);
     }
 
     /**
@@ -21,7 +32,7 @@ class ListItem extends Model
             $builder
                 ->join('checklists', 'list_items.checklist_id', '=', 'checklists.id')
                 ->where('user_id', '=', \Auth::id())
-                ->select('text', 'checklist_id', 'list_items.id as listitem_id');
+                ->select('text', 'checklist_id', 'list_items.id as id');
         });
     }
 }
