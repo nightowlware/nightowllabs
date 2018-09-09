@@ -14,6 +14,9 @@
                         {{checklist.name}}
 
                     </a>
+                    <a id="adder" class="btn btn-lg list-group-item">
+                        <i class="far fa-plus-square"></i>
+                    </a>
                 </div>
 
                 <checklist class="pl-4" v-bind:id="currentChecklistId">

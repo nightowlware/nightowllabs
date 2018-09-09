@@ -11,7 +11,7 @@
                     </div>
                     <div class="flex-center">
                         <h1>
-                            <i class="hugefont fa"
+                            <i class="hugefont far"
                                :class="[isConnected ? 'fa-check-circle' : 'fa-times-circle', isConnected ? 'green' : 'red']">
                             </i>
                         </h1>

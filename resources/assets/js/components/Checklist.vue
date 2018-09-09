@@ -34,7 +34,7 @@
             },
 
             itemSelected(id) {
-                console.log('Selected item' + id);
+                // console.log('Selected item' + id);
             }
         },
 

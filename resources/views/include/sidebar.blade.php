@@ -6,7 +6,7 @@
             @if (Request::url() == str_replace('https', 'http', $details['url']))
                 <a class="flex-center sidebar-button btn btn-warning text-secondary btn-lg" href="{{$details['url']}}" role="button">
                     <div style="padding: 5px;">
-                        <i class="fa {{$details['icon']}}"></i>
+                        <i class="{{$details['icon']}}"></i>
                     </div>
                     <div class="hiding-text">
                         {{$name}}
@@ -15,7 +15,7 @@
             @else
                 <a class="flex-center sidebar-button btn btn-secondary btn-lg" href="{{$details['url']}}" role="button">
                     <div style="padding: 5px;">
-                        <i class="fa {{$details['icon']}}"></i>
+                        <i class="{{$details['icon']}}"></i>
                     </div>
                     <div class="hiding-text">
                         {{$name}}
