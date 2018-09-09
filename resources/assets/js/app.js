@@ -33,6 +33,9 @@ Vue.filter('toCurrency', function (value) {
     return formatter.format(value);
 });
 
+Vue.use(require('vue-long-press-directive'), {duration:1500});
+
+
 ///////////////
 // For Passport
 ///////////////

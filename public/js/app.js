@@ -14336,6 +14336,8 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.filter('toCurrency', function (value
     return formatter.format(value);
 });
 
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__webpack_require__(85), { duration: 1500 });
+
 ///////////////
 // For Passport
 ///////////////
@@ -49271,6 +49273,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
@@ -49318,6 +49322,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     });
                 }
                 this.isChecklistInputEnabled = false;
+            }
+        },
+        onChecklistHold: function onChecklistHold(id) {
+            var _this3 = this;
+
+            // // TODO: improve this!
+            var name = prompt('Enter a new name').substring(0, 191);
+            if (name !== '') {
+                axios.put('api/checklists/' + id, { name: name }).then(function (res) {
+                    _this3.fetchChecklists();
+                }).catch(function (err) {
+                    console.warn(err);
+                });
             }
         }
     },
@@ -49655,6 +49672,16 @@ var render = function() {
                 return _c(
                   "a",
                   {
+                    directives: [
+                      {
+                        name: "long-press",
+                        rawName: "v-long-press",
+                        value: function() {
+                          _vm.onChecklistHold(checklist.id)
+                        },
+                        expression: "() => {onChecklistHold(checklist.id)}"
+                      }
+                    ],
                     staticClass: "btn btn-lg list-group-item",
                     class: {
                       selected: checklist.id === _vm.currentChecklistId
@@ -51886,6 +51913,47 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */
+/***/ (function(module, exports) {
+
+exports.install = function (Vue, options) {
+  if (!options) options = {}
+  if (!options.duration) options.duration = 2000
+
+  Vue.directive('long-press', {
+    bind: function (el, binding) {
+      var self = this
+
+      this._timeout = null
+      this._onmouseup = function () {
+        clearTimeout(self._timeout)
+      }
+
+      this._onmousedown = function (e) {
+        var context = this
+
+        self._timeout = setTimeout(function () {
+          binding.value.call(context, e)
+        }, options.duration)
+      }
+
+      el.addEventListener('mousedown', this._onmousedown)
+      document.addEventListener('mouseup', this._onmouseup)
+    },
+    unbind: function (el) {
+      clearTimeout(this._timeout)
+      el.removeEventListener('mousedown', this._onmousedown)
+      document.removeEventListener('mouseup', this._onmouseup)
+    }
+  })
+}
+
 
 /***/ })
 /******/ ]);

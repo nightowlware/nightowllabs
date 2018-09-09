@@ -9,7 +9,9 @@
                         v-for="checklist in checklists"
                         v-bind:class="{selected: checklist.id===currentChecklistId}"
                         v-bind:id="'checklist_'+checklist.id"
-                        v-on:click="checklistSelected(checklist.id)">
+                        v-on:click="checklistSelected(checklist.id)"
+                        v-long-press="() => {onChecklistHold(checklist.id)}"
+                    >
 
                         {{checklist.name}}
 
@@ -73,6 +75,16 @@
                         }).catch((err) => {console.warn(err)});
                     }
                     this.isChecklistInputEnabled = false;
+                }
+            },
+
+            onChecklistHold(id) {
+                // // TODO: improve this!
+                const name = prompt('Enter a new name').substring(0, 191);
+                if (name !== '') {
+                    axios.put('api/checklists/'+id, {name}).then((res) => {
+                        this.fetchChecklists();
+                    }).catch((err) => {console.warn(err)});
                 }
             }
         },
