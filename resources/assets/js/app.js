@@ -19,6 +19,7 @@ window.Clipboard = Clipboard;
 
 Vue.component('dashboard', require('./components/Dashboard.vue'));
 Vue.component('cryptoboard', require('./components/Cryptoboard.vue'));
+Vue.component('checklists', require('./components/Checklists.vue'));
 
 Vue.filter('toCurrency', function (value) {
     if (typeof value !== "number") {

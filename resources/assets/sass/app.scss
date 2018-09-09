@@ -71,6 +71,10 @@
   margin: auto;
 }
 
+.click-hover {
+  cursor: pointer;
+}
+
 table {
   width: 100%;
 }
@@ -121,3 +125,4 @@ body {
 .navbar-custom .nav-item:hover .nav-link {
   color: #ffffff;
 }
+

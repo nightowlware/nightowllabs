@@ -113,6 +113,6 @@ class HomeController extends Controller
     }
 
     public function checklists(Request $request) {
-        return "Under construction!";
+        return view('checklists');
     }
 }
