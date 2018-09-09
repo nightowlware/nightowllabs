@@ -4,18 +4,31 @@
             <div class="flexy-start">
                 <div id="ribbon" class="list-group">
                     Checklist:
-                    <a
-                        class="btn btn-lg list-group-item"
+                    <div
+                        class="dropdown show"
                         v-for="checklist in checklists"
-                        v-bind:class="{selected: checklist.id===currentChecklistId}"
-                        v-bind:id="'checklist_'+checklist.id"
-                        v-on:click="checklistSelected(checklist.id)"
-                        v-long-press="() => {onChecklistHold(checklist.id)}"
                     >
+                        <a
+                            class="btn btn-lg list-group-item"
+                            v-on:click="checklistSelected(checklist.id)"
+                            :class="[{selected: isSelected(checklist.id)}, {'dropdown-toggle': isSelected(checklist.id)}]"
+                            :id="'checklist_'+checklist.id"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            {{checklist.name}}
+                        </a>
 
-                        {{checklist.name}}
 
-                    </a>
+                        <!--Popup menu-->
+                        <div :id="'popup_'+checklist.id" class="dropdown-menu" :aria-labelledby="'checklist_'+checklist.id">
+                            <a class="dropdown-item" href="#" @click="editClicked(checklist.id)">Edit {{ checklist.id }}</a>
+                            <a class="dropdown-item" href="#">Delete!</a>
+                        </div>
+
+                    </div>
+
                     <a id="checklist-adder" class="adder btn btn-lg list-group-item" @click="adderClicked">
                         <i class="fas fa-plus"></i>
                         <input id="adder-checklist-input"
@@ -28,7 +41,7 @@
                     </a>
                 </div>
 
-                <checklist class="pl-4" v-bind:id="currentChecklistId">
+                <checklist class="pl-4" :id="currentChecklistId">
                 </checklist>
 
             </div>
@@ -86,6 +99,14 @@
                         this.fetchChecklists();
                     }).catch((err) => {console.warn(err)});
                 }
+            },
+
+            isSelected(id) {
+                return id === this.currentChecklistId;
+            },
+
+            editClicked(id) {
+                console.log("Clicked", id);
             }
         },
 

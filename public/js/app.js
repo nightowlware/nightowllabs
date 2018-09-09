@@ -49275,6 +49275,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
@@ -49336,6 +49349,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     console.warn(err);
                 });
             }
+        },
+        isSelected: function isSelected(id) {
+            return id === this.currentChecklistId;
+        },
+        editClicked: function editClicked(id) {
+            console.log("Clicked", id);
         }
     },
 
@@ -49669,38 +49688,68 @@ var render = function() {
             [
               _vm._v("\n                Checklist:\n                "),
               _vm._l(_vm.checklists, function(checklist) {
-                return _c(
-                  "a",
-                  {
-                    directives: [
-                      {
-                        name: "long-press",
-                        rawName: "v-long-press",
-                        value: function() {
-                          _vm.onChecklistHold(checklist.id)
-                        },
-                        expression: "() => {onChecklistHold(checklist.id)}"
+                return _c("div", { staticClass: "dropdown show" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-lg list-group-item",
+                      class: [
+                        { selected: _vm.isSelected(checklist.id) },
+                        { "dropdown-toggle": _vm.isSelected(checklist.id) }
+                      ],
+                      attrs: {
+                        id: "checklist_" + checklist.id,
+                        "data-toggle": "dropdown",
+                        "aria-haspopup": "true",
+                        "aria-expanded": "false"
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.checklistSelected(checklist.id)
+                        }
                       }
-                    ],
-                    staticClass: "btn btn-lg list-group-item",
-                    class: {
-                      selected: checklist.id === _vm.currentChecklistId
                     },
-                    attrs: { id: "checklist_" + checklist.id },
-                    on: {
-                      click: function($event) {
-                        _vm.checklistSelected(checklist.id)
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(checklist.name) +
+                          "\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "dropdown-menu",
+                      attrs: {
+                        id: "popup_" + checklist.id,
+                        "aria-labelledby": "checklist_" + checklist.id
                       }
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n\n                    " +
-                        _vm._s(checklist.name) +
-                        "\n\n                "
-                    )
-                  ]
-                )
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              _vm.editClicked(checklist.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Edit " + _vm._s(checklist.id))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        { staticClass: "dropdown-item", attrs: { href: "#" } },
+                        [_vm._v("Delete!")]
+                      )
+                    ]
+                  )
+                ])
               }),
               _vm._v(" "),
               _c(
