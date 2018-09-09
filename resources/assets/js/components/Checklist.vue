@@ -9,6 +9,9 @@
 
             {{item.text}}
         </a>
+        <a v-if="name!==null" id="item-adder" class="adder btn btn-lg list-group-item">
+            <i class="fas fa-plus"></i>
+        </a>
     </div>
 </template>
 

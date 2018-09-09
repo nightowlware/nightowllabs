@@ -49224,7 +49224,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#ribbon {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.selected {\n    color: var(--warning) !important;\n}\n.red {\n    color: red;\n}\n.hugefont {\n    margin-left: auto;\n    margin-right: auto;\n    font-size: 4rem;\n}\n", ""]);
+exports.push([module.i, "\n#ribbon {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.selected {\n    color: var(--warning) !important;\n}\n.red {\n    color: red;\n}\n.hugefont {\n    margin-left: auto;\n    margin-right: auto;\n    font-size: 4rem;\n}\n.adder {\n    margin-top: 4px;\n    background: black;\n    border: 2px solid;\n}\n", ""]);
 
 // exports
 
@@ -49235,6 +49235,13 @@ exports.push([module.i, "\n#ribbon {\n    -webkit-box-orient: vertical;\n    -we
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49289,6 +49296,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         checklistSelected: function checklistSelected(id) {
             this.currentChecklistId = id;
             // console.log('Selected checklist: ' + id);
+        },
+        adderClicked: function adderClicked(event) {
+            setTimeout(function () {
+                $('#adder-input').focus();
+            });
+            this.isChecklistInputEnabled = true;
+        },
+        submitNewChecklist: function submitNewChecklist() {
+            var _this2 = this;
+
+            if (this.isChecklistInputEnabled) {
+                var name = $('#adder-input').val();
+                if (name && name !== "") {
+                    axios.post('api/checklists', { name: name }).then(function (res) {
+                        _this2.fetchChecklists();
+                        $('#adder-input').val('');
+                    }).catch(function (err) {
+                        console.warn(err);
+                    });
+                }
+                this.isChecklistInputEnabled = false;
+            }
         }
     },
 
@@ -49297,7 +49326,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             checklists: null,
-            currentChecklistId: null
+            currentChecklistId: null,
+            checklistNameInput: null,
+            isChecklistInputEnabled: false
         };
     },
 
@@ -49391,7 +49422,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49402,6 +49433,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -49491,7 +49525,18 @@ var render = function() {
           },
           [_vm._v("\n\n        " + _vm._s(item.text) + "\n    ")]
         )
-      })
+      }),
+      _vm._v(" "),
+      _vm.name !== null
+        ? _c(
+            "a",
+            {
+              staticClass: "adder btn btn-lg list-group-item",
+              attrs: { id: "item-adder" }
+            },
+            [_c("i", { staticClass: "fas fa-plus" })]
+          )
+        : _vm._e()
     ],
     2
   )
@@ -49524,7 +49569,7 @@ var render = function() {
             "div",
             { staticClass: "list-group", attrs: { id: "ribbon" } },
             [
-              _vm._v("\n                Select Checklist:\n                "),
+              _vm._v("\n                Checklist:\n                "),
               _vm._l(_vm.checklists, function(checklist) {
                 return _c(
                   "a",
@@ -49550,7 +49595,60 @@ var render = function() {
                 )
               }),
               _vm._v(" "),
-              _vm._m(0)
+              _c(
+                "a",
+                {
+                  staticClass: "adder btn btn-lg list-group-item",
+                  attrs: { id: "checklist-adder" },
+                  on: { click: _vm.adderClicked }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-plus" }),
+                  _vm._v(" "),
+                  _vm.isChecklistInputEnabled
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.checklistNameInput,
+                            expression: "checklistNameInput"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "adder-input",
+                          placeholder: "Type Checklist Name"
+                        },
+                        domProps: { value: _vm.checklistNameInput },
+                        on: {
+                          keyup: function($event) {
+                            if (
+                              !("button" in $event) &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.submitNewChecklist($event)
+                          },
+                          blur: _vm.submitNewChecklist,
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.checklistNameInput = $event.target.value
+                          }
+                        }
+                      })
+                    : _vm._e()
+                ]
+              )
             ],
             2
           ),
@@ -49565,18 +49663,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "btn btn-lg list-group-item", attrs: { id: "adder" } },
-      [_c("i", { staticClass: "far fa-plus-square" })]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

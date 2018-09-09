@@ -3,7 +3,7 @@
         <div class="col-md-9">
             <div class="flexy-start">
                 <div id="ribbon" class="list-group">
-                    Select Checklist:
+                    Checklist:
                     <a
                         class="btn btn-lg list-group-item"
                         v-for="checklist in checklists"
@@ -14,8 +14,15 @@
                         {{checklist.name}}
 
                     </a>
-                    <a id="adder" class="btn btn-lg list-group-item">
-                        <i class="far fa-plus-square"></i>
+                    <a id="checklist-adder" class="adder btn btn-lg list-group-item" @click="adderClicked">
+                        <i class="fas fa-plus"></i>
+                        <input id="adder-input"
+                               @keyup.enter="submitNewChecklist"
+                               @blur="submitNewChecklist"
+                               v-if="isChecklistInputEnabled"
+                               class="form-control"
+                               v-model="checklistNameInput"
+                               placeholder="Type Checklist Name">
                     </a>
                 </div>
 
@@ -48,6 +55,24 @@
             checklistSelected(id) {
                 this.currentChecklistId = id;
                 // console.log('Selected checklist: ' + id);
+            },
+
+            adderClicked(event) {
+                setTimeout(() => {$('#adder-input').focus();});
+                this.isChecklistInputEnabled = true;
+            },
+
+            submitNewChecklist() {
+                if (this.isChecklistInputEnabled) {
+                    const name = $('#adder-input').val();
+                    if (name && name !== "") {
+                        axios.post('api/checklists', {name}).then((res) => {
+                            this.fetchChecklists();
+                            $('#adder-input').val('');
+                        }).catch((err) => {console.warn(err)});
+                    }
+                    this.isChecklistInputEnabled = false;
+                }
             }
         },
 
@@ -58,6 +83,8 @@
             return {
                 checklists: null,
                 currentChecklistId: null,
+                checklistNameInput: null,
+                isChecklistInputEnabled: false
             };
         },
 
@@ -83,5 +110,11 @@
         margin-left: auto;
         margin-right: auto;
         font-size: 4rem;
+    }
+
+    .adder {
+        margin-top: 4px;
+        background: black;
+        border: 2px solid;
     }
 </style>
