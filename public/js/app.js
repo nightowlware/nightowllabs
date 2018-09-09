@@ -49299,7 +49299,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         adderClicked: function adderClicked(event) {
             setTimeout(function () {
-                $('#adder-input').focus();
+                $('#adder-checklist-input').focus();
             });
             this.isChecklistInputEnabled = true;
         },
@@ -49307,11 +49307,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             if (this.isChecklistInputEnabled) {
-                var name = $('#adder-input').val();
-                if (name && name !== "") {
+                // truncate at max string length for DB: 191
+                var name = this.checklistNameInput.substring(0, 191);
+                if (name !== "") {
                     axios.post('api/checklists', { name: name }).then(function (res) {
                         _this2.fetchChecklists();
-                        $('#adder-input').val('');
+                        _this2.checklistNameInput = '';
                     }).catch(function (err) {
                         console.warn(err);
                     });
@@ -49327,7 +49328,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             checklists: null,
             currentChecklistId: null,
-            checklistNameInput: null,
+            checklistNameInput: '',
             isChecklistInputEnabled: false
         };
     },
@@ -49422,7 +49423,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49433,6 +49434,15 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49476,6 +49486,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         itemSelected: function itemSelected(id) {
             // console.log('Selected item' + id);
+        },
+        itemAdderClicked: function itemAdderClicked(event) {
+            setTimeout(function () {
+                $('#adder-item-input').focus();
+            });
+            this.isItemInputEnabled = true;
+        },
+        submitNewItem: function submitNewItem() {
+            var _this2 = this;
+
+            if (this.isItemInputEnabled) {
+                // truncate input
+                var text = this.itemInput.substring(0, 2000);
+                if (text && text !== "") {
+                    axios.post('api/listitems', { text: text, checklist_id: this.id }).then(function (res) {
+                        _this2.fetchItems();
+                        _this2.itemInput = '';
+                    }).catch(function (err) {
+                        console.warn(err);
+                    });
+                }
+                this.isItemInputEnabled = false;
+            }
         }
     },
 
@@ -49484,7 +49517,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             items: null,
-            name: null
+            name: null,
+            itemInput: '',
+            isItemInputEnabled: false
         };
     },
 
@@ -49532,9 +49567,55 @@ var render = function() {
             "a",
             {
               staticClass: "adder btn btn-lg list-group-item",
-              attrs: { id: "item-adder" }
+              attrs: { id: "item-adder" },
+              on: { click: _vm.itemAdderClicked }
             },
-            [_c("i", { staticClass: "fas fa-plus" })]
+            [
+              _c("i", { staticClass: "fas fa-plus" }),
+              _vm._v(" "),
+              _vm.isItemInputEnabled
+                ? _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.itemInput,
+                        expression: "itemInput"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "adder-item-input",
+                      placeholder: "Enter Checklist Item"
+                    },
+                    domProps: { value: _vm.itemInput },
+                    on: {
+                      keyup: function($event) {
+                        if (
+                          !("button" in $event) &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.submitNewItem($event)
+                      },
+                      blur: _vm.submitNewItem,
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.itemInput = $event.target.value
+                      }
+                    }
+                  })
+                : _vm._e()
+            ]
           )
         : _vm._e()
     ],
@@ -49617,7 +49698,7 @@ var render = function() {
                         ],
                         staticClass: "form-control",
                         attrs: {
-                          id: "adder-input",
+                          id: "adder-checklist-input",
                           placeholder: "Type Checklist Name"
                         },
                         domProps: { value: _vm.checklistNameInput },

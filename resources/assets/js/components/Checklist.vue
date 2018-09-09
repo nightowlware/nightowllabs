@@ -9,8 +9,17 @@
 
             {{item.text}}
         </a>
-        <a v-if="name!==null" id="item-adder" class="adder btn btn-lg list-group-item">
+
+        <a v-if="name!==null "id="item-adder" class="adder btn btn-lg list-group-item" @click="itemAdderClicked">
             <i class="fas fa-plus"></i>
+            <input id="adder-item-input"
+                   @keyup.enter="submitNewItem"
+                   @blur="submitNewItem"
+                   v-if="isItemInputEnabled"
+                   class="form-control"
+                   v-model="itemInput"
+                   placeholder="Enter Checklist Item"
+            >
         </a>
     </div>
 </template>
@@ -38,6 +47,25 @@
 
             itemSelected(id) {
                 // console.log('Selected item' + id);
+            },
+
+            itemAdderClicked(event) {
+                setTimeout(() => {$('#adder-item-input').focus();});
+                this.isItemInputEnabled = true;
+            },
+
+            submitNewItem() {
+                if (this.isItemInputEnabled) {
+                    // truncate input
+                    const text = this.itemInput.substring(0, 2000);
+                    if (text && text !== "") {
+                        axios.post('api/listitems', {text, checklist_id: this.id}).then((res) => {
+                            this.fetchItems();
+                            this.itemInput = '';
+                        }).catch((err) => {console.warn(err)});
+                    }
+                    this.isItemInputEnabled = false;
+                }
             }
         },
 
@@ -48,6 +76,8 @@
             return {
                 items: null,
                 name: null,
+                itemInput: '',
+                isItemInputEnabled: false,
             };
         },
 

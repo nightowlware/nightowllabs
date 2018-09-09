@@ -16,7 +16,7 @@
                     </a>
                     <a id="checklist-adder" class="adder btn btn-lg list-group-item" @click="adderClicked">
                         <i class="fas fa-plus"></i>
-                        <input id="adder-input"
+                        <input id="adder-checklist-input"
                                @keyup.enter="submitNewChecklist"
                                @blur="submitNewChecklist"
                                v-if="isChecklistInputEnabled"
@@ -58,17 +58,18 @@
             },
 
             adderClicked(event) {
-                setTimeout(() => {$('#adder-input').focus();});
+                setTimeout(() => {$('#adder-checklist-input').focus();});
                 this.isChecklistInputEnabled = true;
             },
 
             submitNewChecklist() {
                 if (this.isChecklistInputEnabled) {
-                    const name = $('#adder-input').val();
-                    if (name && name !== "") {
+                    // truncate at max string length for DB: 191
+                    const name = this.checklistNameInput.substring(0, 191);
+                    if (name !== "") {
                         axios.post('api/checklists', {name}).then((res) => {
                             this.fetchChecklists();
-                            $('#adder-input').val('');
+                            this.checklistNameInput = '';
                         }).catch((err) => {console.warn(err)});
                     }
                     this.isChecklistInputEnabled = false;
@@ -83,7 +84,7 @@
             return {
                 checklists: null,
                 currentChecklistId: null,
-                checklistNameInput: null,
+                checklistNameInput: '',
                 isChecklistInputEnabled: false
             };
         },
