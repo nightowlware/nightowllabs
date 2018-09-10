@@ -49361,6 +49361,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this4 = this;
 
             axios.delete('api/checklists/' + id, { name: name }).then(function (res) {
+                _this4.currentChecklistId = null;
                 _this4.fetchChecklists();
             }).catch(function (err) {
                 console.warn(err);
@@ -49469,7 +49470,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49480,6 +49481,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -49528,6 +49530,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }).catch(function (err) {
                     console.warn(err);
                 });
+            } else {
+                this.name = null;
+                this.items = null;
             }
         },
         itemSelected: function itemSelected(id) {
@@ -49573,7 +49578,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         // Whenver the chose checklist id changes (from the parent)
         id: function id(newVal, oldVal) {
-            // console.log("ID changed: ", oldVal, newVal);
+            console.log("ID changed: ", oldVal, newVal);
             this.fetchItems();
         }
     }
@@ -49591,7 +49596,9 @@ var render = function() {
     "div",
     { staticClass: "list-group" },
     [
-      _vm._v("\n    " + _vm._s(_vm.name) + "\n    "),
+      _vm._v(
+        "\n    " + _vm._s(_vm.name) + "\n    " + _vm._s(_vm.id) + "\n    "
+      ),
       _vm._l(_vm.items, function(item) {
         return _c(
           "a",

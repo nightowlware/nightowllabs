@@ -111,6 +111,7 @@
 
             deleteClicked(id) {
                 axios.delete('api/checklists/'+id, {name}).then((res) => {
+                    this.currentChecklistId = null;
                     this.fetchChecklists();
                 }).catch((err) => {console.warn(err)});
             }

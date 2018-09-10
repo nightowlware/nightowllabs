@@ -1,6 +1,7 @@
 <template>
     <div class="list-group">
         {{ name }}
+        {{ id }}
         <a
             class="click-hover list-group-item"
             v-for="item in items"
@@ -42,6 +43,9 @@
                         this.name = res.data.name;
                         this.items = res.data.list_items;
                     }).catch((err) => {console.warn(err)});
+                } else {
+                    this.name = null;
+                    this.items = null;
                 }
             },
 
@@ -84,7 +88,7 @@
         watch: {
             // Whenver the chose checklist id changes (from the parent)
             id: function(newVal, oldVal) {
-                // console.log("ID changed: ", oldVal, newVal);
+                console.log("ID changed: ", oldVal, newVal);
                 this.fetchItems();
             }
         }
