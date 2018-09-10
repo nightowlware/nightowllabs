@@ -14286,7 +14286,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(80);
+module.exports = __webpack_require__(81);
 
 
 /***/ }),
@@ -14336,16 +14336,16 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.filter('toCurrency', function (value
     return formatter.format(value);
 });
 
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__webpack_require__(85), { duration: 1500 });
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__webpack_require__(65), { duration: 1500 });
 
 ///////////////
 // For Passport
 ///////////////
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('passport-clients', __webpack_require__(65));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('passport-clients', __webpack_require__(66));
 
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('passport-authorized-clients', __webpack_require__(70));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('passport-authorized-clients', __webpack_require__(71));
 
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('passport-personal-access-tokens', __webpack_require__(75));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component('passport-personal-access-tokens', __webpack_require__(76));
 
 // Main Vue instance
 var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
@@ -49288,6 +49288,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
@@ -49310,9 +49315,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.warn(err);
             });
         },
-        checklistSelected: function checklistSelected(id) {
+        checklistSelected: function checklistSelected(id, event) {
             this.currentChecklistId = id;
-            // console.log('Selected checklist: ' + id);
         },
         adderClicked: function adderClicked(event) {
             setTimeout(function () {
@@ -49354,7 +49358,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return id === this.currentChecklistId;
         },
         editClicked: function editClicked(id) {
-            console.log("Clicked", id);
+            console.log("Edit Clicked", id);
         }
     },
 
@@ -49693,19 +49697,11 @@ var render = function() {
                     "a",
                     {
                       staticClass: "btn btn-lg list-group-item",
-                      class: [
-                        { selected: _vm.isSelected(checklist.id) },
-                        { "dropdown-toggle": _vm.isSelected(checklist.id) }
-                      ],
-                      attrs: {
-                        id: "checklist_" + checklist.id,
-                        "data-toggle": "dropdown",
-                        "aria-haspopup": "true",
-                        "aria-expanded": "false"
-                      },
+                      class: [{ selected: _vm.isSelected(checklist.id) }],
+                      attrs: { id: "checklist_" + checklist.id },
                       on: {
                         click: function($event) {
-                          _vm.checklistSelected(checklist.id)
+                          _vm.checklistSelected(checklist.id, $event)
                         }
                       }
                     },
@@ -49713,39 +49709,59 @@ var render = function() {
                       _vm._v(
                         "\n                        " +
                           _vm._s(checklist.name) +
-                          "\n                    "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "dropdown-menu",
-                      attrs: {
-                        id: "popup_" + checklist.id,
-                        "aria-labelledby": "checklist_" + checklist.id
-                      }
-                    },
-                    [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              _vm.editClicked(checklist.id)
-                            }
-                          }
-                        },
-                        [_vm._v("Edit " + _vm._s(checklist.id))]
+                          "\n\n                        "
                       ),
+                      _c("span", {
+                        staticClass: "selected h5",
+                        class: {
+                          "dropdown-toggle": _vm.isSelected(checklist.id)
+                        },
+                        attrs: {
+                          "data-toggle": _vm.isSelected(checklist.id)
+                            ? "dropdown"
+                            : false,
+                          "aria-haspopup": _vm.isSelected(checklist.id)
+                            ? "true"
+                            : "false",
+                          "aria-expanded": _vm.isSelected(checklist.id)
+                            ? "false"
+                            : false
+                        }
+                      }),
                       _vm._v(" "),
                       _c(
-                        "a",
-                        { staticClass: "dropdown-item", attrs: { href: "#" } },
-                        [_vm._v("Delete!")]
+                        "div",
+                        {
+                          staticClass: "dropdown-menu",
+                          attrs: {
+                            id: "popup_" + checklist.id,
+                            "aria-labelledby": "checklist_" + checklist.id
+                          }
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dropdown-item",
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  _vm.editClicked(checklist.id)
+                                }
+                              }
+                            },
+                            [_vm._v("Edit " + _vm._s(checklist.id))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dropdown-item",
+                              attrs: { href: "#" }
+                            },
+                            [_vm._v("Delete!")]
+                          )
+                        ]
                       )
                     ]
                   )
@@ -49832,18 +49848,55 @@ if (false) {
 
 /***/ }),
 /* 65 */
+/***/ (function(module, exports) {
+
+exports.install = function (Vue, options) {
+  if (!options) options = {}
+  if (!options.duration) options.duration = 2000
+
+  Vue.directive('long-press', {
+    bind: function (el, binding) {
+      var self = this
+
+      this._timeout = null
+      this._onmouseup = function () {
+        clearTimeout(self._timeout)
+      }
+
+      this._onmousedown = function (e) {
+        var context = this
+
+        self._timeout = setTimeout(function () {
+          binding.value.call(context, e)
+        }, options.duration)
+      }
+
+      el.addEventListener('mousedown', this._onmousedown)
+      document.addEventListener('mouseup', this._onmouseup)
+    },
+    unbind: function (el) {
+      clearTimeout(this._timeout)
+      el.removeEventListener('mousedown', this._onmousedown)
+      document.removeEventListener('mouseup', this._onmouseup)
+    }
+  })
+}
+
+
+/***/ }),
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(66)
+  __webpack_require__(67)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(68)
+var __vue_script__ = __webpack_require__(69)
 /* template */
-var __vue_template__ = __webpack_require__(69)
+var __vue_template__ = __webpack_require__(70)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49882,13 +49935,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(67);
+var content = __webpack_require__(68);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49908,7 +49961,7 @@ if(false) {
 }
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -49922,7 +49975,7 @@ exports.push([module.i, "\n.action-link[data-v-5d1d7d82] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50286,7 +50339,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50847,19 +50900,19 @@ if (false) {
 }
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(71)
+  __webpack_require__(72)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(73)
+var __vue_script__ = __webpack_require__(74)
 /* template */
-var __vue_template__ = __webpack_require__(74)
+var __vue_template__ = __webpack_require__(75)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50898,13 +50951,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(72);
+var content = __webpack_require__(73);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -50924,7 +50977,7 @@ if(false) {
 }
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -50938,7 +50991,7 @@ exports.push([module.i, "\n.action-link[data-v-2ee9fe67] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51058,7 +51111,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51167,19 +51220,19 @@ if (false) {
 }
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(76)
+  __webpack_require__(77)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(78)
+var __vue_script__ = __webpack_require__(79)
 /* template */
-var __vue_template__ = __webpack_require__(79)
+var __vue_template__ = __webpack_require__(80)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51218,13 +51271,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(77);
+var content = __webpack_require__(78);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -51244,7 +51297,7 @@ if(false) {
 }
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -51258,7 +51311,7 @@ exports.push([module.i, "\n.action-link[data-v-89c53f18] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51580,7 +51633,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51958,51 +52011,10 @@ if (false) {
 }
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */
-/***/ (function(module, exports) {
-
-exports.install = function (Vue, options) {
-  if (!options) options = {}
-  if (!options.duration) options.duration = 2000
-
-  Vue.directive('long-press', {
-    bind: function (el, binding) {
-      var self = this
-
-      this._timeout = null
-      this._onmouseup = function () {
-        clearTimeout(self._timeout)
-      }
-
-      this._onmousedown = function (e) {
-        var context = this
-
-        self._timeout = setTimeout(function () {
-          binding.value.call(context, e)
-        }, options.duration)
-      }
-
-      el.addEventListener('mousedown', this._onmousedown)
-      document.addEventListener('mouseup', this._onmouseup)
-    },
-    unbind: function (el) {
-      clearTimeout(this._timeout)
-      el.removeEventListener('mousedown', this._onmousedown)
-      document.removeEventListener('mouseup', this._onmouseup)
-    }
-  })
-}
-
 
 /***/ })
 /******/ ]);

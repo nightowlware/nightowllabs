@@ -10,23 +10,28 @@
                     >
                         <a
                             class="btn btn-lg list-group-item"
-                            v-on:click="checklistSelected(checklist.id)"
-                            :class="[{selected: isSelected(checklist.id)}, {'dropdown-toggle': isSelected(checklist.id)}]"
+                            v-on:click="checklistSelected(checklist.id, $event)"
+                            :class="[{selected: isSelected(checklist.id)}]"
                             :id="'checklist_'+checklist.id"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
                         >
                             {{checklist.name}}
+
+                            <span
+                                    class="selected h5"
+                                    :class="{'dropdown-toggle': isSelected(checklist.id)}"
+                                    :data-toggle="isSelected(checklist.id) ? 'dropdown' : false"
+                                    :aria-haspopup="isSelected(checklist.id) ? 'true' : 'false'"
+                                    :aria-expanded="isSelected(checklist.id) ? 'false' : false"
+                            >
+                            </span>
+
+
+                            <!--Popup menu-->
+                            <div :id="'popup_'+checklist.id" class="dropdown-menu" :aria-labelledby="'checklist_'+checklist.id">
+                                <a class="dropdown-item" href="#" @click="editClicked(checklist.id)">Edit {{ checklist.id }}</a>
+                                <a class="dropdown-item" href="#">Delete!</a>
+                            </div>
                         </a>
-
-
-                        <!--Popup menu-->
-                        <div :id="'popup_'+checklist.id" class="dropdown-menu" :aria-labelledby="'checklist_'+checklist.id">
-                            <a class="dropdown-item" href="#" @click="editClicked(checklist.id)">Edit {{ checklist.id }}</a>
-                            <a class="dropdown-item" href="#">Delete!</a>
-                        </div>
-
                     </div>
 
                     <a id="checklist-adder" class="adder btn btn-lg list-group-item" @click="adderClicked">
@@ -67,9 +72,8 @@
                 }).catch((err) => {console.warn(err)});
             },
 
-            checklistSelected(id) {
+            checklistSelected(id, event) {
                 this.currentChecklistId = id;
-                // console.log('Selected checklist: ' + id);
             },
 
             adderClicked(event) {
@@ -106,7 +110,7 @@
             },
 
             editClicked(id) {
-                console.log("Clicked", id);
+                console.log("Edit Clicked", id);
             }
         },
 
