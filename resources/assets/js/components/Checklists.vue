@@ -27,9 +27,9 @@
 
 
                             <!--Popup menu-->
-                            <div :id="'popup_'+checklist.id" class="dropdown-menu" :aria-labelledby="'checklist_'+checklist.id">
-                                <a class="dropdown-item" href="#" @click="editClicked(checklist.id)">Edit {{ checklist.id }}</a>
-                                <a class="dropdown-item" href="#">Delete!</a>
+                            <div :id="'popup_'+checklist.id" class="selected dropdown-menu" :aria-labelledby="'checklist_'+checklist.id">
+                                <a class="dropdown-item" @click="editClicked(checklist.id)">Edit Name</a>
+                                <a class="dropdown-item" @click="deleteClicked(checklist.id)">Delete Checklist!</a>
                             </div>
                         </a>
                     </div>
@@ -95,7 +95,11 @@
                 }
             },
 
-            onChecklistHold(id) {
+            isSelected(id) {
+                return id === this.currentChecklistId;
+            },
+
+            editClicked(id) {
                 // // TODO: improve this!
                 const name = prompt('Enter a new name').substring(0, 191);
                 if (name !== '') {
@@ -105,12 +109,10 @@
                 }
             },
 
-            isSelected(id) {
-                return id === this.currentChecklistId;
-            },
-
-            editClicked(id) {
-                console.log("Edit Clicked", id);
+            deleteClicked(id) {
+                axios.delete('api/checklists/'+id, {name}).then((res) => {
+                    this.fetchChecklists();
+                }).catch((err) => {console.warn(err)});
             }
         },
 
@@ -154,5 +156,13 @@
         margin-top: 4px;
         background: black;
         border: 2px solid;
+    }
+
+    .dropdown-menu {
+        border: 1px dimgray solid;
+    }
+
+    .dropdown-toggle::after {
+        vertical-align: 0.04rem;
     }
 </style>

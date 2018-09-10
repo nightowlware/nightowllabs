@@ -49226,7 +49226,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#ribbon {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.selected {\n    color: var(--warning) !important;\n}\n.red {\n    color: red;\n}\n.hugefont {\n    margin-left: auto;\n    margin-right: auto;\n    font-size: 4rem;\n}\n.adder {\n    margin-top: 4px;\n    background: black;\n    border: 2px solid;\n}\n", ""]);
+exports.push([module.i, "\n#ribbon {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.selected {\n    color: var(--warning) !important;\n}\n.red {\n    color: red;\n}\n.hugefont {\n    margin-left: auto;\n    margin-right: auto;\n    font-size: 4rem;\n}\n.adder {\n    margin-top: 4px;\n    background: black;\n    border: 2px solid;\n}\n.dropdown-menu {\n    border: 1px dimgray solid;\n}\n.dropdown-toggle::after {\n    vertical-align: 0.04rem;\n}\n", ""]);
 
 // exports
 
@@ -49329,9 +49329,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (this.isChecklistInputEnabled) {
                 // truncate at max string length for DB: 191
-                var name = this.checklistNameInput.substring(0, 191);
-                if (name !== "") {
-                    axios.post('api/checklists', { name: name }).then(function (res) {
+                var _name = this.checklistNameInput.substring(0, 191);
+                if (_name !== "") {
+                    axios.post('api/checklists', { name: _name }).then(function (res) {
                         _this2.fetchChecklists();
                         _this2.checklistNameInput = '';
                     }).catch(function (err) {
@@ -49341,7 +49341,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.isChecklistInputEnabled = false;
             }
         },
-        onChecklistHold: function onChecklistHold(id) {
+        isSelected: function isSelected(id) {
+            return id === this.currentChecklistId;
+        },
+        editClicked: function editClicked(id) {
             var _this3 = this;
 
             // // TODO: improve this!
@@ -49354,11 +49357,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
         },
-        isSelected: function isSelected(id) {
-            return id === this.currentChecklistId;
-        },
-        editClicked: function editClicked(id) {
-            console.log("Edit Clicked", id);
+        deleteClicked: function deleteClicked(id) {
+            var _this4 = this;
+
+            axios.delete('api/checklists/' + id, { name: name }).then(function (res) {
+                _this4.fetchChecklists();
+            }).catch(function (err) {
+                console.warn(err);
+            });
         }
     },
 
@@ -49732,7 +49738,7 @@ var render = function() {
                       _c(
                         "div",
                         {
-                          staticClass: "dropdown-menu",
+                          staticClass: "selected dropdown-menu",
                           attrs: {
                             id: "popup_" + checklist.id,
                             "aria-labelledby": "checklist_" + checklist.id
@@ -49743,23 +49749,26 @@ var render = function() {
                             "a",
                             {
                               staticClass: "dropdown-item",
-                              attrs: { href: "#" },
                               on: {
                                 click: function($event) {
                                   _vm.editClicked(checklist.id)
                                 }
                               }
                             },
-                            [_vm._v("Edit " + _vm._s(checklist.id))]
+                            [_vm._v("Edit Name")]
                           ),
                           _vm._v(" "),
                           _c(
                             "a",
                             {
                               staticClass: "dropdown-item",
-                              attrs: { href: "#" }
+                              on: {
+                                click: function($event) {
+                                  _vm.deleteClicked(checklist.id)
+                                }
+                              }
                             },
-                            [_vm._v("Delete!")]
+                            [_vm._v("Delete Checklist!")]
                           )
                         ]
                       )
