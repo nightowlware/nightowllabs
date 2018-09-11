@@ -40,8 +40,8 @@
             fetchItems() {
                 if (this.id) {
                     axios.get('api/checklists/' + this.id).then((res) => {
-                        this.name = res.data.name;
                         this.items = res.data.list_items;
+                        this.name = res.data.name;
                     }).catch((err) => {console.warn(err)});
                 } else {
                     this.name = null;

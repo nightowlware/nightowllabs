@@ -10,7 +10,7 @@
                     >
                         <a
                             class="btn btn-lg list-group-item"
-                            v-on:click="checklistSelected(checklist.id, $event)"
+                            v-on:click="checklistSelected({id: checklist.id, name: checklist.name}, $event)"
                             :class="[{selected: isSelected(checklist.id)}]"
                             :id="'checklist_'+checklist.id"
                         >
@@ -46,7 +46,7 @@
                     </a>
                 </div>
 
-                <checklist class="pl-4" :id="currentChecklistId">
+                <checklist class="pl-4" :id="currentChecklistId" ref="childChecklist">
                 </checklist>
 
             </div>
@@ -70,9 +70,12 @@
                     this.checklists = res.data;
                     // console.info(this.checklists);
                 }).catch((err) => {console.warn(err)});
+
+                // update the child's state
+                this.$refs.childChecklist.fetchItems();
             },
 
-            checklistSelected(id, event) {
+            checklistSelected({id, name}, event) {
                 this.currentChecklistId = id;
             },
 

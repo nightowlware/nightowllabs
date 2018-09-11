@@ -49314,8 +49314,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (err) {
                 console.warn(err);
             });
+
+            // update the child's state
+            this.$refs.childChecklist.fetchItems();
         },
-        checklistSelected: function checklistSelected(id, event) {
+        checklistSelected: function checklistSelected(_ref, event) {
+            var id = _ref.id,
+                name = _ref.name;
+
             this.currentChecklistId = id;
         },
         adderClicked: function adderClicked(event) {
@@ -49525,8 +49531,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (this.id) {
                 axios.get('api/checklists/' + this.id).then(function (res) {
-                    _this.name = res.data.name;
                     _this.items = res.data.list_items;
+                    _this.name = res.data.name;
                 }).catch(function (err) {
                     console.warn(err);
                 });
@@ -49714,7 +49720,10 @@ var render = function() {
                       attrs: { id: "checklist_" + checklist.id },
                       on: {
                         click: function($event) {
-                          _vm.checklistSelected(checklist.id, $event)
+                          _vm.checklistSelected(
+                            { id: checklist.id, name: checklist.name },
+                            $event
+                          )
                         }
                       }
                     },
@@ -49843,6 +49852,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("checklist", {
+            ref: "childChecklist",
             staticClass: "pl-4",
             attrs: { id: _vm.currentChecklistId }
           })
