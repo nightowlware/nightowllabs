@@ -49226,7 +49226,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.ribbon {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    min-width: 20%;\n}\n.elide {\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n.selected {\n    color: var(--warning) !important;\n}\n.red {\n    color: red;\n}\n.hugefont {\n    margin-left: auto;\n    margin-right: auto;\n    font-size: 4rem;\n}\n.adder {\n    margin-top: 4px;\n    background: black;\n    border: 2px solid;\n}\n.dropdown-menu {\n    border: 1px dimgray solid;\n}\n.dropdown-toggle::after {\n    vertical-align: 0.04rem;\n}\n", ""]);
+exports.push([module.i, "\n.ribbon {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    min-width: 20%;\n}\n.elide {\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n.selected {\n    color: var(--warning) !important;\n}\n.red {\n    color: red;\n}\n.hugefont {\n    margin-left: auto;\n    margin-right: auto;\n    font-size: 4rem;\n}\n.adder {\n    margin-top: 4px;\n    background: black;\n    border: 2px solid;\n}\n.dropdown-menu {\n    border: 1px dimgray solid;\n}\n.dropdown-toggle::after {\n    vertical-align: 0.1rem;\n}\n", ""]);
 
 // exports
 
@@ -49843,7 +49843,8 @@ var render = function() {
                       _vm._v(" "),
                       _vm.isSelected(checklist.id)
                         ? _c("span", {
-                            staticClass: "px-1 inline-block selected h5",
+                            staticClass:
+                              "px-1 py-0 my-0 inline-block selected h5",
                             class: {
                               "dropdown-toggle": _vm.isSelected(checklist.id)
                             },

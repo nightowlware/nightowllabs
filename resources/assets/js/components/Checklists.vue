@@ -19,7 +19,7 @@
                             </span>
 
                             <span
-                                    class="px-1 inline-block selected h5"
+                                    class="px-1 py-0 my-0 inline-block selected h5"
                                     v-if="isSelected(checklist.id)"
                                     :class="{'dropdown-toggle': isSelected(checklist.id)}"
                                     :data-toggle="isSelected(checklist.id) ? 'dropdown' : false"
@@ -177,6 +177,6 @@
     }
 
     .dropdown-toggle::after {
-        vertical-align: 0.04rem;
+        vertical-align: 0.1rem;
     }
 </style>
