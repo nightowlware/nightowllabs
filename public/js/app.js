@@ -49226,7 +49226,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#ribbon {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.selected {\n    color: var(--warning) !important;\n}\n.red {\n    color: red;\n}\n.hugefont {\n    margin-left: auto;\n    margin-right: auto;\n    font-size: 4rem;\n}\n.adder {\n    margin-top: 4px;\n    background: black;\n    border: 2px solid;\n}\n.dropdown-menu {\n    border: 1px dimgray solid;\n}\n.dropdown-toggle::after {\n    vertical-align: 0.04rem;\n}\n", ""]);
+exports.push([module.i, "\n.ribbon {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    min-width: 20%;\n}\n.elide {\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n.selected {\n    color: var(--warning) !important;\n}\n.red {\n    color: red;\n}\n.hugefont {\n    margin-left: auto;\n    margin-right: auto;\n    font-size: 4rem;\n}\n.adder {\n    margin-top: 4px;\n    background: black;\n    border: 2px solid;\n}\n.dropdown-menu {\n    border: 1px dimgray solid;\n}\n.dropdown-toggle::after {\n    vertical-align: 0.04rem;\n}\n", ""]);
 
 // exports
 
@@ -49237,6 +49237,9 @@ exports.push([module.i, "\n#ribbon {\n    -webkit-box-orient: vertical;\n    -we
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -49325,19 +49328,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.currentChecklistId = id;
         },
         adderClicked: function adderClicked(event) {
+            this.isChecklistInputEnabled = true;
             setTimeout(function () {
                 $('#adder-checklist-input').focus();
             });
-            this.isChecklistInputEnabled = true;
         },
         submitNewChecklist: function submitNewChecklist() {
             var _this2 = this;
 
             if (this.isChecklistInputEnabled) {
                 // truncate at max string length for DB: 191
-                var _name = this.checklistNameInput.substring(0, 191);
-                if (_name !== "") {
-                    axios.post('api/checklists', { name: _name }).then(function (res) {
+                var name = this.checklistNameInput.substring(0, 191);
+                if (name !== "") {
+                    axios.post('api/checklists', { name: name }).then(function (res) {
                         _this2.fetchChecklists();
                         _this2.checklistNameInput = '';
                     }).catch(function (err) {
@@ -49366,7 +49369,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         deleteClicked: function deleteClicked(id) {
             var _this4 = this;
 
-            axios.delete('api/checklists/' + id, { name: name }).then(function (res) {
+            axios.delete('api/checklists/' + id).then(function (res) {
                 _this4.currentChecklistId = null;
                 _this4.fetchChecklists();
             }).catch(function (err) {
@@ -49476,7 +49479,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.wide-ribbon {\n    min-width: calc(20% * 1.618 * 2);\n}\n", ""]);
 
 // exports
 
@@ -49487,6 +49490,23 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49537,18 +49557,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     console.warn(err);
                 });
             } else {
-                this.name = null;
+                this.name = "";
                 this.items = null;
             }
         },
         itemSelected: function itemSelected(id) {
-            // console.log('Selected item' + id);
+            this.currentItemId = id;
         },
         itemAdderClicked: function itemAdderClicked(event) {
+            this.isItemInputEnabled = true;
             setTimeout(function () {
                 $('#adder-item-input').focus();
             });
-            this.isItemInputEnabled = true;
         },
         submitNewItem: function submitNewItem() {
             var _this2 = this;
@@ -49566,6 +49586,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
                 this.isItemInputEnabled = false;
             }
+        },
+        isSelected: function isSelected(id) {
+            return id === this.currentItemId;
+        },
+        editClicked: function editClicked(id) {
+            var _this3 = this;
+
+            // // TODO: improve this!
+            var text = prompt('Enter new text').substring(0, 2000);
+            if (text !== '') {
+                axios.put('api/listitems/' + id, { text: text }).then(function (res) {
+                    _this3.fetchItems();
+                }).catch(function (err) {
+                    console.warn(err);
+                });
+            }
+        },
+        deleteClicked: function deleteClicked(id) {
+            var _this4 = this;
+
+            axios.delete('api/listitems/' + id).then(function (res) {
+                _this4.currentItemId = null;
+                _this4.fetchItems();
+            }).catch(function (err) {
+                console.warn(err);
+            });
         }
     },
 
@@ -49574,9 +49620,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             items: null,
-            name: null,
+            name: "",
             itemInput: '',
-            isItemInputEnabled: false
+            isItemInputEnabled: false,
+            currentItemId: null
         };
     },
 
@@ -49584,7 +49631,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         // Whenver the chose checklist id changes (from the parent)
         id: function id(newVal, oldVal) {
-            console.log("ID changed: ", oldVal, newVal);
             this.fetchItems();
         }
     }
@@ -49598,31 +49644,87 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "list-group" },
-    [
-      _vm._v(
-        "\n    " + _vm._s(_vm.name) + "\n    " + _vm._s(_vm.id) + "\n    "
-      ),
-      _vm._l(_vm.items, function(item) {
-        return _c(
-          "a",
-          {
-            staticClass: "click-hover list-group-item",
-            attrs: { id: "item_" + item.id },
-            on: {
-              click: function($event) {
-                _vm.itemSelected(item.id)
-              }
-            }
-          },
-          [_vm._v("\n\n        " + _vm._s(item.text) + "\n    ")]
-        )
-      }),
-      _vm._v(" "),
-      _vm.name !== null
-        ? _c(
+  return _vm.id
+    ? _c(
+        "div",
+        { staticClass: "wide-ribbon list-group", attrs: { id: "item-ribbon" } },
+        [
+          _vm._v("\n    " + _vm._s(_vm.name) + "\n    "),
+          _vm._l(_vm.items, function(item) {
+            return _c("div", { staticClass: "dropdown show" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-lg list-group-item",
+                  class: [{ selected: _vm.isSelected(item.id) }],
+                  attrs: { id: "item_" + item.id },
+                  on: {
+                    click: function($event) {
+                      _vm.itemSelected(item.id)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n            " + _vm._s(item.text) + "\n\n            "
+                  ),
+                  _c("span", {
+                    staticClass: "selected h5",
+                    class: { "dropdown-toggle": _vm.isSelected(item.id) },
+                    attrs: {
+                      "data-toggle": _vm.isSelected(item.id)
+                        ? "dropdown"
+                        : false,
+                      "aria-haspopup": _vm.isSelected(item.id)
+                        ? "true"
+                        : "false",
+                      "aria-expanded": _vm.isSelected(item.id) ? "false" : false
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "selected dropdown-menu",
+                      attrs: {
+                        id: "item-popup-" + item.id,
+                        "aria-labelledby": "item-popup-" + item.id
+                      }
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          on: {
+                            click: function($event) {
+                              _vm.editClicked(item.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Edit Text")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          on: {
+                            click: function($event) {
+                              _vm.deleteClicked(item.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Delete Item!")]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ])
+          }),
+          _vm._v(" "),
+          _c(
             "a",
             {
               staticClass: "adder btn btn-lg list-group-item",
@@ -49645,7 +49747,7 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: {
                       id: "adder-item-input",
-                      placeholder: "Enter Checklist Item"
+                      placeholder: "Enter ChecklistItem"
                     },
                     domProps: { value: _vm.itemInput },
                     on: {
@@ -49676,10 +49778,10 @@ var render = function() {
                 : _vm._e()
             ]
           )
-        : _vm._e()
-    ],
-    2
-  )
+        ],
+        2
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -49707,15 +49809,18 @@ var render = function() {
         [
           _c(
             "div",
-            { staticClass: "list-group", attrs: { id: "ribbon" } },
+            {
+              staticClass: "ribbon list-group",
+              attrs: { id: "checklist-ribbon" }
+            },
             [
               _vm._v("\n                Checklist:\n                "),
               _vm._l(_vm.checklists, function(checklist) {
-                return _c("div", { staticClass: "dropdown show" }, [
+                return _c("div", { staticClass: "show position-relative" }, [
                   _c(
                     "a",
                     {
-                      staticClass: "btn btn-lg list-group-item",
+                      staticClass: "flexy-center btn btn-lg list-group-item",
                       class: [{ selected: _vm.isSelected(checklist.id) }],
                       attrs: { id: "checklist_" + checklist.id },
                       on: {
@@ -49728,35 +49833,41 @@ var render = function() {
                       }
                     },
                     [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(checklist.name) +
-                          "\n\n                        "
-                      ),
-                      _c("span", {
-                        staticClass: "selected h5",
-                        class: {
-                          "dropdown-toggle": _vm.isSelected(checklist.id)
-                        },
-                        attrs: {
-                          "data-toggle": _vm.isSelected(checklist.id)
-                            ? "dropdown"
-                            : false,
-                          "aria-haspopup": _vm.isSelected(checklist.id)
-                            ? "true"
-                            : "false",
-                          "aria-expanded": _vm.isSelected(checklist.id)
-                            ? "false"
-                            : false
-                        }
-                      }),
+                      _c("span", { staticClass: "elide" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(checklist.name) +
+                            "\n                        "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm.isSelected(checklist.id)
+                        ? _c("span", {
+                            staticClass: "px-1 inline-block selected h5",
+                            class: {
+                              "dropdown-toggle": _vm.isSelected(checklist.id)
+                            },
+                            attrs: {
+                              "data-toggle": _vm.isSelected(checklist.id)
+                                ? "dropdown"
+                                : false,
+                              "aria-haspopup": _vm.isSelected(checklist.id)
+                                ? "true"
+                                : "false",
+                              "aria-expanded": _vm.isSelected(checklist.id)
+                                ? "false"
+                                : false
+                            }
+                          })
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
                         "div",
                         {
-                          staticClass: "selected dropdown-menu",
+                          staticClass:
+                            "position-absolute selected dropdown-menu",
                           attrs: {
-                            id: "popup_" + checklist.id,
+                            id: "checklist-popup-" + checklist.id,
                             "aria-labelledby": "checklist_" + checklist.id
                           }
                         },

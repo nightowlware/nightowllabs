@@ -2,22 +2,25 @@
     <div class="row">
         <div class="col-md-9">
             <div class="flexy-start">
-                <div id="ribbon" class="list-group">
+                <div id="checklist-ribbon" class="ribbon list-group">
                     Checklist:
                     <div
-                        class="dropdown show"
+                        class="show position-relative"
                         v-for="checklist in checklists"
                     >
                         <a
-                            class="btn btn-lg list-group-item"
+                            class="flexy-center btn btn-lg list-group-item"
                             v-on:click="checklistSelected({id: checklist.id, name: checklist.name}, $event)"
                             :class="[{selected: isSelected(checklist.id)}]"
                             :id="'checklist_'+checklist.id"
                         >
-                            {{checklist.name}}
+                            <span class="elide">
+                                {{checklist.name}}
+                            </span>
 
                             <span
-                                    class="selected h5"
+                                    class="px-1 inline-block selected h5"
+                                    v-if="isSelected(checklist.id)"
                                     :class="{'dropdown-toggle': isSelected(checklist.id)}"
                                     :data-toggle="isSelected(checklist.id) ? 'dropdown' : false"
                                     :aria-haspopup="isSelected(checklist.id) ? 'true' : 'false'"
@@ -27,7 +30,7 @@
 
 
                             <!--Popup menu-->
-                            <div :id="'popup_'+checklist.id" class="selected dropdown-menu" :aria-labelledby="'checklist_'+checklist.id">
+                            <div :id="'checklist-popup-'+checklist.id" class="position-absolute selected dropdown-menu" :aria-labelledby="'checklist_'+checklist.id">
                                 <a class="dropdown-item" @click="editClicked(checklist.id)">Edit Name</a>
                                 <a class="dropdown-item" @click="deleteClicked(checklist.id)">Delete Checklist!</a>
                             </div>
@@ -80,8 +83,8 @@
             },
 
             adderClicked(event) {
-                setTimeout(() => {$('#adder-checklist-input').focus();});
                 this.isChecklistInputEnabled = true;
+                setTimeout(() => {$('#adder-checklist-input').focus();});
             },
 
             submitNewChecklist() {
@@ -113,7 +116,7 @@
             },
 
             deleteClicked(id) {
-                axios.delete('api/checklists/'+id, {name}).then((res) => {
+                axios.delete('api/checklists/'+id).then((res) => {
                     this.currentChecklistId = null;
                     this.fetchChecklists();
                 }).catch((err) => {console.warn(err)});
@@ -138,8 +141,15 @@
 </script>
 
 <style>
-    #ribbon {
+    .ribbon {
         flex-direction: column;
+        min-width: 20%;
+    }
+
+    .elide {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .selected {
