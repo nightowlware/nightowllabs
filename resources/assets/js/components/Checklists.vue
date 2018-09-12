@@ -32,7 +32,7 @@
                             <!--Popup menu-->
                             <div :id="'checklist-popup-'+checklist.id" class="position-absolute selected dropdown-menu" :aria-labelledby="'checklist_'+checklist.id">
                                 <a class="dropdown-item" @click="editClicked(checklist.id)">Edit Name</a>
-                                <a class="dropdown-item" @click="deleteClicked(checklist.id)">Delete Checklist!</a>
+                                <a class="dropdown-item" @click="deleteClicked(checklist.id)">Delete Entire Checklist!</a>
                             </div>
                         </a>
                     </div>

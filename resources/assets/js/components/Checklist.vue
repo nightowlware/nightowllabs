@@ -2,19 +2,22 @@
     <div v-if="id" id="item-ribbon" class="wide-ribbon list-group">
         {{ name }}
         <div
-            class="dropdown show"
+            class="show"
             v-for="item in items"
         >
             <a
-                class="btn btn-lg list-group-item"
+                class="flexy-center btn btn-lg list-group-item"
                 :class="[{selected: isSelected(item.id)}]"
                 v-on:click="itemSelected(item.id)"
                 :id="'item_'+item.id"
             >
-                {{item.text}}
+                <span class="elide">
+                    {{item.text}}
+                </span>
 
                 <span
-                    class="selected h5"
+                    class="px-1 py-0 my-0 inline-block selected h5"
+                    v-if="isSelected(item.id)"
                     :class="{'dropdown-toggle': isSelected(item.id)}"
                     :data-toggle="isSelected(item.id) ? 'dropdown' : false"
                     :aria-haspopup="isSelected(item.id) ? 'true' : 'false'"
@@ -22,7 +25,7 @@
                 ></span>
 
                 <!--Popup menu-->
-                <div :id="'item-popup-'+item.id" class="selected dropdown-menu" :aria-labelledby="'item-popup-'+item.id">
+                <div :id="'item-popup-'+item.id" class="position-absolute selected dropdown-menu" :aria-labelledby="'item-popup-'+item.id">
                     <a class="dropdown-item" @click="editClicked(item.id)">Edit Text</a>
                     <a class="dropdown-item" @click="deleteClicked(item.id)">Delete Item!</a>
                 </div>

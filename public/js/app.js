@@ -49534,6 +49534,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id'],
@@ -49651,11 +49654,11 @@ var render = function() {
         [
           _vm._v("\n    " + _vm._s(_vm.name) + "\n    "),
           _vm._l(_vm.items, function(item) {
-            return _c("div", { staticClass: "dropdown show" }, [
+            return _c("div", { staticClass: "show" }, [
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-lg list-group-item",
+                  staticClass: "flexy-center btn btn-lg list-group-item",
                   class: [{ selected: _vm.isSelected(item.id) }],
                   attrs: { id: "item_" + item.id },
                   on: {
@@ -49665,27 +49668,36 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._v(
-                    "\n            " + _vm._s(item.text) + "\n\n            "
-                  ),
-                  _c("span", {
-                    staticClass: "selected h5",
-                    class: { "dropdown-toggle": _vm.isSelected(item.id) },
-                    attrs: {
-                      "data-toggle": _vm.isSelected(item.id)
-                        ? "dropdown"
-                        : false,
-                      "aria-haspopup": _vm.isSelected(item.id)
-                        ? "true"
-                        : "false",
-                      "aria-expanded": _vm.isSelected(item.id) ? "false" : false
-                    }
-                  }),
+                  _c("span", { staticClass: "elide" }, [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(item.text) +
+                        "\n            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.isSelected(item.id)
+                    ? _c("span", {
+                        staticClass: "px-1 py-0 my-0 inline-block selected h5",
+                        class: { "dropdown-toggle": _vm.isSelected(item.id) },
+                        attrs: {
+                          "data-toggle": _vm.isSelected(item.id)
+                            ? "dropdown"
+                            : false,
+                          "aria-haspopup": _vm.isSelected(item.id)
+                            ? "true"
+                            : "false",
+                          "aria-expanded": _vm.isSelected(item.id)
+                            ? "false"
+                            : false
+                        }
+                      })
+                    : _vm._e(),
                   _vm._v(" "),
                   _c(
                     "div",
                     {
-                      staticClass: "selected dropdown-menu",
+                      staticClass: "position-absolute selected dropdown-menu",
                       attrs: {
                         id: "item-popup-" + item.id,
                         "aria-labelledby": "item-popup-" + item.id
@@ -49896,7 +49908,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Delete Checklist!")]
+                            [_vm._v("Delete Entire Checklist!")]
                           )
                         ]
                       )
