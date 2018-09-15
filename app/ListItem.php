@@ -2,10 +2,11 @@
 
 namespace App;
 
+use App\Observers\SortedObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class ListItem extends Model
+class ListItem extends Sortable
 {
     public $timestamps = false;
 

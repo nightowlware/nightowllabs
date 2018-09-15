@@ -2,10 +2,11 @@
 
 namespace App;
 
+use App\Observers\SortedObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class Checklist extends Model
+class Checklist extends Sortable
 {
     protected $fillable = [
         'name'

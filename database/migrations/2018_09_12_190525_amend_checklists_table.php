@@ -15,7 +15,7 @@ class AmendChecklistsTable extends Migration
     {
         foreach (['checklists', 'list_items'] as $t) {
             Schema::table($t, function (Blueprint $table) {
-                $table->integer('sort_order');
+                $table->integer('sort_order')->default(0);
             });
 
             // set the order to the id by default
