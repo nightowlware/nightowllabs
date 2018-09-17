@@ -33,7 +33,7 @@ class ListItem extends Sortable
             $builder
                 ->join('checklists', 'list_items.checklist_id', '=', 'checklists.id')
                 ->where('user_id', '=', \Auth::id())
-                ->select('text', 'checklist_id', 'list_items.id as id');
+                ->select('text', 'checklist_id', 'list_items.id as id', 'list_items.sort_order as sort_order');
         });
     }
 }

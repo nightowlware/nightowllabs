@@ -14,13 +14,14 @@ class ChecklistController extends Controller
      */
     public function index()
     {
-        return Checklist::with('listItems')->get();
+        return Checklist::with('listItems')->orderBy('sort_order')->get();
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @return
      */
     public function store(Request $request)
     {
@@ -74,5 +75,15 @@ class ChecklistController extends Controller
     {
         Checklist::destroy($id);
         return response()->json("Checklist Destroyed.", 200);
+    }
+
+    public function shiftAsc($id) {
+        Checklist::find($id)->shiftAsc();
+        return response()->json("Checklist Moved in Ascending Direction.", 200);
+    }
+
+    public function shiftDesc($id) {
+        Checklist::find($id)->shiftDesc();
+        return response()->json("Checklist Moved in Descending Direction.", 200);
     }
 }

@@ -49479,7 +49479,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.wide-ribbon {\n    min-width: calc(20% * 1.618 * 2);\n}\n", ""]);
+exports.push([module.i, "\n.wide-ribbon {\n    min-width: calc(20% * 1.618 * 2);\n}\n.item-checkbox {\n    margin-top: 0;\n    width: 25px;\n    height: 25px;\n}\n\n", ""]);
 
 // exports
 
@@ -49490,6 +49490,12 @@ exports.push([module.i, "\n.wide-ribbon {\n    min-width: calc(20% * 1.618 * 2);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49693,6 +49699,28 @@ var render = function() {
                         }
                       })
                     : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-check",
+                      staticStyle: { "margin-left": "auto" }
+                    },
+                    [
+                      _c("input", {
+                        staticClass: "item-checkbox form-check-input",
+                        attrs: {
+                          type: "checkbox",
+                          id: "item_completed_" + item.id
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", {
+                        staticClass: "form-check-label",
+                        attrs: { for: "item_completed_" + item.id }
+                      })
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
                     "div",

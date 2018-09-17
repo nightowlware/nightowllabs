@@ -40,6 +40,11 @@ Route::name('api.')->group(function() {
     })->name('quote');
 
 
+    Route::patch('checklists/shiftAsc/{id}', 'API\ChecklistController@shiftAsc');
+    Route::patch('checklists/shiftDesc/{id}', 'API\ChecklistController@shiftDesc');
     Route::resource('checklists', 'API\ChecklistController');
+
+    Route::patch('listitems/shiftAsc/{id}', 'API\ItemController@shiftAsc');
+    Route::patch('listitems/shiftDesc/{id}', 'API\ItemController@shiftDesc');
     Route::resource('listitems', 'API\ListItemController');
 });

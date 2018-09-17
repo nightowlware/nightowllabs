@@ -16,7 +16,7 @@ class ListItemController extends Controller
      */
     public function index()
     {
-        return ListItem::all();
+        return ListItem::orderBy('sort_order')->get();
     }
 
     /**

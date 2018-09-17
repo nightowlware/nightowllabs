@@ -24,6 +24,12 @@
                     :aria-expanded="isSelected(item.id) ? 'false' : false"
                 ></span>
 
+                <div style="margin-left: auto" class="form-check">
+                    <input class="item-checkbox form-check-input" type="checkbox" :id="'item_completed_'+item.id">
+                    <label class="form-check-label" :for="'item_completed_'+item.id">
+                    </label>
+                </div>
+
                 <!--Popup menu-->
                 <div :id="'item-popup-'+item.id" class="position-absolute selected dropdown-menu" :aria-labelledby="'item-popup-'+item.id">
                     <a class="dropdown-item" @click="editClicked(item.id)">Edit Text</a>
@@ -140,4 +146,11 @@
     .wide-ribbon {
         min-width: calc(20% * 1.618 * 2);
     }
+
+    .item-checkbox {
+        margin-top: 0;
+        width: 25px;
+        height: 25px;
+    }
+
 </style>
