@@ -49479,7 +49479,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.wide-ribbon {\n    min-width: calc(20% * 1.618 * 2);\n}\n.item-checkbox {\n    margin-top: 0;\n    width: 25px;\n    height: 25px;\n}\n\n", ""]);
+exports.push([module.i, "\n.wide-ribbon {\n    min-width: calc(20% * 1.618 * 2);\n}\n.item-checkbox {\n    margin-top: 0;\n    width: 25px;\n    height: 25px;\n}\n.checked {\n    text-decoration: line-through;\n    color: var(--success);\n}\n\n", ""]);
 
 // exports
 
@@ -49490,6 +49490,7 @@ exports.push([module.i, "\n.wide-ribbon {\n    min-width: calc(20% * 1.618 * 2);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -49674,13 +49675,17 @@ var render = function() {
                   }
                 },
                 [
-                  _c("span", { staticClass: "elide" }, [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(item.text) +
-                        "\n            "
-                    )
-                  ]),
+                  _c(
+                    "span",
+                    { staticClass: "elide", class: { checked: item.checked } },
+                    [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(item.text) +
+                          "\n            "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
                   _vm.isSelected(item.id)
                     ? _c("span", {
@@ -49708,10 +49713,47 @@ var render = function() {
                     },
                     [
                       _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: item.checked,
+                            expression: "item.checked"
+                          }
+                        ],
                         staticClass: "item-checkbox form-check-input",
                         attrs: {
                           type: "checkbox",
                           id: "item_completed_" + item.id
+                        },
+                        domProps: {
+                          checked: Array.isArray(item.checked)
+                            ? _vm._i(item.checked, null) > -1
+                            : item.checked
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = item.checked,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(item, "checked", $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    item,
+                                    "checked",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(item, "checked", $$c)
+                            }
+                          }
                         }
                       }),
                       _vm._v(" "),

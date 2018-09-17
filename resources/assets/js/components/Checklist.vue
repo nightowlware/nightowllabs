@@ -11,7 +11,7 @@
                 v-on:click="itemSelected(item.id)"
                 :id="'item_'+item.id"
             >
-                <span class="elide">
+                <span class="elide" :class="{checked: item.checked}">
                     {{item.text}}
                 </span>
 
@@ -25,7 +25,8 @@
                 ></span>
 
                 <div style="margin-left: auto" class="form-check">
-                    <input class="item-checkbox form-check-input" type="checkbox" :id="'item_completed_'+item.id">
+                    <input class="item-checkbox form-check-input" type="checkbox"
+                           v-model="item.checked" :id="'item_completed_'+item.id">
                     <label class="form-check-label" :for="'item_completed_'+item.id">
                     </label>
                 </div>
@@ -151,6 +152,11 @@
         margin-top: 0;
         width: 25px;
         height: 25px;
+    }
+
+    .checked {
+        text-decoration: line-through;
+        color: var(--success);
     }
 
 </style>
