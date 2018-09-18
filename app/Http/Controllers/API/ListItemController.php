@@ -81,4 +81,14 @@ class ListItemController extends Controller
 
         return response()->json("ListItem Destroyed.", 200);
     }
+
+    public function shiftAsc($id) {
+        ListItem::find($id)->shiftAsc();
+        return response()->json("ListItem Moved in Ascending Direction.", 200);
+    }
+
+    public function shiftDesc($id) {
+        ListItem::find($id)->shiftDesc();
+        return response()->json("ListItem Moved in Descending Direction.", 200);
+    }
 }

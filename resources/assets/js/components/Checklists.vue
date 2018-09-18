@@ -31,6 +31,8 @@
 
                             <!--Popup menu-->
                             <div :id="'checklist-popup-'+checklist.id" class="position-absolute selected dropdown-menu" :aria-labelledby="'checklist_'+checklist.id">
+                                <a class="dropdown-item" @click="shiftUp(checklist.id)">Shift Up</a>
+                                <a class="dropdown-item" @click="shiftDown(checklist.id)">Shift Down</a>
                                 <a class="dropdown-item" @click="editClicked(checklist.id)">Edit Name</a>
                                 <a class="dropdown-item" @click="deleteClicked(checklist.id)">Delete Entire Checklist!</a>
                             </div>
@@ -103,6 +105,20 @@
 
             isSelected(id) {
                 return id === this.currentChecklistId;
+            },
+
+            shift(id, direction) {
+                axios.patch('api/checklists/'+id+'/shift'+direction).then((res) => {
+                    this.fetchChecklists();
+                }).catch((err) => {console.warn(err)});
+            },
+
+            shiftUp(id) {
+                this.shift(id, 'Desc');
+            },
+
+            shiftDown(id) {
+                this.shift(id, 'Asc');
             },
 
             editClicked(id) {

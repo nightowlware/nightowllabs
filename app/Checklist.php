@@ -21,7 +21,7 @@ class Checklist extends Sortable
     }
 
     public function listItems() {
-        return $this->hasMany('App\ListItem');
+        return $this->hasMany('App\ListItem')->orderBy('sort_order');
     }
 
     /**

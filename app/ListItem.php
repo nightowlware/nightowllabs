@@ -36,4 +36,26 @@ class ListItem extends Sortable
                 ->select('text', 'checklist_id', 'list_items.id as id', 'list_items.sort_order as sort_order');
         });
     }
+
+    // Not pretty, but had to override these two methods here since it turns out
+    // the queries are not the same for the subclasses.
+    public function shiftAsc() {
+        $swapWith = self::where($this->getTable() . '.sort_order', '>', $this->sort_order)->
+            where('checklist_id', '=', $this->checklist_id)->
+            get()->sortBy('sort_order')->first();
+
+        if ($swapWith) {
+            $this->swapSortOrder($swapWith);
+        }
+    }
+
+    public function shiftDesc() {
+        $swapWith = self::where($this->getTable() . '.sort_order', '<', $this->sort_order)->
+            where('checklist_id', '=', $this->checklist_id)->
+            get()->sortBy('sort_order')->last();
+
+        if ($swapWith) {
+            $this->swapSortOrder($swapWith);
+        }
+    }
 }

@@ -33,6 +33,8 @@
 
                 <!--Popup menu-->
                 <div :id="'item-popup-'+item.id" class="position-absolute selected dropdown-menu" :aria-labelledby="'item-popup-'+item.id">
+                    <a class="dropdown-item" @click="shiftUp(item.id)">Shift Up</a>
+                    <a class="dropdown-item" @click="shiftDown(item.id)">Shift Down</a>
                     <a class="dropdown-item" @click="editClicked(item.id)">Edit Text</a>
                     <a class="dropdown-item" @click="deleteClicked(item.id)">Delete Item!</a>
                 </div>
@@ -101,6 +103,20 @@
 
             isSelected(id) {
                 return id === this.currentItemId;
+            },
+
+            shift(id, direction) {
+                axios.patch('api/listitems/'+id+'/shift'+direction).then((res) => {
+                    this.fetchItems();
+                }).catch((err) => {console.warn(err)});
+            },
+
+            shiftUp(id) {
+                this.shift(id, 'Desc');
+            },
+
+            shiftDown(id) {
+                this.shift(id, 'Asc');
             },
 
             editClicked(id) {

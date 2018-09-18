@@ -49296,6 +49296,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
@@ -49353,25 +49355,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         isSelected: function isSelected(id) {
             return id === this.currentChecklistId;
         },
-        editClicked: function editClicked(id) {
+        shift: function shift(id, direction) {
             var _this3 = this;
+
+            axios.patch('api/checklists/' + id + '/shift' + direction).then(function (res) {
+                _this3.fetchChecklists();
+            }).catch(function (err) {
+                console.warn(err);
+            });
+        },
+        shiftUp: function shiftUp(id) {
+            this.shift(id, 'Desc');
+        },
+        shiftDown: function shiftDown(id) {
+            this.shift(id, 'Asc');
+        },
+        editClicked: function editClicked(id) {
+            var _this4 = this;
 
             // // TODO: improve this!
             var name = prompt('Enter a new name').substring(0, 191);
             if (name !== '') {
                 axios.put('api/checklists/' + id, { name: name }).then(function (res) {
-                    _this3.fetchChecklists();
+                    _this4.fetchChecklists();
                 }).catch(function (err) {
                     console.warn(err);
                 });
             }
         },
         deleteClicked: function deleteClicked(id) {
-            var _this4 = this;
+            var _this5 = this;
 
             axios.delete('api/checklists/' + id).then(function (res) {
-                _this4.currentChecklistId = null;
-                _this4.fetchChecklists();
+                _this5.currentChecklistId = null;
+                _this5.fetchChecklists();
             }).catch(function (err) {
                 console.warn(err);
             });
@@ -49544,6 +49561,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id'],
@@ -49600,25 +49619,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         isSelected: function isSelected(id) {
             return id === this.currentItemId;
         },
-        editClicked: function editClicked(id) {
+        shift: function shift(id, direction) {
             var _this3 = this;
+
+            axios.patch('api/listitems/' + id + '/shift' + direction).then(function (res) {
+                _this3.fetchItems();
+            }).catch(function (err) {
+                console.warn(err);
+            });
+        },
+        shiftUp: function shiftUp(id) {
+            this.shift(id, 'Desc');
+        },
+        shiftDown: function shiftDown(id) {
+            this.shift(id, 'Asc');
+        },
+        editClicked: function editClicked(id) {
+            var _this4 = this;
 
             // // TODO: improve this!
             var text = prompt('Enter new text').substring(0, 2000);
             if (text !== '') {
                 axios.put('api/listitems/' + id, { text: text }).then(function (res) {
-                    _this3.fetchItems();
+                    _this4.fetchItems();
                 }).catch(function (err) {
                     console.warn(err);
                 });
             }
         },
         deleteClicked: function deleteClicked(id) {
-            var _this4 = this;
+            var _this5 = this;
 
             axios.delete('api/listitems/' + id).then(function (res) {
-                _this4.currentItemId = null;
-                _this4.fetchItems();
+                _this5.currentItemId = null;
+                _this5.fetchItems();
             }).catch(function (err) {
                 console.warn(err);
             });
@@ -49774,6 +49808,32 @@ var render = function() {
                       }
                     },
                     [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          on: {
+                            click: function($event) {
+                              _vm.shiftUp(item.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Shift Up")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          on: {
+                            click: function($event) {
+                              _vm.shiftDown(item.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Shift Down")]
+                      ),
+                      _vm._v(" "),
                       _c(
                         "a",
                         {
@@ -49955,6 +50015,32 @@ var render = function() {
                           }
                         },
                         [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dropdown-item",
+                              on: {
+                                click: function($event) {
+                                  _vm.shiftUp(checklist.id)
+                                }
+                              }
+                            },
+                            [_vm._v("Shift Up")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dropdown-item",
+                              on: {
+                                click: function($event) {
+                                  _vm.shiftDown(checklist.id)
+                                }
+                              }
+                            },
+                            [_vm._v("Shift Down")]
+                          ),
+                          _vm._v(" "),
                           _c(
                             "a",
                             {

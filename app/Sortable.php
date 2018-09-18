@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 abstract class Sortable extends Model
 {
     public function shiftAsc() {
-        $swapWith = self::where('sort_order', '>', $this->sort_order)->get()->sortBy('sort_order')->first();
+        $swapWith = self::where($this->getTable() . '.sort_order', '>', $this->sort_order)->get()->sortBy('sort_order')->first();
         if ($swapWith) {
             $this->swapSortOrder($swapWith);
         }
     }
 
     public function shiftDesc() {
-        $swapWith = self::where('sort_order', '<', $this->sort_order)->get()->sortBy('sort_order')->last();
+        $swapWith = self::where($this->getTable() . '.sort_order', '<', $this->sort_order)->get()->sortBy('sort_order')->last();
         if ($swapWith) {
             $this->swapSortOrder($swapWith);
         }
