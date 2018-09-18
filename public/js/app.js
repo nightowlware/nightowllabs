@@ -49563,6 +49563,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id'],
@@ -49587,7 +49592,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             } else {
                 this.name = "";
-                this.items = null;
+                this.items = [];
             }
         },
         itemSelected: function itemSelected(id) {
@@ -49659,11 +49664,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
 
-    computed: {},
+    computed: {
+        isChecklistCompleted: function isChecklistCompleted() {
+            return this.items.length > 0 && this.items.every(function (i) {
+                return i.checked;
+            });
+        }
+    },
 
     data: function data() {
         return {
-            items: null,
+            items: [],
             name: "",
             itemInput: '',
             isItemInputEnabled: false,
@@ -49693,7 +49704,15 @@ var render = function() {
         "div",
         { staticClass: "wide-ribbon list-group", attrs: { id: "item-ribbon" } },
         [
-          _vm._v("\n    " + _vm._s(_vm.name) + "\n    "),
+          _c("div", [
+            _vm._v("\n        " + _vm._s(_vm.name) + ":\n        "),
+            _vm.isChecklistCompleted
+              ? _c("span", { staticStyle: { color: "var(--success)" } }, [
+                  _vm._v("Checklist Completed!\n        ")
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
           _vm._l(_vm.items, function(item) {
             return _c("div", { staticClass: "show" }, [
               _c(

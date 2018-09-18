@@ -1,6 +1,11 @@
 <template>
     <div v-if="id" id="item-ribbon" class="wide-ribbon list-group">
-        {{ name }}
+        <div>
+            {{ name }}:
+            <span v-if="isChecklistCompleted" style="color: var(--success)" >Checklist Completed!
+            </span>
+        </div>
+
         <div
             class="show"
             v-for="item in items"
@@ -74,7 +79,7 @@
                     }).catch((err) => {console.warn(err)});
                 } else {
                     this.name = "";
-                    this.items = null;
+                    this.items = [];
                 }
             },
 
@@ -138,11 +143,14 @@
         },
 
         computed: {
+            isChecklistCompleted() {
+                return this.items.length > 0 && this.items.every((i) => i.checked);
+            }
         },
 
         data() {
             return {
-                items: null,
+                items: [],
                 name: "",
                 itemInput: '',
                 isItemInputEnabled: false,
