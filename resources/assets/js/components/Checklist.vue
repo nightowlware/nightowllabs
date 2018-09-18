@@ -2,7 +2,7 @@
     <div v-if="id" id="item-ribbon" class="wide-ribbon list-group">
         <div>
             {{ name }}:
-            <span v-if="isChecklistCompleted" style="color: var(--success)" >Checklist Completed!
+            <span v-if="isChecklistCompleted" style="color: var(--success)" >Completed!
             </span>
         </div>
 
