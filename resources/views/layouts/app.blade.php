@@ -32,7 +32,7 @@
 
 </head>
 <body>
-    <div id="app">
+    <div id="">
         <nav class="navbar navbar-expand-md navbar-custom navbar-laravel">
             <div style="max-width: none;" class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -98,11 +98,11 @@
         <div class="flexy-start">
             @auth
                 @include('include.sidebar')
-                <main class="py-4 col-9 col-sm-10">
+                <main id="app" class="py-4 col-9 col-sm-10">
                     @yield('content')
                 </main>
             @else
-                <main class="py-4 col-12">
+                <main id="app" class="py-4 col-12">
                     @yield('content')
                 </main>
             @endauth
