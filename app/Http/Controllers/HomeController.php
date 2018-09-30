@@ -115,4 +115,8 @@ class HomeController extends Controller
     public function checklists(Request $request) {
         return view('checklists');
     }
+
+    public function manageApi(Request $request) {
+        return view('manage_api');
+    }
 }

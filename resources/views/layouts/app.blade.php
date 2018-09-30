@@ -70,6 +70,10 @@
                                         {{ __('Profile') }}
                                     </a>
 
+                                    <a class="dropdown-item" href="{{ route('manageApi') }}">
+                                        {{ __('API Keys') }}
+                                    </a>
+
                                     {{--The logout link is a special-case that does a POST instead of a GET,--}}
                                     {{--That way the route is protected from cross-site scripting attacks.--}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"

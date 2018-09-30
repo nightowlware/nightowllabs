@@ -27,6 +27,7 @@ $defineGetPost('echo');
 $defineGetPost('fileshare');
 $defineGetPost('checklists');
 $defineGetPost('profile');
+$defineGetPost('manageApi');
 
 
 Route::get('/', function () {
