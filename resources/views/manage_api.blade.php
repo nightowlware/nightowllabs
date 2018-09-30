@@ -6,8 +6,8 @@
         <br>
         <ul>
             <li>OAuth clients are applications that needs to access OD on a user's behalf.</li>
-            <li>Personal Access Tokens are simple long-lived tokens that are generated then used as a secret during API calls.
-                To use a token, simply pass it in the "Authorization" header as "Bearer [token]" when issuing an API call.</li>
+            <li>Personal Access Tokens are simple long-lived tokens that are generated then used for authorizing API calls.
+                Pass the token in the "Authorization" header as follows: "Bearer [token]".</li>
         </ul>
 
         <hr>
