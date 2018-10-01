@@ -11,6 +11,15 @@ import Vue from 'vue';
 import Clipboard from 'clipboard';
 window.Clipboard = Clipboard;
 
+///////////////
+// Speech stuff
+///////////////
+import speak from 'speech-synthesis';
+window.speak = speak;
+
+window.speechListener = require('annyang');
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
