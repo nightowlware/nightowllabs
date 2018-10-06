@@ -140,6 +140,11 @@
                     this.fetchItems();
                 }).catch((err) => {console.warn(err)});
             },
+
+            onUserSaysCheck() {
+                console.log('Check! - next');
+                this.checklistSpeaker.next();
+            }
         },
 
         computed: {
@@ -159,9 +164,29 @@
         },
 
         watch: {
-            // Whenver the chose checklist id changes (from the parent)
+            // Whenever the chosen checklist id changes (from the parent)
             id: function(newVal, oldVal) {
                 this.fetchItems();
+
+                // reset speechListener
+                speechListener.abort();
+
+                if (newVal) {
+                    speechListener.addCommands({
+                        'check': this.onUserSaysCheck,
+                        'checked': this.onUserSaysCheck,
+                    });
+                    speechListener.start();
+
+                    const that = this;
+                    this.checklistSpeaker = (function *makeGenerator() {
+                        for (const i of that.items) {
+                            console.log("speaking ", i.text);
+                            speak(i.text);
+                            yield;
+                        }
+                    })();
+                }
             }
         }
     }

@@ -136,7 +136,7 @@
                     this.currentChecklistId = null;
                     this.fetchChecklists();
                 }).catch((err) => {console.warn(err)});
-            }
+            },
         },
 
         computed: {
