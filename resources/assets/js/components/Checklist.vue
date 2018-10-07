@@ -180,9 +180,6 @@
             id: function(newVal, oldVal) {
                 this.fetchItems();
 
-                // reset speechListener
-                // speechListener.abort();
-
                 if (newVal) {
                     speechListener.addCommands({
                         'check': this.onUserSaysCheck,
@@ -199,6 +196,7 @@
                             i.checked = true;
                         }
                         speak('Checklist completed!');
+                        speechListener.abort();
                     })();
                 }
             }
