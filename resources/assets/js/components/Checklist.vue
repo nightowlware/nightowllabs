@@ -155,6 +155,23 @@
             },
 
             onVoiceAssist() {
+                speechListener.addCommands({
+                    'check': this.onUserSaysCheck,
+                    'checked': this.onUserSaysCheck,
+                    'chick': this.onUserSaysCheck,
+                });
+                speechListener.start();
+
+                const that = this;
+                this.checklistSpeaker = (function *makeGenerator() {
+                    for (const i of that.items) {
+                        speak(i.text);
+                        yield;
+                        i.checked = true;
+                    }
+                    speak('Checklist completed!');
+                    speechListener.abort();
+                })();
                 this.onUserSaysCheck();
             }
         },
@@ -179,26 +196,6 @@
             // Whenever the chosen checklist id changes (from the parent)
             id: function(newVal, oldVal) {
                 this.fetchItems();
-
-                if (newVal) {
-                    speechListener.addCommands({
-                        'check': this.onUserSaysCheck,
-                        'checked': this.onUserSaysCheck,
-                        'chick': this.onUserSaysCheck,
-                    });
-                    speechListener.start();
-
-                    const that = this;
-                    this.checklistSpeaker = (function *makeGenerator() {
-                        for (const i of that.items) {
-                            speak(i.text);
-                            yield;
-                            i.checked = true;
-                        }
-                        speak('Checklist completed!');
-                        speechListener.abort();
-                    })();
-                }
             }
         }
     }
