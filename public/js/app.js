@@ -49563,7 +49563,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.wide-ribbon {\n    min-width: calc(20% * 1.618 * 2);\n}\n.item-checkbox {\n    margin-top: 0;\n    width: 25px;\n    height: 25px;\n}\n.checked {\n    text-decoration: line-through;\n    color: var(--success);\n}\n\n", ""]);
+exports.push([module.i, "\n#voice-assist {\n    margin-bottom: 5px;\n    color: black;\n}\n.wide-ribbon {\n    min-width: calc(20% * 1.618 * 2);\n}\n.item-checkbox {\n    margin-top: 0;\n    width: 25px;\n    height: 25px;\n}\n.checked {\n    text-decoration: line-through;\n    color: var(--success);\n}\n\n", ""]);
 
 // exports
 
@@ -49577,6 +49577,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49657,6 +49662,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 axios.get('api/checklists/' + this.id).then(function (res) {
                     _this.items = res.data.list_items;
                     _this.name = res.data.name;
+
+                    var _iteratorNormalCompletion = true;
+                    var _didIteratorError = false;
+                    var _iteratorError = undefined;
+
+                    try {
+                        for (var _iterator = _this.items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                            var i = _step.value;
+
+                            _this.$set(i, 'checked', false);
+                        }
+                    } catch (err) {
+                        _didIteratorError = true;
+                        _iteratorError = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+                        } finally {
+                            if (_didIteratorError) {
+                                throw _iteratorError;
+                            }
+                        }
+                    }
                 }).catch(function (err) {
                     console.warn(err);
                 });
@@ -49733,8 +49763,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         onUserSaysCheck: function onUserSaysCheck() {
-            console.log('Check! - next');
             this.checklistSpeaker.next();
+        },
+        onVoiceAssist: function onVoiceAssist() {
+            this.onUserSaysCheck();
         }
     },
 
@@ -49763,44 +49795,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.fetchItems();
 
             // reset speechListener
-            speechListener.abort();
+            // speechListener.abort();
 
             if (newVal) {
                 speechListener.addCommands({
                     'check': this.onUserSaysCheck,
-                    'checked': this.onUserSaysCheck
+                    'checked': this.onUserSaysCheck,
+                    'chick': this.onUserSaysCheck
                 });
                 speechListener.start();
 
                 var that = this;
                 this.checklistSpeaker = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function makeGenerator() {
-                    var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, i;
+                    var _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, i;
 
                     return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function makeGenerator$(_context) {
                         while (1) {
                             switch (_context.prev = _context.next) {
                                 case 0:
-                                    _iteratorNormalCompletion = true;
-                                    _didIteratorError = false;
-                                    _iteratorError = undefined;
+                                    _iteratorNormalCompletion2 = true;
+                                    _didIteratorError2 = false;
+                                    _iteratorError2 = undefined;
                                     _context.prev = 3;
-                                    _iterator = that.items[Symbol.iterator]();
+                                    _iterator2 = that.items[Symbol.iterator]();
 
                                 case 5:
-                                    if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                    if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
                                         _context.next = 14;
                                         break;
                                     }
 
-                                    i = _step.value;
+                                    i = _step2.value;
 
-                                    console.log("speaking ", i.text);
                                     speak(i.text);
-                                    _context.next = 11;
+                                    _context.next = 10;
                                     return;
 
+                                case 10:
+                                    i.checked = true;
+
                                 case 11:
-                                    _iteratorNormalCompletion = true;
+                                    _iteratorNormalCompletion2 = true;
                                     _context.next = 5;
                                     break;
 
@@ -49811,26 +49846,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 case 16:
                                     _context.prev = 16;
                                     _context.t0 = _context['catch'](3);
-                                    _didIteratorError = true;
-                                    _iteratorError = _context.t0;
+                                    _didIteratorError2 = true;
+                                    _iteratorError2 = _context.t0;
 
                                 case 20:
                                     _context.prev = 20;
                                     _context.prev = 21;
 
-                                    if (!_iteratorNormalCompletion && _iterator.return) {
-                                        _iterator.return();
+                                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                        _iterator2.return();
                                     }
 
                                 case 23:
                                     _context.prev = 23;
 
-                                    if (!_didIteratorError) {
+                                    if (!_didIteratorError2) {
                                         _context.next = 26;
                                         break;
                                     }
 
-                                    throw _iteratorError;
+                                    throw _iteratorError2;
 
                                 case 26:
                                     return _context.finish(23);
@@ -49839,6 +49874,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     return _context.finish(20);
 
                                 case 28:
+                                    speak('Checklist completed!');
+
+                                case 29:
                                 case 'end':
                                     return _context.stop();
                             }
@@ -49869,7 +49907,20 @@ var render = function() {
               ? _c("span", { staticStyle: { color: "var(--success)" } }, [
                   _vm._v("Completed!\n        ")
                 ])
-              : _vm._e()
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-sm float-right btn-warning",
+                attrs: { id: "voice-assist" },
+                on: { click: _vm.onVoiceAssist }
+              },
+              [
+                _vm._v("\n            Voice Assist\n            "),
+                _c("i", { staticClass: "fas fa-microphone-alt" })
+              ]
+            )
           ]),
           _vm._v(" "),
           _vm._l(_vm.items, function(item) {

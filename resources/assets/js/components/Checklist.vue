@@ -4,6 +4,11 @@
             {{ name }}:
             <span v-if="isChecklistCompleted" style="color: var(--success)" >Completed!
             </span>
+
+            <button @click="onVoiceAssist" id="voice-assist" class="btn btn-sm float-right btn-warning">
+                Voice Assist
+                <i class="fas fa-microphone-alt"></i>
+            </button>
         </div>
 
         <div
@@ -76,6 +81,10 @@
                     axios.get('api/checklists/' + this.id).then((res) => {
                         this.items = res.data.list_items;
                         this.name = res.data.name;
+
+                        for (const i of this.items) {
+                            this.$set(i, 'checked', false);
+                        }
                     }).catch((err) => {console.warn(err)});
                 } else {
                     this.name = "";
@@ -142,8 +151,11 @@
             },
 
             onUserSaysCheck() {
-                console.log('Check! - next');
                 this.checklistSpeaker.next();
+            },
+
+            onVoiceAssist() {
+                this.onUserSaysCheck();
             }
         },
 
@@ -169,22 +181,24 @@
                 this.fetchItems();
 
                 // reset speechListener
-                speechListener.abort();
+                // speechListener.abort();
 
                 if (newVal) {
                     speechListener.addCommands({
                         'check': this.onUserSaysCheck,
                         'checked': this.onUserSaysCheck,
+                        'chick': this.onUserSaysCheck,
                     });
                     speechListener.start();
 
                     const that = this;
                     this.checklistSpeaker = (function *makeGenerator() {
                         for (const i of that.items) {
-                            console.log("speaking ", i.text);
                             speak(i.text);
                             yield;
+                            i.checked = true;
                         }
+                        speak('Checklist completed!');
                     })();
                 }
             }
@@ -193,6 +207,11 @@
 </script>
 
 <style>
+    #voice-assist {
+        margin-bottom: 5px;
+        color: black;
+    }
+
     .wide-ribbon {
         min-width: calc(20% * 1.618 * 2);
     }
