@@ -34,6 +34,8 @@ Route::get('/', function () {
     return redirect('/home');
 })->middleware('auth');
 
+Route::get('/phaser', 'PhaserController@playground')->name('phaser');
+
 
 ///////////////
 // Admin routes
