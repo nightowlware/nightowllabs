@@ -11,37 +11,44 @@ const config = {
     },
     scene: {
         preload: preload,
-        create: create
+        create: create,
+        update: update
     }
 };
 
 const game = new Phaser.Game(config);
 
-function preload ()
-{
-    this.load.setBaseURL('images');
+// On every frame update
+function update() {
+    this.xVelocity = (this.xVelocity + (Math.random() * 50 - 25)) % 200;
+    this.yVelocity = (this.yVelocity + (Math.random() * 50 - 25)) % 200;
 
+    this.logo.setVelocity(this.xVelocity, this.yVelocity);
+}
+
+function preload() {
+    this.load.setBaseURL('images');
     this.load.image('logo', 'owl_standalone.png');
     this.load.image('sky', 'sky.jpg');
 }
 
-function create ()
-{
+function create() {
     this.add.image(400, 300, 'sky');
 
-    var particles = this.add.particles('logo');
+    let particles = this.add.particles('logo');
 
-    var emitter = particles.createEmitter({
+    let emitter = particles.createEmitter({
         speed: 200,
         scale: { start: 0.5, end: 0 },
         blendMode: 'NORMAL'
     });
 
-    var logo = this.physics.add.image(400, 100, 'logo');
+    this.logo = this.physics.add.image(400, 100, 'logo');
+    this.logo.setBounce(1, 1);
+    this.logo.setCollideWorldBounds(true);
 
-    logo.setVelocity(30, 40);
-    logo.setBounce(1, 1);
-    logo.setCollideWorldBounds(true);
+    this.xVelocity = 0;
+    this.yVelocity = 0;
 
-    emitter.startFollow(logo);
+    emitter.startFollow(this.logo);
 }
