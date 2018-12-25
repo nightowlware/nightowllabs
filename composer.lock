@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b235484b405e4f17237597f34b0df1a7",
+    "content-hash": "3e32d2a0cc7af81458db958ddf93e572",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -3557,6 +3557,61 @@
             "time": "2018-09-05T11:40:09+00:00"
         },
         {
+            "name": "pvtl/voyager-blog",
+            "version": "0.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pvtl/voyager-blog.git",
+                "reference": "b86da12ece964b0c628cf5ac5c1a4010ff6935ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pvtl/voyager-blog/zipball/b86da12ece964b0c628cf5ac5c1a4010ff6935ae",
+                "reference": "b86da12ece964b0c628cf5ac5c1a4010ff6935ae",
+                "shasum": ""
+            },
+            "require": {
+                "tcg/voyager": "^1.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pvtl\\VoyagerBlog\\Providers\\BlogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "classmap": [],
+                "psr-4": {
+                    "Pvtl\\VoyagerBlog\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pivotal Agency",
+                    "email": "tech@pivotalagency.com.au",
+                    "homepage": "http://pivotalagency.com.au"
+                }
+            ],
+            "description": "Ahoy! - A package to provide a blog to Voyager",
+            "keywords": [
+                "blog",
+                "frontend",
+                "laravel",
+                "posts",
+                "voyager"
+            ],
+            "time": "2018-08-23T00:31:18+00:00"
+        },
+        {
             "name": "ramsey/uuid",
             "version": "3.8.0",
             "source": {
@@ -3637,6 +3692,58 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "reliese/laravel",
+            "version": "v0.0.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reliese/laravel.git",
+                "reference": "10075c5f5e67efba18d781216ff5a0ffa3fc2d7f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reliese/laravel/zipball/10075c5f5e67efba18d781216ff5a0ffa3fc2d7f",
+                "reference": "10075c5f5e67efba18d781216ff5a0ffa3fc2d7f",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2.5",
+                "illuminate/console": "~5.1",
+                "illuminate/contracts": "~5.1",
+                "illuminate/database": "~5.1",
+                "illuminate/filesystem": "~5.1",
+                "illuminate/support": "~5.1",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "~1.4",
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Reliese\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cristian Llanos",
+                    "email": "cristianllanos@outlook.com"
+                }
+            ],
+            "description": "Reliese Components for Laravel Framework code generation.",
+            "homepage": "http://cristianllanos.com",
+            "keywords": [
+                "laravel",
+                "reliese"
+            ],
+            "time": "2017-02-04T15:50:39+00:00"
         },
         {
             "name": "seld/jsonlint",

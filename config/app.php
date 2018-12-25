@@ -150,6 +150,9 @@ return [
         /*
          * Package Service Providers...
          */
+        Collective\Html\HtmlServiceProvider::class,
+        Reliese\Coders\CodersServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -160,9 +163,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\LinkMenuProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        Collective\Html\HtmlServiceProvider::class,
-
     ],
 
     /*
