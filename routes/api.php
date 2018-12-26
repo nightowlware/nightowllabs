@@ -47,4 +47,7 @@ Route::name('api.')->group(function() {
     Route::patch('listitems/{id}/shiftAsc', 'API\ListItemController@shiftAsc');
     Route::patch('listitems/{id}/shiftDesc', 'API\ListItemController@shiftDesc');
     Route::resource('listitems', 'API\ListItemController');
+
+    Route::resource('blogposts', 'BlogPostController');
+
 });

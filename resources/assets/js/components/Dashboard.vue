@@ -17,12 +17,10 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <!--<a href="crypto" class="btn btn-primary pull-right">-->
-                        <!--Realtime Crypto price ticker-->
-                    <!--</a>-->
-                </div>
+            <!--Render all published blog posts, sorted by publish date.-->
+            <div v-for="blog in blogPosts" class="jumbotron">
+                <h2>{{blog.title}}</h2>
+                <div v-html="blog.body"></div>
             </div>
 
         </div>
@@ -34,9 +32,16 @@
         mounted() {
             // Retrieve quotes from external java program
             this.fetchQuotes(3);
+            this.fetchBlogPosts();
         },
 
         methods: {
+            fetchBlogPosts() {
+                axios.get('/api/blogposts').then((res) => {
+                    this.blogPosts = res.data;
+                });
+            },
+
             fetchQuotes(num) {
                 let promiseArray = Array(num).fill('/api/quote').map(url => axios.request(url));
 
@@ -55,7 +60,8 @@
 
         data() {
             return {
-                quoteWall: ""
+                quoteWall: "",
+                blogPosts: []
             }
         },
 
