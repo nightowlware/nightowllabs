@@ -1,23 +1,20 @@
 <template>
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="jumbotron">
-                <div style="display: flex">
-                    <div>
-                        <!--Here is my static quote-->
-                        <!--<br><br>-->
+        <div class="col-md-12">
 
-                        <!--Obtain custom quote from cgi Java program!-->
-                        <span v-html="quoteWall"></span>
+            <!--Render n quotes, where n can be passed to "fetchQuotes()"-->
+            <!--<div class="jumbotron">-->
+                <!--<div style="display: flex">-->
+                    <!--<div>-->
+                        <!--<span v-html="quoteWall"></span>-->
+                    <!--</div>-->
+                    <!--<div class="fill">-->
+                        <!--<img :src="require('../../images/flask.png')"/>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
 
-                    </div>
-                    <div class="fill">
-                        <img :src="require('../../images/flask.png')"/>
-                    </div>
-                </div>
-            </div>
-
-            <!--Render all published blog posts, sorted by publish date.-->
+            <!--Render all published blog posts-->
             <div v-for="blog in blogPosts" class="jumbotron">
                 <h2>{{blog.title}}</h2>
                 <div v-html="blog.body"></div>
@@ -30,8 +27,7 @@
 <script>
     export default {
         mounted() {
-            // Retrieve quotes from external java program
-            this.fetchQuotes(3);
+            // this.fetchQuotes(3);
             this.fetchBlogPosts();
         },
 

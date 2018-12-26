@@ -49335,14 +49335,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        // Retrieve quotes from external java program
-        this.fetchQuotes(3);
+        // this.fetchQuotes(3);
         this.fetchBlogPosts();
     },
 
@@ -49398,29 +49394,15 @@ var render = function() {
   return _c("div", { staticClass: "row justify-content-center" }, [
     _c(
       "div",
-      { staticClass: "col-md-8" },
-      [
-        _c("div", { staticClass: "jumbotron" }, [
-          _c("div", { staticStyle: { display: "flex" } }, [
-            _c("div", [
-              _c("span", { domProps: { innerHTML: _vm._s(_vm.quoteWall) } })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "fill" }, [
-              _c("img", { attrs: { src: __webpack_require__(51) } })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.blogPosts, function(blog) {
-          return _c("div", { staticClass: "jumbotron" }, [
-            _c("h2", [_vm._v(_vm._s(blog.title))]),
-            _vm._v(" "),
-            _c("div", { domProps: { innerHTML: _vm._s(blog.body) } })
-          ])
-        })
-      ],
-      2
+      { staticClass: "col-md-12" },
+      _vm._l(_vm.blogPosts, function(blog) {
+        return _c("div", { staticClass: "jumbotron" }, [
+          _c("h2", [_vm._v(_vm._s(blog.title))]),
+          _vm._v(" "),
+          _c("div", { domProps: { innerHTML: _vm._s(blog.body) } })
+        ])
+      }),
+      0
     )
   ])
 }
@@ -49435,12 +49417,7 @@ if (false) {
 }
 
 /***/ }),
-/* 51 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/flask.png?8ca4456b725a1b2ea4ccf3620b989c3b";
-
-/***/ }),
+/* 51 */,
 /* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 

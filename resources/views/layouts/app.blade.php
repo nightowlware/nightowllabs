@@ -36,18 +36,18 @@
         <nav class="navbar navbar-expand-md navbar-custom navbar-laravel">
             <div style="max-width: none;" class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="/images/owl_standalone.png" style="height: 20%; width: 20%"/>
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="/images/owl_standalone.png" style="zoom: 50%"/>
+                    {{config('app.name', 'Laravel')}}
                 </a>
-                <button class="navbar-dark navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div>
+                    SOMETHING HERE
+                </div>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                    {{--<ul class="navbar-nav mr-auto">--}}
 
-                    </ul>
+                    {{--</ul>--}}
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
