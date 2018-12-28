@@ -40,7 +40,13 @@
                     {{config('app.name', 'Laravel')}}
                 </a>
                 <div>
-                    SOMETHING HERE
+                    @php
+                        $quote = \App\Quote::inRandomOrder()->first()->quote;
+                        $author = \App\Quote::inRandomOrder()->first()->author;
+                    @endphp
+
+                    "{{ $quote }}"
+                    -- {{ $author }}
                 </div>
 
                 <div class="" id="navbarSupportedContent">
