@@ -1,7 +1,9 @@
 const config = {
     type: Phaser.WEBGL,
-    width: 800,
+    width: 1000,
     height: 600,
+    // width: window.innerWidth * window.devicePixelRatio,
+    // height: window.innerHeight * window.devicePixelRatio,
     parent: 'game',
     physics: {
         default: 'arcade',
@@ -20,6 +22,8 @@ const game = new Phaser.Game(config);
 
 // On every frame update.
 function update() {
+    this.backgroundSprite.tilePositionX += 0.5;
+
     const delta = 20;
     const cap = 200;
     this.xVelocity = (this.xVelocity + (Math.random() * delta - delta/2)) % cap;
@@ -54,13 +58,13 @@ function preload() {
 function create() {
     this.input.keyboard.on('keydown_A', () => {
         this.xVelocity -= 40;
-        console.log(this.xVelocity);
     });
 
     // for some reason, cursor (arrow keys) don't support callbacks like above.
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
-    this.add.image(400, 300, 'sky');
+    const {width, height} = this.sys.game.canvas;
+    this.backgroundSprite = this.add.tileSprite(500, 300, 0, 0, 'sky');
 
     let particles = this.add.particles('logo');
 

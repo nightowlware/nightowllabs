@@ -1,6 +1,6 @@
 <template>
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="jumbotron">
                 <div style="display: flex; justify-content: space-between">
                     <div>
