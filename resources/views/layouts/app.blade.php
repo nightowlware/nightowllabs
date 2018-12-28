@@ -39,7 +39,7 @@
                     <img src="/images/owl_standalone.png" style="zoom: 50%"/>
                     {{config('app.name', 'Laravel')}}
                 </a>
-                <div>
+                <div id="navbar-quote">
                     @php
                         $quote = \App\Quote::inRandomOrder()->first()->quote;
                         $author = \App\Quote::inRandomOrder()->first()->author;
