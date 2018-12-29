@@ -16,7 +16,8 @@
 
             <!--Render all published blog posts-->
             <div v-for="blog in blogPosts" class="jumbotron">
-                <h2>{{blog.title}}</h2>
+                <h4>{{blog.title}}</h4>
+                <p><small>{{formatDate(blog.published_date)}}</small></p>
                 <div v-html="blog.body"></div>
             </div>
 
@@ -51,6 +52,10 @@
 
             paddedQuote(q) {
                 return "<br><br>" + q;
+            },
+
+            formatDate(d) {
+                return new Date(d).toLocaleDateString('en-US');
             }
         },
 
@@ -78,5 +83,9 @@
         object-fit: cover;
         width: 50%;
         /*height: auto;*/
+    }
+
+    p small {
+        color: #fff;
     }
 </style>
