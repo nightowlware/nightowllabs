@@ -88,4 +88,8 @@
     p small {
         color: #fff;
     }
+
+    .jumbotron {
+        padding: 1.5rem 2rem;
+    }
 </style>
