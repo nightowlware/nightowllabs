@@ -15,6 +15,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .env
+.env.back
 prod_connect_db.sh
 
 fullchain.pem
