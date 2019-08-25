@@ -14,27 +14,24 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./:/var/www/html
-    network_mode: host
-    # networks:
-    #   - default_net
+    networks:
+      - app_net
 
   nginx:
     image: nginx:alpine
     restart: unless-stopped
     tty: true
     ports:
-      # - "8080:80"
-      - "4433:443"
+      - "443:443"
     volumes:
       - ./:/var/www/html
       - ./nginx/conf.d/:/etc/nginx/conf.d/
       - ./nginx/ssl/:/etc/nginx/ssl/
-    network_mode: host
-    # networks:
-    #   - default_net
+    networks:
+      - app_net
 
-# networks:
-#   default_net:
-#     external:
-#       name: host
+networks:
+  app_net:
+    driver:
+      bridge
 
