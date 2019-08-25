@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: prod
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    network_mode: host
+    # networks:
+    #   - default_net
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    tty: true
+    ports:
+      # - "8080:80"
+      - "4433:443"
+    volumes:
+      - ./:/var/www/html
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/ssl/:/etc/nginx/ssl/
+    network_mode: host
+    # networks:
+    #   - default_net
+
+# networks:
+#   default_net:
+#     external:
+#       name: host
+

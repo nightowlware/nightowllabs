@@ -1,83 +1,52 @@
-FROM ubuntu:18.04
+# Set master image
+FROM php:7.2-fpm-alpine
 
-MAINTAINER Shafik Amin <shafik23@gmail.com>
+# Copy composer.lock and composer.json
+COPY composer.lock composer.json /var/www/html/
 
-LABEL Description="CyberExperiments, based on a LAMP stack." \
-    License="Apache License 2.0" \
-    Usage="docker run -d -p [HOST WWW PORT NUMBER]:80 -p [HOST DB PORT NUMBER]:3306 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql fauria/lamp" \
-    Version="1.0"
+# Set working directory
+WORKDIR /var/www/html
 
+# Install Additional dependencies
+RUN apk update && apk add --no-cache \
+        build-base shadow vim curl \
+        php7 \
+        php7-fpm \
+        php7-common \
+        php7-pdo \
+        php7-pdo_mysql \
+        php7-mysqli \
+        php7-mcrypt \
+        php7-mbstring \
+        php7-xml \
+        php7-openssl \
+        php7-json \
+        php7-phar \
+        php7-zip \
+        php7-gd \
+        php7-dom \
+        php7-session \
+        php7-zlib
 
-RUN apt-get update
-RUN apt-get upgrade -y
+# Add and Enable PHP-PDO Extenstions
+RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-enable pdo_mysql
 
-COPY debconf.selections /tmp/
-RUN debconf-set-selections /tmp/debconf.selections
+# Install PHP Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN apt-get install -y zip unzip
-RUN apt-get install -y \
-    php7.2 \
-    php7.2-bz2 \
-    php7.2-cgi \
-    php7.2-cli \
-    php7.2-common \
-    php7.2-curl \
-    php7.2-dev \
-    php7.2-enchant \
-    php7.2-fpm \
-    php7.2-gd \
-    php7.2-gmp \
-    php7.2-imap \
-    php7.2-interbase \
-    php7.2-intl \
-    php7.2-json \
-    php7.2-ldap \
-    php7.2-mbstring \
-    php7.2-mcrypt \
-    php7.2-mysql \
-    php7.2-odbc \
-    php7.2-opcache \
-    php7.2-pgsql \
-    php7.2-phpdbg \
-    php7.2-pspell \
-    php7.2-readline \
-    php7.2-recode \
-    php7.2-snmp \
-    php7.2-sqlite3 \
-    php7.2-sybase \
-    php7.2-tidy \
-    php7.2-xmlrpc \
-    php7.2-xsl \
-    php7.2-zip
-RUN apt-get install apache2 libapache2-mod-php7.2 -y
-RUN apt-get install mariadb-common mariadb-server mariadb-client -y
+# Remove Cache
+RUN rm -rf /var/cache/apk/*
 
-RUN apt-get install git nodejs npm composer nano tree vim curl ftp -y
-# RUN apt-get install postfix -y
-# RUN npm install -g bower grunt-cli gulp
+# Add UID '1000' to www-data
+RUN usermod -u 1000 www-data
 
-# ENV LOG_STDOUT **Boolean**
-# ENV LOG_STDERR **Boolean**
-# ENV LOG_LEVEL warn
-# ENV ALLOW_OVERRIDE All
-# ENV DATE_TIMEZONE UTC
-# ENV TERM dumb
+# Copy existing application directory permissions
+COPY --chown=www-data:www-data . /var/www/html
 
-# COPY index.php /var/www/html/
-# COPY run-lamp.sh /usr/sbin/
+# Change current user to www
+USER www-data
 
-RUN a2enmod rewrite
-RUN ln -s /usr/bin/nodejs /usr/bin/node
-# RUN chmod +x /usr/sbin/run-lamp.sh
-# RUN chown -R www-data:www-data /var/www/html
-
-# VOLUME /var/www/html
-# VOLUME /var/log/httpd
-# VOLUME /var/lib/mysql
-# VOLUME /var/log/mysql
-# VOLUME /etc/apache2
-
-EXPOSE 80
-EXPOSE 3306
-
-# CMD ["/usr/sbin/run-lamp.sh"]
+# Expose port 9000 and start php-fpm server
+EXPOSE 9000
+CMD ["php-fpm"]
