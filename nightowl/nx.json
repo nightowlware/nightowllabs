@@ -7,5 +7,12 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "nootz-e2e": {
+      "tags": []
+    },
+    "nootz": {
+      "tags": []
+    }
+  }
 }
