@@ -6,15 +6,15 @@
   <h1>{{ title }}, a NightOwl site</h1>
 </header>
 
-<p>Chemicals</p>
+<h2>Compounds</h2>
 
 <main>
-  <li *ngFor="let c of chemicals">
+  <div *ngFor="let c of chemicals">
     <nootz-chemical-view
-      [headings]="'Headings'"
+      [headings]="headings"
       [chemical]="c"
     ></nootz-chemical-view>
-  </li>
+  </div>
 </main>
 
 <router-outlet></router-outlet>

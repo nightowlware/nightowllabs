@@ -17,7 +17,9 @@ export class SheetsService {
   }
 
   getChemicals(): Observable<SheetRow[]> {
-    return this.getChemicalsSheet().pipe(map(sheet => sheet.values.slice(1)));
+    return this.getChemicalsSheet().pipe(
+      map(sheet => sheet.values.slice(1).sort())
+    );
   }
 
   getHeadings(): Observable<SheetRow> {
