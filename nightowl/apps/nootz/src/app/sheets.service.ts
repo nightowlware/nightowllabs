@@ -30,10 +30,19 @@ export class SheetsService {
 export interface Sheet {
   range: string;
   majorDimension: string;
-  values: [[string]];
+  values: string[][];
 }
 
-export type SheetRow = [string];
+export type SheetRow = string[];
 
 // TODO: make this a stronger type.
 export type Chemical = SheetRow;
+
+export enum HeadingsEnum {
+  ChemicalName,
+  Dose,
+  Risk,
+  PersonalRating,
+  Mechanism,
+  Opinion
+}

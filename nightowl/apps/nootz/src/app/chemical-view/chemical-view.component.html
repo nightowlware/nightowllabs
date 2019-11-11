@@ -1,5 +1,8 @@
-<details>
-  <summary>{{ chemical[0] | uppercase }}</summary>
-  <p>{{ headings }}</p>
-  <p>{{ chemical }}</p>
+<details [ngClass]="getRiskClass()">
+  <summary>{{ chemicalName | uppercase }}</summary>
+  <p>{{ dose }}</p>
+  <p>{{ risk }}</p>
+  <p>{{ personalRating }}</p>
+  <p>{{ mechanism }}</p>
+  <p>{{ opinion }}</p>
 </details>

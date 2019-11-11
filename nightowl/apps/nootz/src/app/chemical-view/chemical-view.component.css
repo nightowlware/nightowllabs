@@ -1,0 +1,15 @@
+.low-risk {
+  background-color: green;
+}
+
+.medium-risk {
+  background-color: yellow;
+}
+
+.high-risk {
+  background-color: orange;
+}
+
+.danger-risk {
+  background-color: red;
+}
