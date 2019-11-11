@@ -4,9 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+import { ChemicalViewComponent } from './chemical-view/chemical-view.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ChemicalViewComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

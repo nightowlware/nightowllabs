@@ -10,7 +10,7 @@
       },
       "root": "apps/nootz",
       "sourceRoot": "apps/nootz/src",
-      "prefix": "nightowl",
+      "prefix": "nootz",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",

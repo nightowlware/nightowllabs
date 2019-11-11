@@ -17,7 +17,11 @@ export class SheetsService {
   }
 
   getChemicals(): Observable<SheetRow[]> {
-    return this.getChemicalsSheet().pipe(map(sheet => sheet.values));
+    return this.getChemicalsSheet().pipe(map(sheet => sheet.values.slice(1)));
+  }
+
+  getHeadings(): Observable<SheetRow> {
+    return this.getChemicalsSheet().pipe(map(sheet => sheet.values[0]));
   }
 }
 
@@ -28,3 +32,6 @@ export interface Sheet {
 }
 
 export type SheetRow = [string];
+
+// TODO: make this a stronger type.
+export type Chemical = SheetRow;
