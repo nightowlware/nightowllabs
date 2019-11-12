@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Chemical, SheetRow, HeadingsEnum } from '../sheets.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { Chemical, SheetRow, HeadingsEnum } from '../sheets.service';
   templateUrl: './chemical-view.component.html',
   styleUrls: ['./chemical-view.component.css']
 })
-export class ChemicalViewComponent implements OnInit {
+export class ChemicalViewComponent implements OnInit, OnChanges {
   @Input()
   private chemical: Chemical;
 
@@ -29,6 +29,14 @@ export class ChemicalViewComponent implements OnInit {
     this.personalRating = this.chemical[HeadingsEnum.PersonalRating];
     this.mechanism = this.chemical[HeadingsEnum.Mechanism];
     this.opinion = this.chemical[HeadingsEnum.Opinion];
+  }
+
+  ngOnChanges() {
+    this.ngOnInit();
+  }
+
+  getRiskEnglish() {
+    return this.risk.split('-').pop();
   }
 
   getRiskClass() {

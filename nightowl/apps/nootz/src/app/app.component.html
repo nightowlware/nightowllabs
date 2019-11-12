@@ -9,12 +9,11 @@
 <h2>Compounds</h2>
 
 <main>
-  <div *ngFor="let c of chemicals">
-    <nootz-chemical-view
-      [headings]="headings"
-      [chemical]="c"
-    ></nootz-chemical-view>
-  </div>
+  <nootz-chemical-view
+    *ngFor="let c of chemicals; trackBy: trackByFunction"
+    [headings]="headings"
+    [chemical]="c"
+  ></nootz-chemical-view>
 </main>
 
 <router-outlet></router-outlet>

@@ -1,15 +1,20 @@
 .low-risk {
-  background-color: green;
+  background-color: #82ca9d;
 }
 
 .medium-risk {
-  background-color: yellow;
+  background-color: #fff79a;
 }
 
 .high-risk {
-  background-color: orange;
+  background-color: #ffb347;
 }
 
 .danger-risk {
-  background-color: red;
+  background-color: #f7977a;
+}
+
+details > p {
+  backdrop-filter: contrast(75%);
+  padding: 15px;
 }

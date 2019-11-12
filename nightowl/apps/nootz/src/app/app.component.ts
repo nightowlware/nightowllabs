@@ -1,3 +1,5 @@
+import { interval } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { SheetsService, Sheet, SheetRow } from './sheets.service';
 
@@ -19,6 +21,15 @@ export class AppComponent implements OnInit {
       .getChemicals()
       .subscribe(data => (this.chemicals = data));
 
+    // refresh data regularly
+    interval(5000)
+      .pipe(switchMap(() => this.sheetsService.getChemicals()))
+      .subscribe(data => (this.chemicals = data));
+
     this.sheetsService.getHeadings().subscribe(data => (this.headings = data));
+  }
+
+  trackByFunction(index, item) {
+    return item[0];
   }
 }
