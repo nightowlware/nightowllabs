@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
       .subscribe(data => (this.chemicals = data));
 
     // refresh data regularly
-    interval(5000)
+    interval(10000)
       .pipe(switchMap(() => this.sheetsService.getChemicals()))
       .subscribe(data => (this.chemicals = data));
 
