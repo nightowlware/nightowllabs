@@ -1,17 +1,20 @@
 /**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
  **/
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
 
-  const port = process.env.port || 3333;
+  // Should read from local .env file
+  const port = process.env.API_PORT || 6666;
+  console.log(process.cwd());
 
   await app.listen(port, () => {
     console.log('Listening at http://localhost:' + port + '/' + globalPrefix);
