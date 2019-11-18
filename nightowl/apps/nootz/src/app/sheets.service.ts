@@ -2,17 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { environment as env } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SheetsService {
-  private chemicalsSheetUrl = '/api';
-
   constructor(private http: HttpClient) {}
 
   getChemicalsSheet() {
-    return this.http.get<Sheet>(this.chemicalsSheetUrl);
+    return this.http.get<Sheet>(env.apiUrl);
   }
 
   getChemicals(): Observable<SheetRow[]> {
