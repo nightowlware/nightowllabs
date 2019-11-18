@@ -5,6 +5,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import * as dotenv from 'dotenv';
 
+// Enable configuration-by-env file: key-value pairs
+// are injected into the "process.env" object.
 dotenv.config();
 
 async function bootstrap() {

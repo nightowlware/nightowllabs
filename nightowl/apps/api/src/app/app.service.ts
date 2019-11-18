@@ -1,4 +1,4 @@
-import { Injectable, HttpService } from '@nestjs/common';
+import { Injectable, HttpService, Logger } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,8 +8,8 @@ export class AppService {
   constructor(private readonly http: HttpService) {}
 
   getData(): Observable<AxiosResponse<any>> {
-    const apiKey = 'AIzaSyATd93dzBnGM7VqSzhrhIellwuWN2pG-Zw';
-    const sheetId = '1V0enEoxAVnOcziwCy1Qq8WN4IT3vP8lwKeaE8xtdJ8A';
+    const apiKey = process.env.API_GOOGLE_SHEETS_KEY;
+    const sheetId = process.env.API_GOOGLE_SHEETS_ID;
 
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Chemicals?key=${apiKey}`;
     return this.http.get(url).pipe(map(res => res.data));

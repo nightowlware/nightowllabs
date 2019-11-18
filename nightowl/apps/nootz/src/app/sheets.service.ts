@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SheetsService {
-  private chemicalsSheetUrl =
-    'https://sheets.googleapis.com/v4/spreadsheets/1V0enEoxAVnOcziwCy1Qq8WN4IT3vP8lwKeaE8xtdJ8A/values/Chemicals?key=AIzaSyATd93dzBnGM7VqSzhrhIellwuWN2pG-Zw';
+  private chemicalsSheetUrl = '/api';
 
   constructor(private http: HttpClient) {}
 
