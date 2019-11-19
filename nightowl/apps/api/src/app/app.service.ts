@@ -20,14 +20,13 @@ export class AppService {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Chemicals?key=${apiKey}`;
     return this.http
       .get(url)
-      .pipe(
-        catchError(e => {
-          throw new HttpException(
-            'Could not read from the GoogleSheets API',
-            HttpStatus.INTERNAL_SERVER_ERROR
-          );
-        })
-      )
+      .pipe(catchError(this.handleGoogleSheetsError))
       .pipe(map(res => res.data));
+  }
+
+  handleGoogleSheetsError(e): never {
+    const msg = 'Could not read from the GoogleSheets API';
+    Logger.error(msg);
+    throw new HttpException(msg, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 }
