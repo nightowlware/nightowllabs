@@ -2,7 +2,10 @@ import {
   Controller,
   Get,
   UseInterceptors,
-  CacheInterceptor
+  CacheInterceptor,
+  HttpException,
+  HttpStatus,
+  Logger
 } from '@nestjs/common';
 
 import { AppService } from './app.service';

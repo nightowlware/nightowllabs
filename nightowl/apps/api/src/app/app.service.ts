@@ -1,7 +1,13 @@
-import { Injectable, HttpService, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  HttpService,
+  Logger,
+  HttpException,
+  HttpStatus
+} from '@nestjs/common';
 import { AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AppService {
@@ -12,6 +18,16 @@ export class AppService {
     const sheetId = process.env.API_GOOGLE_SHEETS_ID;
 
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Chemicals?key=${apiKey}`;
-    return this.http.get(url).pipe(map(res => res.data));
+    return this.http
+      .get(url)
+      .pipe(
+        catchError(e => {
+          throw new HttpException(
+            'Could not read from the GoogleSheets API',
+            HttpStatus.INTERNAL_SERVER_ERROR
+          );
+        })
+      )
+      .pipe(map(res => res.data));
   }
 }
