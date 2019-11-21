@@ -17,7 +17,7 @@ import { Connection } from 'typeorm';
       username: process.env.MONGO_USERNAME || 'nootz',
       password: process.env.MONGO_PASSWORD || 'nootz',
       database: 'nootz',
-      entities: [],
+      entities: ['dist/**/*.entity{.ts,.js}', 'src/**/*.entity{.ts,.js}'],
       synchronize: !environment.production,
       useUnifiedTopology: true
     })
