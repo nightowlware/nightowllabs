@@ -8,10 +8,21 @@ import {
 import { AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { InjectRepository } from '@nestjs/typeorm';
+import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { Interaction } from '../models/interaction.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
-export class AppService {
-  constructor(private readonly http: HttpService) {}
+export class AppService extends TypeOrmCrudService<Interaction> {
+  constructor(
+    private readonly http: HttpService,
+
+    @InjectRepository(Interaction)
+    private readonly interactionsRepo: Repository<Interaction>
+  ) {
+    super(interactionsRepo);
+  }
 
   getData(): Observable<AxiosResponse<any>> {
     const apiKey = process.env.API_GOOGLE_SHEETS_KEY;
@@ -28,5 +39,16 @@ export class AppService {
     const msg = 'Could not read from the GoogleSheets API';
     Logger.error(msg);
     throw new HttpException(msg, HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
+  getAllInteractions(): Promise<Interaction[]> {
+    return this.interactionsRepo.find();
+  }
+
+  saveInteraction(): Promise<Interaction> {
+    const o = new Interaction();
+    o.chemical = 'Adderall';
+    o.details = 'Test details';
+    return this.interactionsRepo.save(o);
   }
 }
