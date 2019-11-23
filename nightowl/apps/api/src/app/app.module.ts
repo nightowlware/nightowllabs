@@ -19,7 +19,6 @@ import { InteractionsController } from './interactions.controller';
       username: process.env.DB_USERNAME || 'nootz',
       password: process.env.DB_PASSWORD || 'nootz',
       database: 'nootz',
-      // entities: ['dist/**/*.entity{.ts,.js}', 'src/**/*.entity{.ts,.js}'],
       entities: [Interaction],
       synchronize: !environment.production
     }),
