@@ -5,7 +5,7 @@ import { environment } from '../environments/environment';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Connection } from 'typeorm';
-import { Interaction } from '../models/interaction.entity';
+import { Interaction } from '../entities/interaction.entity';
 import { InteractionsController } from './interactions.controller';
 
 @Module({

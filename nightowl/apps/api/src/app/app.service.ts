@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
-import { Interaction } from '../models/interaction.entity';
+import { Interaction } from '../entities/interaction.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -48,7 +48,8 @@ export class AppService extends TypeOrmCrudService<Interaction> {
   saveInteraction(): Promise<Interaction> {
     const o = new Interaction();
     o.chemical = 'Adderall';
-    o.details = 'Test details';
+    o.details = 'Some details';
+    o.json = { a: 42, b: 43 };
     return this.interactionsRepo.save(o);
   }
 }
