@@ -1,4 +1,4 @@
-<details [ngClass]="getRiskClass()">
+<details [ngClass]="getRiskClass()" (click)="onClickMe()">
   <summary>{{ chemicalName | uppercase }}</summary>
   <p *ngIf="dose"><b>Dosage:</b> {{ dose }}</p>
   <p *ngIf="risk"><b>Risk Level:</b> {{ getRiskEnglish() }}</p>

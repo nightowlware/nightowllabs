@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output } from '@angular/core';
 import { Chemical, SheetRow, HeadingsEnum } from '../sheets.service';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'nootz-chemical-view',
@@ -54,5 +55,9 @@ export class ChemicalViewComponent implements OnInit, OnChanges {
       : risk.includes('4')
       ? 'danger-risk'
       : '';
+  }
+
+  onClickMe() {
+    console.log(`${this.chemicalName} clicked!`);
   }
 }
