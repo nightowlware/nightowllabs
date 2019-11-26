@@ -1,4 +1,13 @@
-import { Component, OnInit, Input, OnChanges, Output } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  Output,
+  ViewChild,
+  ElementRef,
+  ChangeDetectorRef
+} from '@angular/core';
 import { Chemical, SheetRow, HeadingsEnum } from '../sheets.service';
 import { EventEmitter } from 'events';
 
@@ -14,6 +23,8 @@ export class ChemicalViewComponent implements OnInit, OnChanges {
   @Input()
   private headings: SheetRow;
 
+  @ViewChild('detailsRef', { static: false }) detailsElement: ElementRef;
+
   chemicalName: string;
   dose: string;
   risk: string;
@@ -21,7 +32,7 @@ export class ChemicalViewComponent implements OnInit, OnChanges {
   mechanism: string;
   opinion: string;
 
-  constructor() {}
+  constructor(private changeDetector: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.chemicalName = this.chemical[HeadingsEnum.ChemicalName];
@@ -34,6 +45,10 @@ export class ChemicalViewComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.ngOnInit();
+  }
+
+  isExpanded() {
+    return this.detailsElement.nativeElement.hasAttribute('open');
   }
 
   getRiskEnglish() {
@@ -57,7 +72,12 @@ export class ChemicalViewComponent implements OnInit, OnChanges {
       : '';
   }
 
-  onClickMe() {
-    console.log(`${this.chemicalName} clicked!`);
+  onClickMe(e: MouseEvent) {
+    // We have to "wait" until the next event loop cycle
+    // so that the DOM has a chance to update.
+    setTimeout(() => {
+      console.log(`${this.chemicalName} clicked!`);
+      console.log(this.isExpanded());
+    });
   }
 }
