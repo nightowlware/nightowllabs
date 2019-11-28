@@ -4,7 +4,9 @@
     "types": [
       "node",
       "jest"
-    ]
+    ],
+    "alwaysStrict": true,
+    "noImplicitAny": true
   },
   "include": [
     "**/*.ts"
