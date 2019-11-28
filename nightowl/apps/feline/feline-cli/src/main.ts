@@ -1,3 +1,6 @@
+//
+// Copyright © 2019 NightOwl Labs
+//
 import { Feline } from "./app/feline";
 
 function main() {
