@@ -1,6 +1,5 @@
 
 import * as repl from 'repl';
-import { callbackify } from 'util';
 
 export class Feline {
 
