@@ -1,2 +1,9 @@
+import { Feline } from "./app/feline";
 
-console.log('Hello there, I am the Feline CLI!');
+function main() {
+    console.log('Feline CLI v0.0.2');
+
+    const f = new Feline();
+    f.runRepl();
+}
+main();
