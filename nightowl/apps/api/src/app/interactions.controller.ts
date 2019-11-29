@@ -22,7 +22,7 @@ import { Interaction } from '../entities/interaction.entity';
     }
   }
 })
-@Controller('interactions')
+@Controller('interaction')
 export class InteractionsController {
   constructor(private readonly service: AppService) {}
 

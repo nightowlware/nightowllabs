@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import { Chemical, SheetRow, HeadingsEnum } from '../sheets.service';
 import { EventEmitter } from 'events';
+import { BackendService } from '../backend.service';
+import { clearScreenDown } from 'readline';
 
 @Component({
   selector: 'nootz-chemical-view',
@@ -17,6 +19,11 @@ import { EventEmitter } from 'events';
   styleUrls: ['./chemical-view.component.css']
 })
 export class ChemicalViewComponent implements OnInit, OnChanges {
+  constructor(
+    private backendService: BackendService,
+    private changeDetector: ChangeDetectorRef
+  ) {}
+
   @Input()
   private chemical: Chemical;
 
@@ -31,8 +38,6 @@ export class ChemicalViewComponent implements OnInit, OnChanges {
   personalRating: string;
   mechanism: string;
   opinion: string;
-
-  constructor(private changeDetector: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.chemicalName = this.chemical[HeadingsEnum.ChemicalName];
@@ -77,7 +82,9 @@ export class ChemicalViewComponent implements OnInit, OnChanges {
     // so that the DOM has a chance to update.
     setTimeout(() => {
       console.log(`${this.chemicalName} clicked!`);
-      console.log(this.isExpanded());
+      this.backendService
+        .postInteraction(this.chemicalName, 'click')
+        .subscribe(data => console.log(data));
     });
   }
 }
