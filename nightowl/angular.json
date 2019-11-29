@@ -193,6 +193,65 @@
           }
         }
       }
+    },
+    "feline-feline-cli": {
+      "root": "apps/feline/feline-cli",
+      "sourceRoot": "apps/feline/feline-cli/src",
+      "projectType": "application",
+      "prefix": "feline-feline-cli",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/feline/feline-cli",
+            "main": "apps/feline/feline-cli/src/main.ts",
+            "tsConfig": "apps/feline/feline-cli/tsconfig.app.json",
+            "assets": [
+              "apps/feline/feline-cli/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/feline/feline-cli/src/environments/environment.ts",
+                  "with": "apps/feline/feline-cli/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "feline-feline-cli:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/feline/feline-cli/tsconfig.app.json",
+              "apps/feline/feline-cli/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/feline/feline-cli/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/feline/feline-cli/jest.config.js",
+            "tsConfig": "apps/feline/feline-cli/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {

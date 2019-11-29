@@ -14,8 +14,4 @@ export class BackendService {
       details
     });
   }
-
-  //   getHeadings(): Observable<SheetRow> {
-  //   return this.getChemicalsSheet().pipe(map(sheet => sheet.values[0]));
-  // }
 }

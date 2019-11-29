@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     this.sheetsService.getHeadings().subscribe(data => (this.headings = data));
   }
 
-  trackByFunction(index, item) {
+  trackByFunction(index: any, item: any[]) {
     return item[0];
   }
 }

@@ -16,6 +16,9 @@
     },
     "api": {
       "tags": []
+    },
+    "feline-feline-cli": {
+      "tags": []
     }
   }
 }
