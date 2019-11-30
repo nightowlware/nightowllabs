@@ -21,13 +21,8 @@
             "polyfills": "apps/nootz/src/polyfills.ts",
             "tsConfig": "apps/nootz/tsconfig.app.json",
             "aot": false,
-            "assets": [
-              "apps/nootz/src/favicon.ico",
-              "apps/nootz/src/assets"
-            ],
-            "styles": [
-              "apps/nootz/src/styles.scss"
-            ],
+            "assets": ["apps/nootz/src/favicon.ico", "apps/nootz/src/assets"],
+            "styles": ["apps/nootz/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -87,10 +82,7 @@
               "apps/nootz/tsconfig.app.json",
               "apps/nootz/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/nootz/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/nootz/**"]
           }
         },
         "test": {
@@ -124,33 +116,26 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/nootz-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/nootz-e2e/**"
-            ]
+            "tsConfig": ["apps/nootz-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/nootz-e2e/**"]
           }
         }
       }
     },
-    "api": {
-      "root": "apps/api",
-      "sourceRoot": "apps/api/src",
+    "nootz-api": {
+      "root": "apps/nootz-api",
+      "sourceRoot": "apps/nootz-api/src",
       "projectType": "application",
-      "prefix": "api",
+      "prefix": "nootz-api",
       "schematics": {},
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
           "options": {
-            "outputPath": "dist/apps/api",
-            "main": "apps/api/src/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": [
-              "apps/api/src/assets"
-            ]
+            "outputPath": "dist/apps/nootz-api",
+            "main": "apps/nootz-api/src/main.ts",
+            "tsConfig": "apps/nootz-api/tsconfig.app.json",
+            "assets": ["apps/nootz-api/src/assets"]
           },
           "configurations": {
             "production": {
@@ -159,8 +144,8 @@
               "inspect": false,
               "fileReplacements": [
                 {
-                  "replace": "apps/api/src/environments/environment.ts",
-                  "with": "apps/api/src/environments/environment.prod.ts"
+                  "replace": "apps/nootz-api/src/environments/environment.ts",
+                  "with": "apps/nootz-api/src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -169,27 +154,24 @@
         "serve": {
           "builder": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "api:build"
+            "buildTarget": "nootz-api:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/api/tsconfig.app.json",
-              "apps/api/tsconfig.spec.json"
+              "apps/nootz-api/tsconfig.app.json",
+              "apps/nootz-api/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/api/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/nootz-api/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/api/jest.config.js",
-            "tsConfig": "apps/api/tsconfig.spec.json"
+            "jestConfig": "apps/nootz-api/jest.config.js",
+            "tsConfig": "apps/nootz-api/tsconfig.spec.json"
           }
         }
       }
@@ -207,9 +189,7 @@
             "outputPath": "dist/apps/feline/feline-cli",
             "main": "apps/feline/feline-cli/src/main.ts",
             "tsConfig": "apps/feline/feline-cli/tsconfig.app.json",
-            "assets": [
-              "apps/feline/feline-cli/src/assets"
-            ]
+            "assets": ["apps/feline/feline-cli/src/assets"]
           },
           "configurations": {
             "production": {
@@ -238,10 +218,7 @@
               "apps/feline/feline-cli/tsconfig.app.json",
               "apps/feline/feline-cli/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/feline/feline-cli/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/feline/feline-cli/**"]
           }
         },
         "test": {

@@ -11,7 +11,6 @@ import {
 import { Chemical, SheetRow, HeadingsEnum } from '../sheets.service';
 import { EventEmitter } from 'events';
 import { BackendService } from '../backend.service';
-import { clearScreenDown } from 'readline';
 
 @Component({
   selector: 'nootz-chemical-view',
