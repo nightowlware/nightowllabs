@@ -27,6 +27,6 @@ export abstract class BaseEntity {
   @Column({ type: 'varchar', length: 300, nullable: true })
   lastChangedBy: string | null;
 
-  @Column({ type: 'json', nullable: true })
+  @Column({ type: 'json', default: {} })
   json: any | null;
 }

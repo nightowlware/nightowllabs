@@ -1,4 +1,4 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, AfterInsert } from 'typeorm';
 import { BaseEntity } from './base.entity';
 
 @Entity({ name: 'interaction' })

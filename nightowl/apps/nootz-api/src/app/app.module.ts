@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Connection } from 'typeorm';
 import { Interaction } from '../entities/interaction.entity';
+import { DatabaseSubscriber } from '../subscribers/database.subscriber';
 import { InteractionsController } from './interactions.controller';
 
 @Module({
@@ -20,6 +21,7 @@ import { InteractionsController } from './interactions.controller';
       password: process.env.DB_PASSWORD || 'nootz',
       database: 'nootz',
       entities: [Interaction],
+      subscribers: [DatabaseSubscriber],
       synchronize: !environment.production
     }),
     TypeOrmModule.forFeature([Interaction])
@@ -29,7 +31,7 @@ import { InteractionsController } from './interactions.controller';
 })
 export class AppModule {
   constructor(private readonly connection: Connection) {
-    const { password, ...others } = connection.options as any;
+    const { password, ...others } = this.connection.options as any;
     Logger.log(`DB connection info: ${JSON.stringify(others)}`);
   }
 }
