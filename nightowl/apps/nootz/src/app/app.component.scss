@@ -8,3 +8,13 @@
   max-width: 800px;
   margin: 50px auto;
 }
+
+main > div {
+  width: 400px;
+  margin: 30px auto;
+}
+
+main > div > input {
+  text-align: center;
+  width: 100%;
+}

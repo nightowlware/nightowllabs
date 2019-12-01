@@ -9,11 +9,30 @@
 <h2>Compounds</h2>
 
 <main>
-  <nootz-chemical-view
-    *ngFor="let c of chemicals; trackBy: trackByFunction"
-    [headings]="headings"
-    [chemical]="c"
-  ></nootz-chemical-view>
+  <div>
+    <input
+      class="form-control"
+      type="text"
+      name="search"
+      [(ngModel)]="searchText"
+      autocomplete="off"
+      placeholder="&#7172; Search for compound"
+    />
+  </div>
+
+  <ng-container *ngFor="let c of chemicals; trackBy: trackByFunction">
+    <nootz-chemical-view
+      [headings]="headings"
+      [chemical]="c"
+      [hidden]="
+        !(
+          !searchText ||
+          searchText.length == 0 ||
+          c[0].toLowerCase().includes(searchText.toLowerCase())
+        )
+      "
+    ></nootz-chemical-view>
+  </ng-container>
 </main>
 
 <router-outlet></router-outlet>

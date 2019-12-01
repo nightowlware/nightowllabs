@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   chemicals: SheetRow[] = [['']];
   headings: SheetRow = [''];
 
+  searchText: string;
+
   constructor(private sheetsService: SheetsService) {}
 
   ngOnInit() {
