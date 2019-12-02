@@ -8,6 +8,7 @@ import { Connection } from 'typeorm';
 import { Interaction } from '../entities/interaction.entity';
 import { DatabaseSubscriber } from '../subscribers/database.subscriber';
 import { InteractionsController } from './interactions.controller';
+import { WebsocketGateway } from '../websocket.gateway';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { InteractionsController } from './interactions.controller';
     TypeOrmModule.forFeature([Interaction])
   ],
   controllers: [AppController, InteractionsController],
-  providers: [AppService]
+  providers: [AppService, WebsocketGateway]
 })
 export class AppModule {
   constructor(private readonly connection: Connection) {
