@@ -7,7 +7,7 @@ import { Socket, Server } from 'socket.io';
 
 // For more on namespaced socket.io, see here:
 // https://socket.io/docs/rooms-and-namespaces/
-@WebSocketGateway({ namespace: '/' })
+@WebSocketGateway({ namespace: 'public' })
 export class WebsocketGateway {
   // The underlying websocket server
   @WebSocketServer()
@@ -15,7 +15,11 @@ export class WebsocketGateway {
 
   @SubscribeMessage('message')
   handleMessage(client: Socket, payload: any): string {
-    console.log('Received payload from WS client: ' + JSON.stringify(payload));
+    // console.log('Received payload from WS client: ' + JSON.stringify(payload));
+
+    // Echo back whatever payload was sent
+    client.send(payload);
+
     return 'ACK';
   }
 }
