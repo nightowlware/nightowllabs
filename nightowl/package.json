@@ -50,10 +50,11 @@
     "class-transformer": "^0.2.3",
     "class-validator": "^0.11.0",
     "core-js": "^3.4.2",
+    "ngx-socket-io": "^3.0.1",
     "pg": "^7.14.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.5.3",
-    "typeorm": "^0.2.20",
+    "typeorm": "^0.2.21",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
