@@ -10,6 +10,12 @@ import { DatabaseSubscriber } from '../subscribers/database.subscriber';
 import { InteractionsController } from './interactions.controller';
 import { WebsocketGateway } from '../websocket.gateway';
 
+// Unfortunately due to Webpack out-of-order execution, this import
+// needs to be repeated here so that the @Module decorator below can
+// see the .env file correctly.
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 @Module({
   imports: [
     HttpModule,

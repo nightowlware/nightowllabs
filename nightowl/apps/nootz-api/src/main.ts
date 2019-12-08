@@ -1,12 +1,7 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
-import * as dotenv from 'dotenv';
-
-// Enable configuration-by-env file: key-value pairs
-// are injected into the "process.env" object.
-// Note that a reboot is required every time the .env values
-// change.
-dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
