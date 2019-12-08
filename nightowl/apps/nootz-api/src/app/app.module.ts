@@ -29,7 +29,8 @@ dotenv.config();
       database: 'nootz',
       entities: [Interaction],
       subscribers: [DatabaseSubscriber],
-      synchronize: !environment.production
+      // synchronize: !environment.production
+      synchronize: true
     }),
     TypeOrmModule.forFeature([Interaction])
   ],
