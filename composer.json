@@ -16,7 +16,7 @@
         "laravelcollective/html": "^5.0",
         "league/flysystem-aws-s3-v3": "^1.0",
         "league/flysystem-cached-adapter": "^1.0",
-        "php-ai/php-ml": "^0.6.2",
+        "php-ai/php-ml": "^0.5.0",
         "phpoffice/phpexcel": "1.8.1",
         "pvtl/voyager-blog": "^0.2.4",
         "reliese/laravel": "^0.0.13",
@@ -67,7 +67,10 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
